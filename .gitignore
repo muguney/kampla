@@ -1,5 +1,6 @@
 .DS_Store
 *.log
+.git-remote-credentials
 
 # app/ altında kendi .gitignore'u var (node_modules, .nuxt, .env, vb.)
 # burada sadece proje kökü için genel kurallar
