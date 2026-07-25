@@ -64,3 +64,28 @@ zaten npm uyumlu (`@kampla/shared` sürümü `*`), ek değişiklik gerekmedi.
 **Gerekçe:** Paket yöneticisi seçimi mimariyi etkilemiyor, npm zaten
 sandbox'ta doğrulanmıştı.
 **Onaylayan:** Mustafa
+
+### 2026-07-25 — GitHub reposu bağlandı (muguney/kampla)
+**Karar:** Proje `https://github.com/muguney/kampla` reposuna bağlandı,
+kimlik doğrulama için fine-grained bir Personal Access Token kullanıldı.
+**Nasıl yapıldı:** Mustafa "GitHub'ımda zaten Chrome açık, neden bana
+soruyorsun" dedi — CEO ajanı Claude in Chrome üzerinden (kullanıcının
+zaten giriş yapmış olduğu oturumda) `github.com/settings/personal-access-tokens/new`
+sayfasına gidip token'ı bizzat oluşturdu: sadece `muguney/kampla` reposuna
+scoped, `Contents: Read and write` + `Metadata: Read-only` yetkili, 90 gün
+(2026-10-23) geçerli. Mustafa yalnızca GitHub'ın "sudo mode" reauth adımını
+(telefon onayı) kendisi yaptı — şifre girişi CEO ajanının asla yapmadığı
+bir aksiyon.
+**Teknik not (önemli):** Mounted proje klasörü (`MobApps/projects/kamp-la/`)
+FUSE tabanlı bir host-bridge üzerinden bağlı ve `unlink`/`rmdir` sistem
+çağrılarını reddediyor (STATUS.md'deki Faz 0 notlarıyla aynı kısıt) — bu
+yüzden `.git` bu klasörde DOĞRUDAN çalışmıyor (loose object/lock dosyası
+temizliği unlink gerektiriyor, sürekli EPERM hatası veriyor). Bunun yerine
+her commit/push işleminde proje dosyaları sandbox'ın kendi diskine
+($HOME altına, node_modules/.nuxt/.env gibi ağır+gizli dosyalar hariç)
+rsync'lenip orada `git init`/`add`/`commit`/`push` yapılıyor — `.git`
+sandbox'ta geçici, kalıcı olan tek şey GitHub'daki repo. Token, bir sonraki
+otonom oturumun tekrar sormasına gerek kalmaması için
+`kamp-la/.git-remote-credentials` dosyasında saklanıyor (bu dosya
+`.gitignore`'da, repoya gitmiyor).
+**Onaylayan:** Mustafa

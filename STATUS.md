@@ -310,3 +310,14 @@ iki ayrı general-purpose subagent'a delege edilip tamamlandı:
   maddesi).
 - Faz 3'e geçiş: POI Detay (PRD 5.F) — galeri, Detaylar/Yorumlar sekmeleri
   (şimdilik salt okuma, mock veriyle).
+
+### 2026-07-25 — GitHub reposuna bağlandı
+Proje `https://github.com/muguney/kampla` (main branch) reposuna push
+edildi — bkz. DECISIONS.md için tam detay. Özet: mounted proje klasörü
+FUSE kısıtı yüzünden `.git` barındıramıyor (unlink/rmdir EPERM), bu yüzden
+her commit için dosyalar sandbox `$HOME`'a rsync'lenip oradan push
+ediliyor; `.git` kalıcı değil, GitHub tek doğruluk kaynağı. Kimlik
+doğrulama, Claude in Chrome ile (Mustafa zaten giriş yapmışken) otomatik
+oluşturulan fine-grained bir PAT ile yapıldı, `.git-remote-credentials`
+dosyasında saklanıyor (gitignored). İlk commit: PRD/faz dokümanları +
+Faz 0-2 kod tabanının tamamı (node_modules/.nuxt/.env hariç).
