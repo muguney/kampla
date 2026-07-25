@@ -1,0 +1,5 @@
+.DS_Store
+*.log
+
+# app/ altında kendi .gitignore'u var (node_modules, .nuxt, .env, vb.)
+# burada sadece proje kökü için genel kurallar

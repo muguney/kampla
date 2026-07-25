@@ -1,0 +1,155 @@
+{
+  "brand": {
+    "name": "Kamp.la"
+  },
+  "common": {
+    "back": "Back",
+    "comingSoon": "This screen will be built in a later phase.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Search",
+    "add": "Add Location",
+    "lists": "My Lists",
+    "menu": "Menu"
+  },
+  "pages": {
+    "home": { "title": "Kamp.la" },
+    "listView": {
+      "title": "List View",
+      "resultCount": "{count} results",
+      "mapToggle": "Map",
+      "favoriteToggle": "Add/remove favorite"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search a city or area (e.g. Alanya, Antalya)",
+      "recentTitle": "Recent Searches",
+      "suggestionsTitle": "Suggestions"
+    },
+    "poiDetail": { "title": "Location Detail" },
+    "poiEdit": { "title": "Edit Location" },
+    "addLocation": { "title": "Add Location" },
+    "myLists": { "title": "My Map Lists" },
+    "listDetail": { "title": "List" },
+    "notifications": { "title": "Notifications" },
+    "premium": { "title": "Kamp.la Plus" },
+    "account": { "title": "My Account" },
+    "accountUsername": { "title": "Change Username" },
+    "accountEmail": { "title": "Change Email" },
+    "accountPassword": { "title": "Change Password" },
+    "accountSocial": { "title": "Social Media Accounts" },
+    "accountReviews": { "title": "All My Reviews" },
+    "profile": { "title": "Profile" },
+    "settings": { "title": "App Settings" },
+    "settingsLanguage": { "title": "Language" },
+    "settingsTheme": { "title": "Theme" },
+    "settingsAbout": { "title": "About Kamp.la" },
+    "login": {
+      "title": "Sign In",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "forgotPassword": "Forgot password",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "googleSignIn": "Sign in with Google",
+      "googleComingSoon": "(coming soon)",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Register",
+      "genericError": "Couldn't sign in. Please check your details and try again."
+    },
+    "register": {
+      "title": "Register",
+      "usernamePlaceholder": "Username",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "agreementTerms": "Membership Agreement",
+      "agreementAnd": "and",
+      "agreementPrivacy": "Privacy Policy",
+      "agreementSuffix": ".",
+      "agreementRequired": "You must accept the agreement to continue.",
+      "submit": "Register",
+      "submitting": "Registering...",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "checkEmailTitle": "Check your email",
+      "checkEmailBody": "We've sent you a confirmation email. Once confirmed, you can sign in.",
+      "genericError": "Couldn't create your account. Please check your details and try again."
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "We'll send a password reset link to your email.",
+      "emailPlaceholder": "Email",
+      "emailInvalid": "Enter a valid email address.",
+      "submit": "Send Reset Link",
+      "submitting": "Sending...",
+      "checkEmailTitle": "Check your email",
+      "checkEmailBody": "We've sent a password reset link to your email. Click the link to set a new password, then sign in.",
+      "backToLogin": "Back to sign in"
+    },
+    "terms": { "title": "Terms of Use" },
+    "privacy": { "title": "Privacy Policy" },
+    "menu": { "title": "Menu" }
+  },
+  "menu": {
+    "addLocation": "Add Location",
+    "login": "Sign In",
+    "account": "My Account",
+    "settings": "App Settings",
+    "about": "About Kamp.la",
+    "logout": "Sign Out"
+  },
+  "wizard": {
+    "step1": "1. Pick Location",
+    "step2": "2. Location Type",
+    "step3": "3. Amenities",
+    "step4": "4. Details",
+    "step5": "5. Photos",
+    "step6": "6. Confirm"
+  },
+  "map": {
+    "layerModal": {
+      "title": "Choose Map Layer",
+      "classic": "Classic",
+      "topo": "Topographic",
+      "satellite": "Satellite"
+    },
+    "poiCard": {
+      "noRating": "No reviews yet",
+      "detailsCta": "Details",
+      "directionsCta": "Directions"
+    },
+    "filterModal": {
+      "title": "Filter by Category",
+      "clear": "Clear",
+      "freeLimitWarning": "Free accounts can filter up to 2 categories. Upgrade to Premium."
+    }
+  },
+  "emptyState": {
+    "favorites": {
+      "title": "You haven't added any favorites yet",
+      "description": "Add places you like to your favorites to see them here.",
+      "cta": "Back to Map"
+    },
+    "visited": {
+      "title": "You haven't marked any visits yet"
+    },
+    "reviews": {
+      "title": "You haven't written any reviews yet",
+      "cta": "Discover a location"
+    },
+    "search": {
+      "title": "No results found"
+    },
+    "notifications": {
+      "title": "No notifications yet"
+    },
+    "lists": {
+      "title": "Create your first list",
+      "cta": "New Map List"
+    }
+  }
+}

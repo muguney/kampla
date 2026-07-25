@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #__nuxt {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-brand-cream text-brand-charcoal antialiased dark:bg-neutral-900 dark:text-neutral-100;
+    font-family: "Baloo 2", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+}
+
+@layer components {
+  /* PRD 2.6 — yuvarlatılmış köşeler, yumuşak gölgeler, "friendly/rounded" UI dili */
+  .kl-card {
+    @apply rounded-card bg-white shadow-sm dark:bg-neutral-800;
+  }
+
+  .kl-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-control bg-brand-orange px-5 py-3 font-semibold text-white transition-colors hover:bg-brand-orange-dark disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .kl-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-control bg-brand-charcoal px-5 py-3 font-semibold text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .kl-btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-control border border-neutral-200 bg-white px-5 py-3 font-semibold text-brand-charcoal transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100;
+  }
+
+  .kl-input {
+    @apply w-full rounded-control border border-neutral-200 bg-white px-4 py-3 text-brand-charcoal placeholder:text-neutral-400 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100;
+  }
+
+  /* Faz 2 — MapLibre harita (PRD 5.B) */
+  .kampla-map-container {
+    @apply absolute inset-0 h-full w-full;
+  }
+
+  /* Kullanıcının anlık konumu — mavi nokta + beyaz halka (bkz. composables/useMap.ts) */
+  .kampla-user-location-dot {
+    @apply h-4 w-4 rounded-full border-2 border-white bg-blue-500 shadow-md;
+  }
+
+  /* Kategori renkli POI pin'i — arka plan rengi sayfada `bg-poi-<type>` ile atanır */
+  .kampla-poi-marker {
+    @apply flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-2 border-white shadow-md transition-transform hover:scale-110;
+  }
+}

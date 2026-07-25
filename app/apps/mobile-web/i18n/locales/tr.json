@@ -1,0 +1,155 @@
+{
+  "brand": {
+    "name": "Kamp.la"
+  },
+  "common": {
+    "back": "Geri",
+    "comingSoon": "Bu ekran ilerleyen fazlarda geliştirilecek.",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "loading": "Yükleniyor..."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "search": "Ara",
+    "add": "Konum Ekle",
+    "lists": "Listelerim",
+    "menu": "Menü"
+  },
+  "pages": {
+    "home": { "title": "Kamp.la" },
+    "listView": {
+      "title": "Liste Görünümü",
+      "resultCount": "{count} sonuç",
+      "mapToggle": "Harita",
+      "favoriteToggle": "Favorilere ekle/çıkar"
+    },
+    "search": {
+      "title": "Ara",
+      "placeholder": "Şehir veya bölge ara (ör. Alanya, Antalya)",
+      "recentTitle": "Son Aramalar",
+      "suggestionsTitle": "Öneriler"
+    },
+    "poiDetail": { "title": "Konum Detayı" },
+    "poiEdit": { "title": "Konumu Düzenle" },
+    "addLocation": { "title": "Konum Ekle" },
+    "myLists": { "title": "Harita Listelerim" },
+    "listDetail": { "title": "Liste" },
+    "notifications": { "title": "Bildirimler" },
+    "premium": { "title": "Kamp.la Plus" },
+    "account": { "title": "Hesabım" },
+    "accountUsername": { "title": "Kullanıcı Adı Değiştir" },
+    "accountEmail": { "title": "E-Posta Değiştir" },
+    "accountPassword": { "title": "Şifre Değiştir" },
+    "accountSocial": { "title": "Sosyal Medya Hesapları" },
+    "accountReviews": { "title": "Tüm Yorumlarım" },
+    "profile": { "title": "Profil" },
+    "settings": { "title": "Uygulama Ayarları" },
+    "settingsLanguage": { "title": "Dil Seçimi" },
+    "settingsTheme": { "title": "Tema Ayarları" },
+    "settingsAbout": { "title": "Kamp.la Hakkında" },
+    "login": {
+      "title": "Üye Girişi",
+      "emailPlaceholder": "E-posta",
+      "passwordPlaceholder": "Şifre",
+      "forgotPassword": "Şifremi unuttum",
+      "submit": "Giriş Yap",
+      "submitting": "Giriş yapılıyor...",
+      "googleSignIn": "Google ile giriş yap",
+      "googleComingSoon": "(yakında)",
+      "noAccount": "Hesabın yok mu?",
+      "registerLink": "Kayıt ol",
+      "genericError": "Giriş yapılamadı. Lütfen bilgilerini kontrol edip tekrar dene."
+    },
+    "register": {
+      "title": "Kayıt Ol",
+      "usernamePlaceholder": "Kullanıcı adı",
+      "emailPlaceholder": "E-posta",
+      "passwordPlaceholder": "Şifre",
+      "agreementTerms": "Üyelik Sözleşmesi",
+      "agreementAnd": "ve",
+      "agreementPrivacy": "Gizlilik Politikası",
+      "agreementSuffix": "'nı kabul ediyorum.",
+      "agreementRequired": "Devam etmek için sözleşmeyi kabul etmelisin.",
+      "submit": "Kayıt Ol",
+      "submitting": "Kayıt olunuyor...",
+      "hasAccount": "Zaten hesabın var mı?",
+      "loginLink": "Giriş yap",
+      "checkEmailTitle": "E-postanı kontrol et",
+      "checkEmailBody": "Hesabını onaylamak için sana bir e-posta gönderdik. Onayladıktan sonra giriş yapabilirsin.",
+      "genericError": "Kayıt oluşturulamadı. Lütfen bilgilerini kontrol edip tekrar dene."
+    },
+    "forgotPassword": {
+      "title": "Şifremi Unuttum",
+      "subtitle": "E-posta adresine şifre sıfırlama linki gönderelim.",
+      "emailPlaceholder": "E-posta",
+      "emailInvalid": "Geçerli bir e-posta adresi gir.",
+      "submit": "Sıfırlama Linki Gönder",
+      "submitting": "Gönderiliyor...",
+      "checkEmailTitle": "E-postanı kontrol et",
+      "checkEmailBody": "E-posta adresine bir şifre sıfırlama linki gönderdik. Linke tıklayıp yeni şifreni belirledikten sonra giriş yapabilirsin.",
+      "backToLogin": "Girişe dön"
+    },
+    "terms": { "title": "Kullanım Koşulları" },
+    "privacy": { "title": "Gizlilik Sözleşmesi" },
+    "menu": { "title": "Menü" }
+  },
+  "menu": {
+    "addLocation": "Konum Ekle",
+    "login": "Giriş Yap",
+    "account": "Hesabım",
+    "settings": "Uygulama Ayarları",
+    "about": "Kamp.la Hakkında",
+    "logout": "Çıkış Yap"
+  },
+  "wizard": {
+    "step1": "1. Konum Seç",
+    "step2": "2. Konum Türü",
+    "step3": "3. Hizmetler",
+    "step4": "4. Detaylar",
+    "step5": "5. Fotoğraflar",
+    "step6": "6. Onay"
+  },
+  "map": {
+    "layerModal": {
+      "title": "Harita Katmanı Seç",
+      "classic": "Klasik",
+      "topo": "Topografik",
+      "satellite": "Uydu"
+    },
+    "poiCard": {
+      "noRating": "Henüz değerlendirme yok",
+      "detailsCta": "Detaylar",
+      "directionsCta": "Yol Tarifi"
+    },
+    "filterModal": {
+      "title": "Kategori Filtrele",
+      "clear": "Temizle",
+      "freeLimitWarning": "Ücretsiz hesapta en fazla 2 kategori filtrelenebilir. Premium'a geç."
+    }
+  },
+  "emptyState": {
+    "favorites": {
+      "title": "Henüz favori eklemediniz",
+      "description": "Beğendiğin konumları favorilerine ekleyerek burada listeleyebilirsin.",
+      "cta": "Haritaya Dön"
+    },
+    "visited": {
+      "title": "Henüz ziyaret işaretlemediniz"
+    },
+    "reviews": {
+      "title": "Henüz yorum yapmadınız",
+      "cta": "Bir konum keşfet"
+    },
+    "search": {
+      "title": "Sonuç bulunamadı"
+    },
+    "notifications": {
+      "title": "Henüz bildiriminiz yok"
+    },
+    "lists": {
+      "title": "İlk listeni oluştur",
+      "cta": "Yeni Harita Listesi Oluştur"
+    }
+  }
+}

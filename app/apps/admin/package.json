@@ -1,0 +1,21 @@
+{
+  "name": "kampla-admin",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3001",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/supabase": "^1.4.0",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@kampla/shared": "*",
+    "nuxt": "^3.13.2",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
+  }
+}

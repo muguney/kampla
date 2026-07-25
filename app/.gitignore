@@ -1,0 +1,18 @@
+node_modules/
+.nuxt/
+.output/
+.data/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Faz 0 kurulum doğrulaması sırasında sandbox dosya sistemi kısıtı nedeniyle
+# silinemeyip yeniden adlandırılan artık klasörler — Mac'te Finder'dan elle
+# silinebilir, projeye dahil değildir (bkz. STATUS.md).
+*_broken*/
+*_unused*/
+*-cleared-*/
