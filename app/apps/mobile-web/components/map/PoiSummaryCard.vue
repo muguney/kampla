@@ -9,6 +9,7 @@ import {
   formatDistanceKm,
   LOCATION_TYPE_LABELS_EN,
   LOCATION_TYPE_LABELS_TR,
+  ratingColor,
   type MockLocationCard,
 } from "@kampla/shared";
 import type { UserLocation } from "~/composables/useMap";
@@ -98,7 +99,7 @@ const hasRating = computed(() => props.location.rating_count > 0);
 
               <div class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-brand-charcoal/70 dark:text-neutral-400">
                 <span v-if="hasRating" class="inline-flex items-center gap-1">
-                  <span class="text-poi-shower">★</span>
+                  <IconsAppIcon name="star-solid" class="h-3 w-3" :style="{ color: ratingColor }" />
                   {{ location.rating_avg.toFixed(1) }}
                   <span>({{ location.rating_count }})</span>
                 </span>

@@ -6,6 +6,8 @@
  * tablosuna insert Faz 5'te eklenecek (PRD 6.8). Açılmadan önce misafir
  * kontrolü çağıran tarafta yapılır (bkz. components/poi/PoiReviewsTab.vue).
  */
+import { ratingColor } from "@kampla/shared";
+
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{
   "update:modelValue": [boolean];
@@ -91,7 +93,7 @@ const avatarUrl = computed(() => authStore.profile?.avatar_url ?? null);
               v-for="star in 5"
               :key="star"
               type="button"
-              class="text-3xl leading-none transition-transform hover:scale-110"
+              class="transition-transform hover:scale-110"
               :aria-label="String(star)"
               role="radio"
               :aria-checked="rating === star"
@@ -99,7 +101,12 @@ const avatarUrl = computed(() => authStore.profile?.avatar_url ?? null);
               @mouseleave="hoverRating = 0"
               @click="rating = star; showRatingError = false"
             >
-              <span :class="(hoverRating || rating) >= star ? 'text-poi-shower' : 'text-neutral-300 dark:text-neutral-600'">★</span>
+              <IconsAppIcon
+                name="star-solid"
+                class="h-8 w-8"
+                :class="(hoverRating || rating) < star ? 'text-neutral-300 dark:text-neutral-600' : ''"
+                :style="(hoverRating || rating) >= star ? { color: ratingColor } : {}"
+              />
             </button>
           </div>
           <p v-if="showRatingError" class="mb-3 text-center text-xs font-semibold text-red-500">

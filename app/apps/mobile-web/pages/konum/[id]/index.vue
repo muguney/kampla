@@ -5,7 +5,7 @@
  * gerçek backend'e bağlanacak). Tasarımdaki gibi tam ekran, üst bar/alt nav yok
  * (bkz. layouts/auth.vue) — kendi kapanış (X) ve alt aksiyon çubuğunu kendi çizer.
  */
-import { MOCK_LOCATIONS, LOCATION_TYPE_LABELS_EN, LOCATION_TYPE_LABELS_TR, type MockLocationCard } from "@kampla/shared";
+import { MOCK_LOCATIONS, LOCATION_TYPE_LABELS_EN, LOCATION_TYPE_LABELS_TR, ratingColor, type MockLocationCard } from "@kampla/shared";
 
 definePageMeta({ layout: "auth" });
 
@@ -28,10 +28,7 @@ const typeLabel = computed(() => {
 
 const authorName = computed(() => location.value?.created_by_username ?? t("pages.poiDetail.teamName"));
 
-const headerStars = computed(() => {
-  const rounded = Math.round(location.value?.rating_avg ?? 0);
-  return { filled: "★".repeat(rounded), empty: "★".repeat(5 - rounded) };
-});
+const headerFilledStars = computed(() => Math.round(location.value?.rating_avg ?? 0));
 
 const addedDateLabel = computed(() => {
   if (!location.value) return "";
@@ -208,7 +205,15 @@ async function handleShare() {
           <div>
             <p class="text-xs font-semibold text-brand-orange">{{ typeLabel }}</p>
             <p v-if="location.rating_count > 0" class="mt-0.5 flex items-center gap-1 text-xs text-brand-charcoal/70 dark:text-neutral-400">
-              <span class="text-poi-shower">{{ headerStars.filled }}</span><span class="text-neutral-300 dark:text-neutral-600">{{ headerStars.empty }}</span>
+              <span class="inline-flex items-center gap-0.5">
+                <IconsAppIcon
+                  v-for="i in 5"
+                  :key="i"
+                  :name="i <= headerFilledStars ? 'star-solid' : 'star-line'"
+                  class="h-3 w-3"
+                  :style="{ color: ratingColor }"
+                />
+              </span>
               <span class="font-semibold text-brand-charcoal dark:text-neutral-200">{{ location.rating_avg.toFixed(1) }}</span>
             </p>
             <p v-else class="mt-0.5 text-xs text-brand-charcoal/50 dark:text-neutral-500">

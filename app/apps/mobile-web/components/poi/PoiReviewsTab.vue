@@ -6,7 +6,7 @@
  * Faz 3 salt okunur: yeni yorum yalnızca bu bileşenin yerel state'ine eklenir,
  * gerçek `reviews` tablosuna insert Faz 5'te eklenecek (PRD 6.8).
  */
-import { getReviewsForLocation, type MockLocationCard, type MockReview } from "@kampla/shared";
+import { getReviewsForLocation, ratingColor, type MockLocationCard, type MockReview } from "@kampla/shared";
 
 const props = defineProps<{ location: MockLocationCard }>();
 
@@ -48,9 +48,8 @@ function barPercent(star: number): number {
   return Math.min(100, (distribution.value[star] / reviewCount.value) * 100);
 }
 
-function starDisplay(rating: number): { filled: string; empty: string } {
-  const rounded = Math.round(rating);
-  return { filled: "★".repeat(rounded), empty: "★".repeat(5 - rounded) };
+function filledStars(rating: number): number {
+  return Math.round(rating);
 }
 
 function openReviewModal() {
@@ -98,7 +97,7 @@ function formatDate(iso: string): string {
           <div v-for="star in STAR_LEVELS" :key="star" class="flex items-center gap-2">
             <span class="w-2 text-xs text-brand-charcoal/60 dark:text-neutral-400">{{ star }}</span>
             <div class="h-2 flex-1 overflow-hidden rounded-pill bg-neutral-200 dark:bg-neutral-700">
-              <div class="h-full rounded-pill bg-poi-shower" :style="{ width: barPercent(star) + '%' }" />
+              <div class="h-full rounded-pill" :style="{ width: barPercent(star) + '%', backgroundColor: ratingColor }" />
             </div>
           </div>
         </div>
@@ -106,9 +105,14 @@ function formatDate(iso: string): string {
           <span class="text-3xl font-extrabold text-brand-charcoal dark:text-neutral-100">
             {{ location.rating_avg.toFixed(1) }}
           </span>
-          <span class="text-sm">
-            <span class="text-poi-shower">{{ starDisplay(location.rating_avg).filled }}</span
-            ><span class="text-neutral-300 dark:text-neutral-600">{{ starDisplay(location.rating_avg).empty }}</span>
+          <span class="inline-flex items-center gap-0.5">
+            <IconsAppIcon
+              v-for="i in 5"
+              :key="i"
+              :name="i <= filledStars(location.rating_avg) ? 'star-solid' : 'star-line'"
+              class="h-3.5 w-3.5"
+              :style="{ color: ratingColor }"
+            />
           </span>
           <span class="mt-0.5 text-xs text-brand-charcoal/60 dark:text-neutral-400">
             {{ t("pages.poiDetail.reviewsTab.totalReviews", { count: reviewCount }) }}
@@ -143,9 +147,14 @@ function formatDate(iso: string): string {
               <p class="text-xs text-brand-charcoal/50 dark:text-neutral-500">{{ formatDate(review.created_at) }}</p>
             </div>
           </div>
-          <span class="text-sm">
-            <span class="text-poi-shower">{{ starDisplay(review.rating).filled }}</span
-            ><span class="text-neutral-300 dark:text-neutral-600">{{ starDisplay(review.rating).empty }}</span>
+          <span class="inline-flex items-center gap-0.5">
+            <IconsAppIcon
+              v-for="i in 5"
+              :key="i"
+              :name="i <= filledStars(review.rating) ? 'star-solid' : 'star-line'"
+              class="h-3.5 w-3.5"
+              :style="{ color: ratingColor }"
+            />
           </span>
         </div>
         <p v-if="review.comment" class="text-sm leading-relaxed text-brand-charcoal/85 dark:text-neutral-300">
