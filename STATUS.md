@@ -1,9 +1,25 @@
 # Durum — Kamp.la
 
 **Güncel Faz:** Faz 6 / 12 — Hesap & Ayarlar (PRD 5.A/5.J/5.L) kod tarafı tamamen bitti; Faz 5'in kalan görevleri hâlâ mimari karara bağlı (BLOCKERS #11), Faz 2/3/4/6 DoD'ları Mustafa'dan bekleniyor
-**Genel Durum:** 🟡 Faz 6'nın 7/8 görevi tamamlandı (yalnızca DoD kaldı); Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11)
+**Genel Durum:** 🟡 Faz 6'nın 7/8 görevi tamamlandı (yalnızca DoD kaldı); Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); Faz 0-6 kod tabanı artık GitHub'da (bkz. aşağıdaki kayıt — önceki oturumlarda git push adımı unutulmuştu, düzeltildi)
 
-## Son Güncelleme: 2026-07-26 — Otonom oturum: Faz 6 (Hesap & Ayarlar) doğrulandı + build-blocking i18n bug'ı düzeltildi
+## Son Güncelleme: 2026-07-26 — Figma tasarım uyumu (Faz 2 ekranları) + git push açığı kapatıldı
+**Yapılanlar:**
+- Mustafa haklı olarak fark etti: Figma connector bağlandıktan sonra bile Faz 2'de kodlanan 6 ekran (Ana Ekran/Harita, Katman Seçim modalı, POI özet kart, Liste, Filtre, Arama) hâlâ PRD metnine göre serbest yazılmıştı, gerçek Figma node'larıyla karşılaştırılmamıştı. İki general-purpose subagent'a paralel delege edildi (`figma-design-to-code` skill'inin gate protokolüyle):
+  - **Bulgular (gerçek Figma'dan, `get_design_context` ile 6 node'un tamamı için doğrulandı):** font "Baloo 2" değil **"Saira"** imiş — `nuxt.config.ts`, `theme.ts`, `main.css` düzeltildi. Renkler: turuncu `#F2884B`→**`#FE8542`**, antrasit `#3B3B3B`→**`#444444`**, puan sarısı→**`#FFCA41`**. `PoiSummaryCard.vue`'da "Detaylar"/"Yol Tarifi" butonlarının rengi/sırası ters kodlanmıştı, düzeltildi. Layout/spacing (harita tam ekran, TopBar Ana Ekran'da farklı, bottom-sheet'ler alt nav'ın üzerinde, kart radius/gölge/ızgara) Figma screenshot'larına göre düzeltildi.
+  - **Açık kalan kısım (BLOCKERS #13):** gerçek ikon export'ları (9 POI kategori ikonu, kalp, yıldız, filtre/katman/konum/geri/arama/pin ikonları) İNDİRİLEMEDİ — Figma MCP "Starter plan" tool-call limitine takıldı, ayrıca bu sandbox'ın ağ proxy'si figma.com asset CDN'ini engelliyor. Subagent'lar dürüstçe bunu raporladı, sahte "tamamlandı" demedi — bunun yerine ekrandaki emoji/elle-çizilmiş placeholder'ları screenshot'lara bakarak yeniden çizilmiş SVG'lerle değiştirdiler (`apps/mobile-web/assets/icons/*.svg`, `components/icons/AppIcon.vue`) ve kodda "bunlar gerçek export değil" yorumu bıraktılar. Gerçek export'lar için Mustafa'nın kendi makinesinde (gerçek internet erişimi olan ortamda) `download_assets` çalıştırması gerekiyor — node ID listesi subagent raporlarında, BLOCKERS #13'te özetlendi.
+  - Doğrulama: her iki subagent da `/tmp` temiz kopyada typecheck (sıfır yeni hata) + `nuxt dev` ile ilgili route'ların HTTP 200 döndüğünü doğruladı.
+- **Kritik operasyonel düzeltme:** Mustafa "neden hiç commit atmıyorsunuz" dedi — haklıydı. Faz 3, 4, 5, 6'nın TÜM kodu (önceki otonom oturumlarda yazılmış) hiç GitHub'a push edilmemişti, çünkü scheduled task'ın kendi SKILL.md'sinde git adımı hiç yoktu (sadece CEO_AGENT.md'de referans olarak duruyordu, zorunlu adım değildi). İki şey yapıldı:
+  1. Scheduled task'ın (`mobapps-autonomous-progress`) prompt'una **zorunlu 4. adım** olarak git commit+push eklendi — bundan sonra her otonom oturum kendi değişikliğini push etmeden bitmiş sayılmayacak.
+  2. Birikmiş TÜM değişiklikler (Faz 3-6 kodu + bu oturumdaki Figma düzeltmeleri) tek seferde commit'lenip push edildi.
+
+**Sırada:**
+- Mustafa'nın kendi makinesinde gerçek Figma ikon export'larını indirip placeholder SVG'lerin yerine koyması (BLOCKERS #13) — ya da CEO ajanının bir sonraki oturumda Figma quota sıfırlandığında tekrar denemesi.
+- Faz 3 (POI Detay/Figma) henüz Figma ile karşılaştırılmadı — bu oturumda kapsam dışı bırakıldı (Mustafa sadece Faz 2 ekranlarından bahsetti), gerekirse ayrı bir görev olarak eklenmeli.
+- Faz 3'e (asıl anlamda: Kullanıcı Katkısı/Etkileşim/Hesap fazlarının devamı) geçiş — bkz. aşağıdaki eski kayıtlar, kod tarafı çoktan ilerlemiş durumda.
+- Hâlâ açık: Faz 2 DoD (BLOCKERS #8), Faz 3 DoD (#9), Faz 4 DoD (#10), Faz 5 mimari karar (#11), Faz 6 DoD (#12), Figma ikon export (#13).
+
+## Son Güncelleme (önceki): 2026-07-26 — Otonom oturum: Faz 6 (Hesap & Ayarlar) doğrulandı + build-blocking i18n bug'ı düzeltildi
 **Yapılanlar:**
 - TASKS.md'deki Faz 6 sırasına göre ilk 3 görev general-purpose subagent'a delege edildi: `pages/hesabim/index.vue`, `hesabim/kullanici-adi.vue`, `hesabim/e-posta.vue`.
 - Subagent, bu 3 dosyanın (ve incelerken ayrıca `hesabim/sifre.vue`, `hesabim/sosyal-medya.vue`, `server/api/hesap-sil.post.ts`, `ayarlar/hakkinda.vue`, `kullanim-kosullari.vue`, `gizlilik.vue`'nun) önceki bir oturumda zaten tam fonksiyonel yazılmış olduğunu tespit etti — TASKS.md bu ilerlemeyi yansıtmıyordu, bu oturumda düzeltildi (Faz 6'nın 7/8 görevi `[x]`'e çekildi).
