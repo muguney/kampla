@@ -7,8 +7,14 @@
  * (`pages/liste.vue`) aynı modalı kullanır — seçim `useFiltersStore` Pinia
  * store'unda tutulduğu için haritadaki pin'ler ve liste kartları otomatik
  * senkron filtrelenir.
+ *
+ * Görsel katman Figma "6-Filtre" (node 132:1271, `get_design_context` ile
+ * alındı) ile eşleştirildi: 3x3 ızgara, 20px köşe yuvarlaklığı, seçili kart tam
+ * turuncu dolgu + beyaz ikon, seçili olmayan kart beyaz + gölge (kenarlık yok),
+ * ücretli kategorilerde küçük "₺" rozeti, kapat butonu turuncu dolgulu daire.
  */
 import { LOCATION_TYPES, LOCATION_TYPE_LABELS_EN, LOCATION_TYPE_LABELS_TR, type LocationType } from "@kampla/shared";
+import { LOCATION_TYPE_ICONS, PAID_LOCATION_TYPES } from "~/composables/useLocationTypeIcon";
 
 defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ "update:modelValue": [boolean] }>();
@@ -17,23 +23,11 @@ const filtersStore = useFiltersStore();
 const subscriptionStore = useSubscriptionStore();
 const { t, locale } = useI18n();
 
-/** Kategori başına basit emoji ikon — ücretli/ücretsiz ayrımı zaten renk noktasıyla yapılıyor. */
-const TYPE_ICONS: Record<LocationType, string> = {
-  "paid-caravan": "🚐",
-  "free-caravan": "🚐",
-  "paid-parking": "🅿️",
-  "free-parking": "🅿️",
-  "paid-tent": "⛺",
-  "free-tent": "⛺",
-  water: "🚰",
-  laundry: "🧺",
-  shower: "🚿",
-};
-
 const typeOptions = computed(() =>
   LOCATION_TYPES.map((type) => ({
     type,
-    icon: TYPE_ICONS[type],
+    icon: LOCATION_TYPE_ICONS[type],
+    isPaid: PAID_LOCATION_TYPES.has(type),
     label: locale.value === "en" ? LOCATION_TYPE_LABELS_EN[type] : LOCATION_TYPE_LABELS_TR[type],
   }))
 );
@@ -74,7 +68,7 @@ onUnmounted(() => {
         <div class="absolute inset-0 bg-black/40" @click="close" />
 
         <div
-          class="kl-card relative w-full max-w-md rounded-b-none p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]"
+          class="relative flex max-h-[92vh] w-full max-w-md flex-col overflow-y-auto rounded-t-[20px] bg-white p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-[0_-4px_12px_0_rgba(0,0,0,0.09)] dark:bg-neutral-900"
           role="dialog"
           aria-modal="true"
           :aria-label="t('map.filterModal.title')"
@@ -85,7 +79,7 @@ onUnmounted(() => {
             <h2 class="text-base font-bold text-brand-charcoal dark:text-neutral-100">
               {{ t("map.filterModal.title") }}
             </h2>
-            <div class="flex items-center gap-1">
+            <div class="flex items-center gap-2">
               <button
                 v-if="filtersStore.activeTypes.length > 0"
                 type="button"
@@ -96,11 +90,11 @@ onUnmounted(() => {
               </button>
               <button
                 type="button"
-                class="flex h-8 w-8 items-center justify-center rounded-full text-brand-charcoal/60 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700"
+                class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-orange text-white shadow-[0_4px_3px_0_rgba(0,0,0,0.09)]"
                 :aria-label="t('common.cancel')"
                 @click="close"
               >
-                ✕
+                <IconsAppIcon name="close" class="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -120,24 +114,41 @@ onUnmounted(() => {
               v-for="option in typeOptions"
               :key="option.type"
               type="button"
-              class="flex flex-col items-center gap-1.5 rounded-control border-2 p-2.5 transition-colors"
+              class="flex flex-col items-center gap-2 rounded-[20px] p-3 shadow-[0_4px_12px_0_rgba(0,0,0,0.09)] transition-colors"
               :class="
                 filtersStore.activeTypes.includes(option.type)
-                  ? 'border-brand-orange bg-brand-orange/10'
-                  : 'border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800'
+                  ? 'bg-brand-orange'
+                  : 'bg-white dark:bg-neutral-800'
               "
               :aria-pressed="filtersStore.activeTypes.includes(option.type)"
               @click="toggleType(option.type)"
             >
-              <span class="relative flex h-11 w-11 items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-700">
-                {{ option.icon }}
-                <span class="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border border-white dark:border-neutral-800" :class="`bg-poi-${option.type}`" />
+              <span class="relative flex h-9 w-9 items-center justify-center">
+                <IconsAppIcon
+                  :name="option.icon"
+                  class="h-full w-full"
+                  :class="
+                    filtersStore.activeTypes.includes(option.type)
+                      ? 'text-white'
+                      : `text-poi-${option.type}`
+                  "
+                />
+                <IconsAppIcon
+                  v-if="option.isPaid"
+                  name="fee-badge"
+                  class="absolute -right-2 -top-2 h-4 w-4"
+                  :class="
+                    filtersStore.activeTypes.includes(option.type)
+                      ? 'text-brand-orange'
+                      : `text-poi-${option.type}`
+                  "
+                />
               </span>
               <span
                 class="text-center text-[11px] font-semibold leading-tight"
                 :class="
                   filtersStore.activeTypes.includes(option.type)
-                    ? 'text-brand-orange'
+                    ? 'text-white'
                     : 'text-brand-charcoal dark:text-neutral-200'
                 "
               >

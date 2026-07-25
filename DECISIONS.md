@@ -89,3 +89,76 @@ otonom oturumun tekrar sormasına gerek kalmaması için
 `kamp-la/.git-remote-credentials` dosyasında saklanıyor (bu dosya
 `.gitignore`'da, repoya gitmiyor).
 **Onaylayan:** Mustafa
+
+### 2026-07-25 — Otonom oturum: Faz 4 fotoğraf depolama yaklaşımı
+**Karar:** Konum fotoğrafları (PRD 5.G Adım 5) için ayrı bir
+`location_photos` tablosu yerine `locations` tablosuna `photo_urls
+text[] not null default '{}'` kolonu eklenecek (mevcut
+`accommodation_types text[]` deseniyle tutarlı, basit çoklu URL listesi
+yeterli — sıralama/kapak foto gibi ek metadata şu an gerekmiyor).
+Depolama: BLOCKERS #4'teki Cloudflare R2 hâlâ bekliyor olduğu için
+STATUS.md/BLOCKERS notundaki "geçici olarak Supabase Storage ile
+başlanabilir" önerisine göre `location-photos` adlı bir Supabase Storage
+bucket'ı migration ile oluşturulacak (zaten açık olan Supabase projesi
+içinde — yeni hesap açma değil, mevcut projede kaynak oluşturma).
+Gerçek R2 key'i geldiğinde upload hedefi değiştirilecek, `photo_urls`
+alanı şema olarak aynı kalır.
+**Gerekçe:** Faz 4'ü R2 hesabı beklemeden ilerletebilmek, şema
+karmaşıklığını en aza indirmek.
+**Onaylayan:** CEO ajanı (otonom oturum — geri dönüşü kolay bir teknik
+detay, büyük mimari karar kapsamında değil; Supabase Storage→R2 geçişi
+ileride tek satırlık upload hedefi değişikliği).
+
+### 2026-07-26 — Otonom oturum: mock POI vs. gerçek `locations` çakışması (ONAY BEKLİYOR)
+**Durum tespiti:** Faz 5 (Etkileşim — yorum/favori/liste) görevlerini
+planlarken şu çakışma ortaya çıktı: Faz 2/3'te Ana Ekran/Liste/Arama/POI
+Detay tamamen `packages/shared/src/mock-locations.ts`'teki sahte veriyle
+çalışıyor (id'ler `mock-loc-001` gibi, gerçek UUID değil — bilinçli bir
+Faz 2/3 kararıydı, "salt okunur" fazlarda hız için). Ancak `reviews.
+location_id` ve `list_items.location_id` gerçek `locations.id`'ye foreign
+key. Yani şu an ekranda görünen hiçbir POI'ye gerçek bir yorum veya
+favori eklenemez — DB foreign key hatası verir. Faz 4'te kullanıcının
+eklediği konumlar gerçek `locations` tablosuna yazılıyor ama bunlar hiçbir
+yerde (haritada/listede) gösterilmiyor; iki veri kaynağı birbirinden kopuk.
+
+**Seçenekler (öneriliyor, karar Mustafa'da):**
+1. **Gerçek entegrasyon:** Ana Ekran/Liste/Arama/POI Detay'ı gerçek
+   `locations` tablosuna bağla (status='published' + kullanıcının kendi
+   'pending' kayıtları). Artı: Faz 5 tam anlamıyla uçtan uca çalışır,
+   Faz 4'te eklenen konumlar sonunda görünür olur. Eksi: DB'de şu an
+   yayınlanmış (`published`) hiç konum yok (admin onay akışı/panel Faz 8'de),
+   bu yüzden harita muhtemelen boş görünecek — en az birkaç konumun admin
+   tarafından manuel `published` olarak eklenmesi/işaretlenmesi gerekir
+   (admin panel Faz 8'i beklemeden Supabase dashboard'dan elle yapılabilir).
+2. **Hibrit (geçici):** Mock veriyi olduğu gibi bırak, yorum/favori/liste
+   özelliklerini yalnızca kullanıcının Faz 4 sihirbazıyla kendi eklediği
+   gerçek konumlar için aktif et (mock POI'lerde bu butonlar "yakında"
+   placeholder kalır). Artı: Faz 2/3'ü bozmadan ilerlenir. Eksi: Kullanıcı
+   deneyimi tutarsız (bazı POI'lerde yorum yazılabiliyor, bazılarında değil).
+3. **Faz 5'i ertele:** Önce Faz 2 DoD onayı (BLOCKERS #8) alınıp gerçek
+   entegrasyon kararı netleşene kadar yalnızca POI'ye bağlı olmayan Faz 5
+   işleri (liste yönetimi) ilerletilir — bu oturumda uygulanan yaklaşım.
+**Bu oturumda alınan geçici karar:** Seçenek 3 uygulandı (POI'ye bağımlı
+olmayan "Harita Listelerim" CRUD'una başlandı), kalan Faz 5 görevleri
+TASKS.md'de bu karara bağımlı olarak işaretlendi.
+**Onaylayan:** Bekliyor — Mustafa'nın 1/2/3'ten birini seçmesi (ya da
+başka bir yön önermesi) gerekiyor, bir sonraki daily'de görüşülmeli.
+
+### 2026-07-26 — Otonom oturum: Public liste sayfası route'u `/liste/[id]` değil `/listeler/[id]`
+**Durum tespiti:** TASKS.md'de PRD 5.K (Liste Sayfası — Paylaşılan/Public) için
+önerilen route `/liste/[id]` idi, ama `pages/liste.vue` (Faz 2'den kalma
+"Liste Görünümü" — harita kart-listesi, PRD 5.E) zaten bu isimde tam bir leaf
+sayfa. Subagent gerçek dev server denemesiyle doğruladı: `pages/liste.vue` +
+`pages/liste/[id].vue` birlikte varken Nuxt/vue-router `liste.vue`'yu nested
+route'lar için parent'a çeviriyor; `liste.vue` içinde `<NuxtPage/>` olmadığından
+`/liste/<id>` ziyaret edilince ebeveynin kendi içeriği sessizce gösteriliyor,
+`id` parametresi tamamen yok sayılıyor (curl ile `/liste` ve `/liste/<id>`
+birebir aynı HTML döndürdüğü kanıtlandı).
+**Karar:** Public liste sayfası `/listeler/[id]` route'una taşındı (proje
+deseniyle tutarlı: `liste`=tekil harita liste görünümü, `listelerim`=kendi
+listelerim/auth, `listeler`=genel/public liste görünümü). Mevcut `/liste`
+özelliğinde regresyon olmadığı ayrıca doğrulandı (değişiklik öncesi/sonrası
+birebir aynı içerik).
+**Onaylayan:** CEO ajanı (otonom oturum — geri dönüşü kolay bir routing
+detayı, PRD'nin özünü/davranışını değiştirmiyor, büyük mimari karar kapsamında
+değil).

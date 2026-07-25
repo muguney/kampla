@@ -11,7 +11,8 @@
 
   body {
     @apply bg-brand-cream text-brand-charcoal antialiased dark:bg-neutral-900 dark:text-neutral-100;
-    font-family: "Baloo 2", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* Font düzeltmesi (2026-07-26, Figma get_design_context): tüm metin node'ları "Saira" kullanıyor. */
+    font-family: "Saira", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
   }
 }
 

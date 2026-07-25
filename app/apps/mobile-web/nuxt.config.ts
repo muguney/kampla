@@ -30,8 +30,11 @@ export default defineNuxtConfig({
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
         {
+          // Font düzeltmesi (2026-07-26, Figma get_design_context — node 52:218/160:1313/64:4384):
+          // Figma'daki tüm metin node'ları "Saira" font ailesini kullanıyor (Regular/SemiBold/Bold),
+          // önceki "Baloo 2" PRD metnine dayalı bir tahmindi ve yanlıştı.
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700;800&display=swap",
         },
       ],
     },
@@ -55,6 +58,15 @@ export default defineNuxtConfig({
     redirect: false,
     url: process.env.NUXT_PUBLIC_SUPABASE_URL || "",
     key: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || "",
+    // Faz 6 — "Hesabımı kalıcı olarak sil" (server/api/hesap-sil.post.ts).
+    // `@nuxtjs/supabase`'in kendi `serverSupabaseServiceRole()` server helper'ı
+    // `useRuntimeConfig(event).supabase.serviceKey`'i okur; bu alan modül tarafından
+    // OTOMATİK olarak PRIVATE (server-only) runtimeConfig'e yazılır — istemciye
+    // (public runtimeConfig) ASLA sızmaz. Modülün kendi varsayılanı
+    // `process.env.SUPABASE_SERVICE_KEY`'i okur ama projedeki gerçek env değişkeni
+    // adı `SUPABASE_SERVICE_ROLE_KEY` (bkz. .env.example) olduğu için burada elle
+    // eşleniyor.
+    serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   },
 
   i18n: {

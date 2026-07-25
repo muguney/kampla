@@ -19,6 +19,11 @@ withDefaults(
     ctaTo: "",
   }
 );
+
+// `ctaTo` verilmişse NuxtLink olarak davranır (favoriler, listeler vb.); verilmemişse
+// (ör. bir modal açmak gibi) CTA tıklaması `cta-click` event'iyle dışarı bildirilir
+// (bkz. components/poi/PoiReviewsTab.vue — "Yorum Yaz" boş durumu, PRD 5.O/5.F).
+defineEmits<{ "cta-click": [] }>();
 </script>
 
 <template>
@@ -31,5 +36,13 @@ withDefaults(
     <NuxtLink v-if="ctaLabel && ctaTo" :to="ctaTo" class="kl-btn-primary mt-2">
       {{ ctaLabel }}
     </NuxtLink>
+    <button
+      v-else-if="ctaLabel"
+      type="button"
+      class="kl-btn-primary mt-2"
+      @click="$emit('cta-click')"
+    >
+      {{ ctaLabel }}
+    </button>
   </div>
 </template>

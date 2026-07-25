@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
  * Konum Ekle — 6 adımlı sihirbaz (PRD 5.G, design/18-24 "Konum Ekle - *.png").
- * Faz 0: yalnızca adım navigasyonu iskeleti. Form state Faz 4'te
- * `useLocationWizard()` composable'ı üzerinden gerçek verilerle doldurulacak.
+ * Faz 4'te tüm adımlar gerçek form state'ine (`useLocationWizardStore`) ve
+ * adım 6'da gerçek Supabase insert'e bağlandı.
  */
 import { useLocationWizardStore } from "~/stores/locationWizard";
 
@@ -29,6 +29,30 @@ const step = computed(() => {
 });
 
 usePageTitle(stepMeta[step.value - 1].key);
+
+/**
+ * "Devam Et" butonunun aktiflik koşulu (PRD 5.G). Adım 1/2 zorunlu seçim
+ * gerektirir, adım 3 (hizmetler) opsiyoneldir, adım 4'te yalnızca `name`
+ * zorunlu (diğer her şey opsiyonel), adım 5 (fotoğraf) tamamen opsiyoneldir.
+ * Adım 6'nın kendi "Kaydet" butonu vardır (bkz. WizardStep6Confirm.vue),
+ * paylaşılan footer adım 6'da gösterilmez.
+ */
+const isStepValid = computed(() => {
+  switch (step.value) {
+    case 1:
+      return wizard.lat !== null && wizard.lng !== null;
+    case 2:
+      return wizard.locationType !== null;
+    case 3:
+      return true;
+    case 4:
+      return wizard.name.trim().length > 0;
+    case 5:
+      return true;
+    default:
+      return true;
+  }
+});
 
 const goTo = (n: number) => {
   if (n < 1 || n > 6) return;
@@ -67,7 +91,7 @@ onBeforeUnmount(() => {
       />
     </div>
 
-    <div class="flex-1 px-6 py-6">
+    <div class="flex flex-1 flex-col px-6 py-6">
       <div class="mb-6 flex items-center gap-3">
         <span class="text-3xl">{{ stepMeta[step - 1].icon }}</span>
         <h1 class="text-lg font-bold text-brand-charcoal dark:text-neutral-100">
@@ -75,13 +99,15 @@ onBeforeUnmount(() => {
         </h1>
       </div>
 
-      <UiPlaceholderScreen
-        icon="🚧"
-        description="Bu adımın formu ilerleyen fazda (Faz 4) doldurulacak."
-      />
+      <WizardStep1Location v-if="step === 1" />
+      <WizardStep2Type v-else-if="step === 2" />
+      <WizardStep3Amenities v-else-if="step === 3" />
+      <WizardStep4Details v-else-if="step === 4" />
+      <WizardStep5Photos v-else-if="step === 5" />
+      <WizardStep6Confirm v-else-if="step === 6" />
     </div>
 
-    <footer class="flex items-center justify-between gap-3 px-6 py-4">
+    <footer v-if="step < 6" class="flex items-center justify-between gap-3 px-6 py-4">
       <button
         type="button"
         class="kl-btn-outline"
@@ -91,15 +117,12 @@ onBeforeUnmount(() => {
         Geri
       </button>
       <button
-        v-if="step < 6"
         type="button"
         class="kl-btn-primary"
+        :disabled="!isStepValid"
         @click="goTo(step + 1)"
       >
         Devam Et
-      </button>
-      <button v-else type="button" class="kl-btn-primary" disabled>
-        Onayla ve Kaydet
       </button>
     </footer>
   </div>

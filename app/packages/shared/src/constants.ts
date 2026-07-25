@@ -89,6 +89,28 @@ export const AMENITY_LABELS_TR: Record<Amenity, string> = {
   dryer: "Kurutma makinesi",
 };
 
+export const AMENITY_LABELS_EN: Record<Amenity, string> = {
+  shower: "Shower",
+  electricity: "Electricity",
+  fridge: "Fridge",
+  "vehicle-entry": "Vehicles can enter the site",
+  "hot-shower": "Hot shower",
+  "near-sea": "Near the sea",
+  "campfire-grill": "Campfire/grill allowed",
+  "pet-friendly": "Pet friendly",
+  "washing-machine": "Washing machine",
+  "paid-general": "Paid (general)",
+  "gsm-signal": "GSM signal",
+  "toilet-drain": "Toilet drain point",
+  "water-fill": "Water refill point",
+  "caravan-waste-drain": "Caravan waste drain point",
+  "free-wifi": "Free wifi",
+  toilet: "Toilet",
+  "market-nearby": "Market nearby/on-site",
+  playground: "Playground",
+  dryer: "Dryer",
+};
+
 /** PRD 6.3 — Konaklama imkanları (çoklu seçim, bağımsız katman) */
 export const ACCOMMODATION_TYPES = ["caravan", "tent", "bungalow"] as const;
 export type AccommodationType = (typeof ACCOMMODATION_TYPES)[number];
@@ -99,6 +121,26 @@ export const ACCOMMODATION_LABELS_TR: Record<AccommodationType, string> = {
   bungalow: "Bungalov / Tiny house var",
 };
 
+export const ACCOMMODATION_LABELS_EN: Record<AccommodationType, string> = {
+  caravan: "Caravan-friendly",
+  tent: "Tent-friendly",
+  bungalow: "Bungalow / tiny house available",
+};
+
+/** POI Detay rozetleri için kısa etiketler (PRD 5.F) — `ACCOMMODATION_LABELS_*` form/sihirbaz
+ * bağlamındaki tam cümleler olduğu için detay sayfası rozetlerinde kısa isimler kullanılır. */
+export const ACCOMMODATION_BADGE_LABELS_TR: Record<AccommodationType, string> = {
+  caravan: "Karavan",
+  tent: "Çadır",
+  bungalow: "Bungalov",
+};
+
+export const ACCOMMODATION_BADGE_LABELS_EN: Record<AccommodationType, string> = {
+  caravan: "Caravan",
+  tent: "Tent",
+  bungalow: "Bungalow",
+};
+
 /** PRD 6.4 — Sezon (tekli seçim) */
 export const SEASONS = ["summer", "winter", "all"] as const;
 export type Season = (typeof SEASONS)[number];
@@ -107,6 +149,12 @@ export const SEASON_LABELS_TR: Record<Season, string> = {
   summer: "Yaz",
   winter: "Kış",
   all: "Tüm sezonlar",
+};
+
+export const SEASON_LABELS_EN: Record<Season, string> = {
+  summer: "Summer",
+  winter: "Winter",
+  all: "All seasons",
 };
 
 /** PRD 6.5 — Referans/bilgi katmanı türleri */

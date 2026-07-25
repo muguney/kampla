@@ -4,8 +4,15 @@
  * kart listesi olarak gösterir. Aynı `useFiltersStore` (PRD 5.D) ile
  * filtrelenir, Ana Ekran'daki gibi Filtre ve "konumuma git" aksiyonları da
  * burada mevcut (bkz. components/map/FilterModal.vue, composables/useMap.ts).
+ *
+ * Görsel katman Figma "5- Liste Ekranı" (node 52:266, `get_design_context` ile
+ * alındı) ile eşleştirildi: 10px köşeli kart + dış gölge, fotoğraf üstünde sol-alt
+ * köşeye taşan favori kalbi, başlık altında kategori ikonu, mesafe → yıldızlar
+ * → yorum sayısı sırası. Figma'da sayısal ortalama (ör. "4.4") gösterilmiyor,
+ * yalnızca yıldız ikonları + yorum adedi var — buna göre kaldırıldı.
  */
-import { distanceKm, formatDistanceKm, LOCATION_TYPE_LABELS_EN, LOCATION_TYPE_LABELS_TR, MOCK_LOCATIONS, type MockLocationCard } from "@kampla/shared";
+import { distanceKm, formatDistanceKm, LOCATION_TYPE_LABELS_EN, LOCATION_TYPE_LABELS_TR, MOCK_LOCATIONS, ratingColor, type MockLocationCard } from "@kampla/shared";
+import { LOCATION_TYPE_ICONS } from "~/composables/useLocationTypeIcon";
 
 usePageTitle("pages.listView.title");
 
@@ -55,6 +62,11 @@ function distanceLabel(loc: MockLocationCard): string | null {
   return formatDistanceKm(distanceKm(userLocation.value, { lat: loc.lat, lng: loc.lng }));
 }
 
+/** Figma'daki 5 yıldızlık gösterim: ortalamaya en yakın tam sayı kadar dolu yıldız. */
+function filledStars(loc: MockLocationCard): number {
+  return Math.round(loc.rating_avg ?? 0);
+}
+
 function handleLocateClick() {
   // Bu görünümde harita yok; "konumuma git" burada yalnızca konum iznini
   // ister ve mesafeleri günceller (haritaya uçma Ana Ekran'da gerçekleşir).
@@ -71,15 +83,12 @@ function handleLocateClick() {
         {{ t("pages.listView.resultCount", { count: filteredLocations.length }) }}
       </p>
 
-      <!-- Ana Ekran'a (haritaya) dönüş — index.vue'deki "Liste" butonunun simetriği -->
+      <!-- Ana Ekran'a (haritaya) dönüş — Figma "buttonWithIcon" (turuncu hap, harita ikonu) -->
       <NuxtLink
         to="/"
-        class="flex items-center gap-2 rounded-pill bg-brand-orange px-4 py-2.5 text-sm font-semibold text-white shadow-lg"
+        class="flex items-center gap-2 rounded-full bg-brand-orange px-[19px] py-[11px] text-sm font-semibold text-white shadow-[0_4px_3px_0_rgba(0,0,0,0.09)]"
       >
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m12 3 9 5-9 5-9-5 9-5Z" stroke-linejoin="round" />
-          <path d="m3 13 9 5 9-5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+        <IconsAppIcon name="map" class="h-4 w-4" />
         {{ t("pages.listView.mapToggle") }}
       </NuxtLink>
     </div>
@@ -88,52 +97,59 @@ function handleLocateClick() {
       <article
         v-for="loc in filteredLocations"
         :key="loc.id"
-        class="kl-card relative flex gap-3 p-3"
+        class="relative flex gap-3 rounded-[10px] bg-white p-2.5 shadow-[0_0_10px_0_rgba(0,0,0,0.15)] dark:bg-neutral-800"
       >
-        <div
-          class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-control text-2xl"
-          :class="!loc.photo_url ? `bg-poi-${loc.location_type}` : ''"
-        >
-          <img v-if="loc.photo_url" :src="loc.photo_url" :alt="loc.name" class="h-full w-full object-cover" />
-          <span v-else>🏕️</span>
+        <div class="relative h-[100px] w-[100px] shrink-0">
+          <div
+            class="flex h-full w-full items-center justify-center overflow-hidden rounded-[10px] text-2xl"
+            :class="!loc.photo_url ? `bg-poi-${loc.location_type}` : ''"
+          >
+            <img v-if="loc.photo_url" :src="loc.photo_url" :alt="loc.name" class="h-full w-full object-cover" />
+            <span v-else>🏕️</span>
+          </div>
+
+          <!-- Hızlı favori — Figma: fotoğrafın sol-alt köşesine taşan daire rozet -->
+          <button
+            type="button"
+            class="absolute -bottom-2 -left-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.2)] dark:bg-neutral-700"
+            :aria-label="t('pages.listView.favoriteToggle')"
+            :aria-pressed="favoriteIds.has(loc.id)"
+            @click="toggleFavorite(loc.id)"
+          >
+            <IconsAppIcon
+              :name="favoriteIds.has(loc.id) ? 'heart-solid' : 'heart-line'"
+              class="h-4 w-4"
+              :class="favoriteIds.has(loc.id) ? 'text-brand-orange' : 'text-brand-charcoal/30 dark:text-neutral-500'"
+            />
+          </button>
         </div>
 
-        <div class="min-w-0 flex-1">
-          <div class="flex items-start justify-between gap-2">
-            <h3 class="truncate text-sm font-bold text-brand-charcoal dark:text-neutral-100">
-              {{ loc.name }}
-            </h3>
+        <div class="min-w-0 flex-1 py-0.5">
+          <h3 class="truncate text-sm font-bold uppercase leading-tight text-brand-charcoal dark:text-neutral-100">
+            {{ loc.name }}
+          </h3>
 
-            <!-- Hızlı favori — TODO(Faz 5): Supabase'e kalıcı yazma (bkz. yukarıdaki not) -->
-            <button
-              type="button"
-              class="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-lg"
-              :aria-label="t('pages.listView.favoriteToggle')"
-              :aria-pressed="favoriteIds.has(loc.id)"
-              @click="toggleFavorite(loc.id)"
-            >
-              <span v-if="favoriteIds.has(loc.id)" class="text-brand-orange">♥</span>
-              <span v-else class="text-brand-charcoal/30 dark:text-neutral-500">♡</span>
-            </button>
+          <div v-if="loc.location_type" class="mt-1.5 flex items-center gap-1.5">
+            <IconsAppIcon :name="LOCATION_TYPE_ICONS[loc.location_type]" class="h-5 w-5" :class="`text-poi-${loc.location_type}`" />
+            <span class="truncate text-xs font-semibold text-brand-charcoal/70 dark:text-neutral-400">
+              {{ typeLabel(loc) }}
+            </span>
           </div>
 
-          <div class="mt-0.5 flex items-center gap-1.5">
-            <span class="h-2 w-2 shrink-0 rounded-full" :class="`bg-poi-${loc.location_type}`" />
-            <span class="truncate text-xs font-semibold text-brand-orange">{{ typeLabel(loc) }}</span>
-          </div>
+          <div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-brand-charcoal/70 dark:text-neutral-400">
+            <span v-if="distanceLabel(loc)">{{ distanceLabel(loc) }}</span>
 
-          <div class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-brand-charcoal/70 dark:text-neutral-400">
-            <span v-if="loc.rating_count > 0" class="inline-flex items-center gap-1">
-              <span class="text-poi-shower">★</span>
-              {{ loc.rating_avg.toFixed(1) }}
-              <span>({{ loc.rating_count }})</span>
+            <span v-if="loc.rating_count > 0" class="inline-flex items-center gap-0.5">
+              <IconsAppIcon
+                v-for="i in 5"
+                :key="i"
+                :name="i <= filledStars(loc) ? 'star-solid' : 'star-line'"
+                class="h-3 w-3"
+                :style="{ color: ratingColor }"
+              />
+              <span class="ml-1">({{ loc.rating_count }})</span>
             </span>
             <span v-else>{{ t("map.poiCard.noRating") }}</span>
-
-            <span v-if="distanceLabel(loc)" class="inline-flex items-center gap-1">
-              <span>·</span>
-              <span>{{ distanceLabel(loc) }}</span>
-            </span>
           </div>
 
           <p v-if="loc.description" class="mt-1 line-clamp-1 text-xs text-brand-charcoal/60 dark:text-neutral-400">
@@ -156,13 +172,11 @@ function handleLocateClick() {
     <div class="pointer-events-none fixed inset-x-4 bottom-24 z-20 flex items-end justify-between">
       <button
         type="button"
-        class="pointer-events-auto relative flex h-12 w-12 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
+        class="pointer-events-auto relative flex h-14 w-14 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
         aria-label="Filtre"
         @click="isFilterModalOpen = true"
       >
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 6h16M7 12h10M10 18h4" stroke-linecap="round" />
-        </svg>
+        <IconsAppIcon name="filter" class="h-5 w-5" />
         <span
           v-if="filtersStore.activeTypes.length > 0"
           class="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-orange px-1 text-[10px] font-bold text-white"
@@ -173,14 +187,11 @@ function handleLocateClick() {
 
       <button
         type="button"
-        class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
+        class="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
         aria-label="Konumuma git"
         @click="handleLocateClick"
       >
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3" />
-          <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke-linecap="round" />
-        </svg>
+        <IconsAppIcon name="locate" class="h-5 w-5" />
       </button>
     </div>
 

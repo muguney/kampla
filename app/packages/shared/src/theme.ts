@@ -1,9 +1,17 @@
 /**
  * Kamp.la — Merkezi tasarım tokenları (PRD Bölüm 2.3 ve 6.1)
  *
- * NOT: Renkler Figma tasarımlarından görsel olarak tahmin edilmiştir.
- * Kesin hex değerleri Figma "Inspect" panelinden alınıp burada güncellenmelidir
- * (bkz. PRD.md üst kısmındaki uyarı notu).
+ * GÜNCELLEME (2026-07-26): `brandColors.orange`/`brandColors.charcoal` ve
+ * `ratingColor`, Figma connector bağlandıktan sonra `get_design_context` ile
+ * 3 ekrandan (node 52:218, 160:1313, 64:4384) doğrudan okunan gerçek hex
+ * değerleriyle güncellendi (bu 3 node'un ikisinde de tutarlı şekilde
+ * "Primary: #FE8542", "Black: #444444" olarak raporlandı). `dark`/`light`
+ * tonları Figma'da ayrı token olarak yok — eski oran korunarak yeniden
+ * hesaplandı (hover/active state'leri için).
+ *
+ * NOT: `poiColors`/`referenceColors` HÂLÂ görsel tahmindir (bu 3 ekranın
+ * Figma verisinde 9 kategori rengi teyit edilmedi) — Liste/Filtre/POI Detay
+ * ekranları Figma ile karşılaştırılırken ayrıca doğrulanmalı.
  *
  * Bu dosya hem `apps/mobile-web/tailwind.config.ts` hem de
  * `apps/admin/tailwind.config.ts` tarafından import edilir — tek kaynak.
@@ -12,13 +20,13 @@
 /** Marka / kurumsal kimlik renkleri (PRD 2.3) */
 export const brandColors = {
   orange: {
-    DEFAULT: "#F2884B",
-    dark: "#D9723A",
-    light: "#F7A876",
+    DEFAULT: "#FE8542",
+    dark: "#E56F31",
+    light: "#FFA56D",
   },
   charcoal: {
-    DEFAULT: "#3B3B3B",
-    soft: "#5A5A58",
+    DEFAULT: "#444444",
+    soft: "#636361",
   },
   cream: "#F1EDE9",
   white: "#FFFFFF",
@@ -47,12 +55,12 @@ export const referenceColors = {
   historic: "#3B9FD6",
 } as const;
 
-/** Puanlama yıldızı rengi (PRD 2.3) */
-export const ratingColor = "#F4C430";
+/** Puanlama yıldızı rengi — Figma node 64:4384 ("Warning: #FFCA41") */
+export const ratingColor = "#FFCA41";
 
 export const fontFamily = {
   sans: [
-    "Baloo 2",
+    "Saira",
     "ui-rounded",
     "system-ui",
     "-apple-system",

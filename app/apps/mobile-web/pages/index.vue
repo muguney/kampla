@@ -105,30 +105,33 @@ function closeSummaryCard() {
 </script>
 
 <template>
-  <div class="relative h-[calc(100vh-4rem-6rem)] min-h-[420px] w-full overflow-hidden">
-    <!-- MapLibre GL JS haritası (Faz 2 — bkz. composables/useMap.ts) -->
+  <div class="relative h-[calc(100vh-6rem)] min-h-[420px] w-full overflow-hidden">
+    <!-- MapLibre GL JS haritası (Faz 2 — bkz. composables/useMap.ts).
+         Figma'da (node 52:218) harita tam ekran kenarına kadar gidiyor, üst
+         bar yok — bkz. components/layout/TopBar.vue (showWordmark dalı). -->
     <div id="map" ref="mapContainer" class="kampla-map-container" />
 
-    <!-- Liste görünümüne geçiş (design/2-Ana Ekran.png sağ üst) -->
+    <!-- Liste görünümüne geçiş (Figma node 52:218: buttonWithIcon, #fe8542,
+         rounded-[20px], shadow 0 4px 3px rgba(0,0,0,.09)) -->
     <NuxtLink
       to="/liste"
-      class="absolute right-4 top-4 flex items-center gap-2 rounded-pill bg-brand-orange px-4 py-2.5 text-sm font-semibold text-white shadow-lg"
+      class="absolute right-4 top-[50px] z-20 flex items-center gap-2 rounded-[20px] bg-brand-orange px-5 py-2.5 text-base font-semibold text-white shadow-[0_4px_3px_rgba(0,0,0,0.09)]"
     >
-      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
       </svg>
       Liste
     </NuxtLink>
 
-    <!-- Katman / Filtre / Konumum butonları (design/2-Ana Ekran.png alt kısmı) -->
+    <!-- Katman / Filtre / Konumum butonları (Figma node 52:218 alt kısmı, ~60px çap) -->
     <div class="absolute inset-x-4 bottom-4 z-10 flex items-end justify-between">
       <button
         type="button"
-        class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
+        class="flex h-14 w-14 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
         aria-label="Harita katmanı"
         @click="isLayerModalOpen = true"
       >
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="m12 3 9 5-9 5-9-5 9-5Z" stroke-linejoin="round" />
           <path d="m3 13 9 5 9-5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -137,11 +140,11 @@ function closeSummaryCard() {
       <div class="flex gap-3">
         <button
           type="button"
-          class="relative flex h-12 w-12 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
+          class="relative flex h-14 w-14 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
           aria-label="Filtre"
           @click="isFilterModalOpen = true"
         >
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 6h16M7 12h10M10 18h4" stroke-linecap="round" />
           </svg>
           <span
@@ -153,11 +156,11 @@ function closeSummaryCard() {
         </button>
         <button
           type="button"
-          class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
+          class="flex h-14 w-14 items-center justify-center rounded-full bg-white text-brand-orange shadow-md dark:bg-neutral-800"
           aria-label="Konumuma git"
           @click="handleLocateClick"
         >
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3" />
             <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke-linecap="round" />
           </svg>

@@ -42,20 +42,26 @@ const hasRating = computed(() => props.location.rating_count > 0);
 <template>
   <Teleport to="body">
     <Transition name="kampla-slide-up">
-      <div v-if="location" class="fixed inset-0 z-50 flex items-end justify-center">
-        <div class="absolute inset-0 bg-black/30" @click="$emit('close')" />
+      <!--
+        Figma node 64:4384: harita pin'ine tıklanınca açılan kart, ekranın alt
+        kenarına yapışık bir bottom-sheet DEĞİL — alt navigasyonun ÜZERİNDE
+        yüzen, dört köşesi yuvarlak bir kart (screenshot'ta kart altında hâlâ
+        harita + alt nav görünüyor). Kapat (✕) butonu da kartın üst kenarını
+        hafifçe taşacak şekilde konumlanıyor. Sürükleme tutamacı Figma'da yok.
+      -->
+      <div v-if="location" class="fixed inset-0 z-50" @click="$emit('close')">
+        <div class="absolute inset-0 bg-black/30" />
 
         <div
-          class="kl-card relative w-full max-w-md rounded-b-none p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]"
+          class="kl-card absolute inset-x-5 bottom-[calc(6rem+env(safe-area-inset-bottom))] p-4"
           role="dialog"
           aria-modal="true"
           :aria-label="location.name"
+          @click.stop
         >
-          <div class="mx-auto mb-3 h-1.5 w-10 rounded-full bg-neutral-200 dark:bg-neutral-700" />
-
           <button
             type="button"
-            class="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-brand-charcoal shadow-sm dark:bg-neutral-800/80 dark:text-neutral-100"
+            class="absolute -top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-charcoal shadow-[0_0_10px_rgba(0,0,0,0.15)] dark:bg-neutral-800 dark:text-neutral-100"
             :aria-label="t('common.cancel')"
             @click="$emit('close')"
           >
@@ -63,9 +69,17 @@ const hasRating = computed(() => props.location.rating_count > 0);
           </button>
 
           <div class="flex gap-3">
-            <!-- Fotoğraf (mock veride yoksa kategori renginde blok) -->
+            <!--
+              Fotoğraf (mock veride yoksa kategori renginde nötr blok).
+              TODO(figma-assets, 2026-07-26): node 121:1099'daki favori/kalp
+              butonu (fotoğrafın sol-üst köşesinde) bu oturumda eklenemedi —
+              Figma MCP rate limit'e takıldı ve sandbox ağı figma.com asset
+              CDN'ini engellediği için gerçek "ant-design:heart-filled"
+              ikonunun baytları indirilemedi; kafadan ikon uydurmamak için
+              atlandı.
+            -->
             <div
-              class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-control text-2xl"
+              class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-control"
               :class="!location.photo_url ? `bg-poi-${location.location_type}` : ''"
             >
               <img
@@ -74,7 +88,6 @@ const hasRating = computed(() => props.location.rating_count > 0);
                 :alt="location.name"
                 class="h-full w-full object-cover"
               />
-              <span v-else>🏕️</span>
             </div>
 
             <div class="min-w-0 flex-1">
@@ -106,18 +119,24 @@ const hasRating = computed(() => props.location.rating_count > 0);
             {{ location.description }}
           </p>
 
+          <!--
+            Figma node 64:4384: buton renkleri PRD'deki ilk tahminin TERSİ —
+            "Detaylar" koyu/antrasit (#444, kl-btn-secondary) SOLDA, "Yol
+            Tarifi" turuncu (#fe8542, kl-btn-primary) SAĞDA. Sıra ve renk
+            burada Figma screenshot'ına göre düzeltildi.
+          -->
           <div class="mt-4 flex gap-3">
+            <NuxtLink :to="`/konum/${location.id}`" class="kl-btn-secondary flex-1">
+              {{ t("map.poiCard.detailsCta") }}
+            </NuxtLink>
+
             <!-- TODO(Faz 3/F): Gerçek rota/navigasyon entegrasyonu (Valhalla/OSRM, PRD 7.1). Şimdilik yalnızca görsel. -->
-            <button type="button" class="kl-btn-outline flex-1">
+            <button type="button" class="kl-btn-primary flex-1">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="m3 11 18-8-8 18-2-8-8-2Z" stroke-linejoin="round" stroke-linecap="round" />
               </svg>
               {{ t("map.poiCard.directionsCta") }}
             </button>
-
-            <NuxtLink :to="`/konum/${location.id}`" class="kl-btn-primary flex-1">
-              {{ t("map.poiCard.detailsCta") }}
-            </NuxtLink>
           </div>
         </div>
       </div>

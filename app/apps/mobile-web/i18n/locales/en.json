@@ -1,155 +1,466 @@
 {
-  "brand": {
-    "name": "Kamp.la"
-  },
-  "common": {
-    "back": "Back",
-    "comingSoon": "This screen will be built in a later phase.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "loading": "Loading..."
-  },
-  "nav": {
-    "home": "Home",
-    "search": "Search",
-    "add": "Add Location",
-    "lists": "My Lists",
-    "menu": "Menu"
-  },
-  "pages": {
-    "home": { "title": "Kamp.la" },
-    "listView": {
-      "title": "List View",
-      "resultCount": "{count} results",
-      "mapToggle": "Map",
-      "favoriteToggle": "Add/remove favorite"
-    },
-    "search": {
-      "title": "Search",
-      "placeholder": "Search a city or area (e.g. Alanya, Antalya)",
-      "recentTitle": "Recent Searches",
-      "suggestionsTitle": "Suggestions"
-    },
-    "poiDetail": { "title": "Location Detail" },
-    "poiEdit": { "title": "Edit Location" },
-    "addLocation": { "title": "Add Location" },
-    "myLists": { "title": "My Map Lists" },
-    "listDetail": { "title": "List" },
-    "notifications": { "title": "Notifications" },
-    "premium": { "title": "Kamp.la Plus" },
-    "account": { "title": "My Account" },
-    "accountUsername": { "title": "Change Username" },
-    "accountEmail": { "title": "Change Email" },
-    "accountPassword": { "title": "Change Password" },
-    "accountSocial": { "title": "Social Media Accounts" },
-    "accountReviews": { "title": "All My Reviews" },
-    "profile": { "title": "Profile" },
-    "settings": { "title": "App Settings" },
-    "settingsLanguage": { "title": "Language" },
-    "settingsTheme": { "title": "Theme" },
-    "settingsAbout": { "title": "About Kamp.la" },
-    "login": {
-      "title": "Sign In",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Password",
-      "forgotPassword": "Forgot password",
-      "submit": "Sign In",
-      "submitting": "Signing in...",
-      "googleSignIn": "Sign in with Google",
-      "googleComingSoon": "(coming soon)",
-      "noAccount": "Don't have an account?",
-      "registerLink": "Register",
-      "genericError": "Couldn't sign in. Please check your details and try again."
-    },
-    "register": {
-      "title": "Register",
-      "usernamePlaceholder": "Username",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Password",
-      "agreementTerms": "Membership Agreement",
-      "agreementAnd": "and",
-      "agreementPrivacy": "Privacy Policy",
-      "agreementSuffix": ".",
-      "agreementRequired": "You must accept the agreement to continue.",
-      "submit": "Register",
-      "submitting": "Registering...",
-      "hasAccount": "Already have an account?",
-      "loginLink": "Sign in",
-      "checkEmailTitle": "Check your email",
-      "checkEmailBody": "We've sent you a confirmation email. Once confirmed, you can sign in.",
-      "genericError": "Couldn't create your account. Please check your details and try again."
-    },
-    "forgotPassword": {
-      "title": "Forgot Password",
-      "subtitle": "We'll send a password reset link to your email.",
-      "emailPlaceholder": "Email",
-      "emailInvalid": "Enter a valid email address.",
-      "submit": "Send Reset Link",
-      "submitting": "Sending...",
-      "checkEmailTitle": "Check your email",
-      "checkEmailBody": "We've sent a password reset link to your email. Click the link to set a new password, then sign in.",
-      "backToLogin": "Back to sign in"
-    },
-    "terms": { "title": "Terms of Use" },
-    "privacy": { "title": "Privacy Policy" },
-    "menu": { "title": "Menu" }
-  },
-  "menu": {
-    "addLocation": "Add Location",
-    "login": "Sign In",
-    "account": "My Account",
-    "settings": "App Settings",
-    "about": "About Kamp.la",
-    "logout": "Sign Out"
-  },
-  "wizard": {
-    "step1": "1. Pick Location",
-    "step2": "2. Location Type",
-    "step3": "3. Amenities",
-    "step4": "4. Details",
-    "step5": "5. Photos",
-    "step6": "6. Confirm"
-  },
-  "map": {
-    "layerModal": {
-      "title": "Choose Map Layer",
-      "classic": "Classic",
-      "topo": "Topographic",
-      "satellite": "Satellite"
-    },
-    "poiCard": {
-      "noRating": "No reviews yet",
-      "detailsCta": "Details",
-      "directionsCta": "Directions"
-    },
-    "filterModal": {
-      "title": "Filter by Category",
-      "clear": "Clear",
-      "freeLimitWarning": "Free accounts can filter up to 2 categories. Upgrade to Premium."
-    }
-  },
-  "emptyState": {
-    "favorites": {
-      "title": "You haven't added any favorites yet",
-      "description": "Add places you like to your favorites to see them here.",
-      "cta": "Back to Map"
-    },
-    "visited": {
-      "title": "You haven't marked any visits yet"
-    },
-    "reviews": {
-      "title": "You haven't written any reviews yet",
-      "cta": "Discover a location"
-    },
-    "search": {
-      "title": "No results found"
-    },
-    "notifications": {
-      "title": "No notifications yet"
-    },
-    "lists": {
-      "title": "Create your first list",
-      "cta": "New Map List"
-    }
-  }
+	"brand": {
+		"name": "Kamp.la"
+	},
+	"common": {
+		"back": "Back",
+		"comingSoon": "This screen will be built in a later phase.",
+		"save": "Save",
+		"cancel": "Cancel",
+		"close": "Close",
+		"loading": "Loading..."
+	},
+	"nav": {
+		"home": "Home",
+		"search": "Search",
+		"add": "Add Location",
+		"lists": "My Lists",
+		"menu": "Menu"
+	},
+	"pages": {
+		"home": { "title": "Kamp.la" },
+		"listView": {
+			"title": "List View",
+			"resultCount": "{count} results",
+			"mapToggle": "Map",
+			"favoriteToggle": "Add/remove favorite"
+		},
+		"search": {
+			"title": "Search",
+			"headerTitle": "Search location",
+			"placeholder": "Search location",
+			"recentTitle": "Recent Searches",
+			"suggestionsTitle": "Suggestions"
+		},
+		"poiDetail": {
+			"title": "Location Detail",
+			"teamName": "The Kamp.la team",
+			"addedBySuffix": " added this on {date}",
+			"tabs": {
+				"details": "Details",
+				"reviews": "Reviews ({count})"
+			},
+			"amenitiesTitle": "Amenities",
+			"description": "Description",
+			"contact": "Contact",
+			"contactIcons": {
+				"phone": "Phone",
+				"website": "Website",
+				"facebook": "Facebook",
+				"instagram": "Instagram",
+				"youtube": "YouTube",
+				"x": "X"
+			},
+			"accommodations": "Camping Options",
+			"seasonLabels": {
+				"summer": "Open in summer",
+				"winter": "Open in winter",
+				"all": "Open all year round"
+			},
+			"coordinatesLabel": "{lat}, {lng} (lat, lng)",
+			"copyCoordinates": "Copy coordinates",
+			"coordinatesCopied": "Coordinates copied to clipboard!",
+			"mapSectionTitle": "Location on Map",
+			"reportIssue": "Report Issue",
+			"edit": "Edit",
+			"reportModal": {
+				"title": "Report Issue",
+				"placeholder": "What issue would you like to report?",
+				"submit": "Submit",
+				"submitted": "Your report has been received, thank you!"
+			},
+			"reviewsTab": {
+				"ratingTitle": "Rating",
+				"totalReviews": "{count} reviews",
+				"writeReview": "Write a review",
+				"emptyTitle": "No reviews yet",
+				"emptyDescription": "If you've visited this place, be the first to write a review.",
+				"emptyCta": "Write a Review"
+			},
+			"reviewModal": {
+				"title": "Rating",
+				"placeholder": "Write your review",
+				"submit": "Publish review",
+				"ratingRequired": "Please select a star rating."
+			},
+			"actions": {
+				"addPhoto": "Add photo",
+				"addPhotoToast": "Photo uploads will be enabled in Phase 5.",
+				"markVisited": "Mark as visited",
+				"markVisitedOnToast": "Marked as visited.",
+				"markVisitedOffToast": "Visited mark removed.",
+				"directions": "Directions",
+				"saveToList": "Save to list",
+				"saveOnToast": "Added to your list.",
+				"saveOffToast": "Removed from your list.",
+				"share": "Share",
+				"shareToast": "Link copied to clipboard."
+			},
+			"directionsModal": {
+				"title": "Directions",
+				"inApp": "Google Maps (in-app)",
+				"external": "Google Maps (external)"
+			},
+			"notFound": {
+				"title": "Location not found",
+				"cta": "Back to Map"
+			}
+		},
+		"poiEdit": { "title": "Edit Location" },
+		"addLocation": { "title": "Add Location" },
+		"myLists": {
+			"title": "My Map Lists",
+			"systemListNames": {
+				"favorites": "My Favorites",
+				"visited": "Visited Places"
+			},
+			"customSectionTitle": "My Custom Lists",
+			"createButton": "+ Create New Map List",
+			"createModal": {
+				"title": "Create New List",
+				"placeholder": "List name (e.g. 2023 Mediterranean Trip)",
+				"submit": "Create",
+				"creating": "Creating...",
+				"nameRequired": "Please enter a list name."
+			},
+			"limitReached": "Free accounts can create up to {max} custom lists.",
+			"upgradeCta": "Upgrade to Premium",
+			"genericError": "Something went wrong, please try again."
+		},
+		"listDetail": {
+			"title": "List",
+			"notFound": {
+				"title": "List not found",
+				"cta": "Back to My Lists"
+			},
+			"typeBadge": {
+				"system": "System List",
+				"custom": "Custom List"
+			},
+			"createdAtLabel": "Created: {date}",
+			"genericError": "Something went wrong, please try again.",
+			"itemsPlaceholder": {
+				"title": "Locations in this list will appear here soon",
+				"description": "Adding/removing locations to this list will be added in a later stage."
+			},
+			"rename": {
+				"button": "Rename",
+				"save": "Save",
+				"cancel": "Cancel",
+				"nameRequired": "Please enter a list name."
+			},
+			"visibility": {
+				"public": "Public",
+				"private": "Private",
+				"makePublicButton": "Make Visible on Profile",
+				"makePrivateButton": "Hide",
+				"confirmPublic": "Are you sure you want to make this list public? It will be visible on your profile.",
+				"confirmPrivate": "Are you sure you want to hide this list?",
+				"confirm": "Yes, Confirm",
+				"cancel": "Cancel"
+			},
+			"delete": {
+				"button": "Delete",
+				"confirmBody": "Are you sure you want to delete this list? This action cannot be undone.",
+				"confirm": "Yes, Delete",
+				"cancel": "Cancel"
+			}
+		},
+		"notifications": { "title": "Notifications" },
+		"premium": { "title": "Kamp.la Plus" },
+		"account": {
+			"title": "My Account",
+			"guestName": "Guest",
+			"shareProfile": "Share Profile",
+			"shareToast": "Link copied to clipboard.",
+			"myListsLink": "Favorites / My Map Lists",
+			"visitedToggleLabel": "Show places I've visited",
+			"visitedToggleError": "Couldn't update the setting, please try again.",
+			"deleteAccount": {
+				"button": "Permanently delete my account",
+				"warning": "This action cannot be undone. Your account and all your data (except reviews, lists, and locations you've added) will be permanently deleted.",
+				"confirm": "Yes, delete my account",
+				"cancel": "Cancel",
+				"deleting": "Deleting...",
+				"genericError": "Something went wrong while deleting your account, please try again."
+			}
+		},
+		"accountUsername": {
+			"title": "Change Username",
+			"label": "New username",
+			"placeholder": "username",
+			"submit": "Save",
+			"submitting": "Saving...",
+			"successToast": "Your username has been updated.",
+			"usernameTaken": "This username is already taken, please try another one.",
+			"genericError": "Something went wrong while updating your username, please try again."
+		},
+		"accountEmail": {
+			"title": "Change Email",
+			"label": "New email address",
+			"currentLabel": "Current email",
+			"placeholder": "you{'@'}example.com",
+			"submit": "Save",
+			"submitting": "Saving...",
+			"checkEmailTitle": "Check your email",
+			"checkEmailBody": "We've sent a confirmation link to both your old and new email address. You need to click the confirmation link to complete the change.",
+			"genericError": "Something went wrong while updating your email, please try again."
+		},
+		"accountPassword": {
+			"title": "Change Password",
+			"currentPlaceholder": "Current password",
+			"newPlaceholder": "New password",
+			"confirmPlaceholder": "New password (again)",
+			"submit": "Update Password",
+			"submitting": "Updating...",
+			"mismatchError": "New passwords don't match.",
+			"tooShortError": "New password must be at least 6 characters.",
+			"currentWrongError": "Current password is incorrect.",
+			"successToast": "Your password has been updated.",
+			"genericError": "Something went wrong while updating your password, please try again."
+		},
+		"accountSocial": {
+			"title": "Social Media Accounts",
+			"websitePlaceholder": "Website (https://...)",
+			"facebookPlaceholder": "Facebook (https://facebook.com/...)",
+			"instagramPlaceholder": "Instagram (https://instagram.com/...)",
+			"xPlaceholder": "X / Twitter (https://x.com/...)",
+			"youtubePlaceholder": "YouTube (https://youtube.com/...)",
+			"submit": "Save",
+			"submitting": "Saving...",
+			"successToast": "Your social media accounts have been updated.",
+			"genericError": "Something went wrong while updating, please try again."
+		},
+		"accountReviews": { "title": "All My Reviews" },
+		"profile": {
+			"title": "Profile",
+			"notFound": {
+				"title": "User not found",
+				"cta": "Back to Home"
+			},
+			"publicListsTitle": "Shared Lists",
+			"noPublicLists": "This user has no public lists"
+		},
+		"publicList": {
+			"title": "List",
+			"notFound": {
+				"title": "List not found or not public",
+				"cta": "Back to Home"
+			},
+			"createdAtLabel": "Created: {date}",
+			"actions": {
+				"share": "Share",
+				"shareToast": "Link copied to clipboard.",
+				"save": "Save List",
+				"saved": "Saved",
+				"saveCopySuffix": "(Copy)",
+				"saveToast": "List saved to your account.",
+				"saveError": "Something went wrong while saving the list, please try again."
+			}
+		},
+		"settings": { "title": "App Settings" },
+		"settingsLanguage": { "title": "Language" },
+		"settingsTheme": { "title": "Theme" },
+		"settingsAbout": {
+			"title": "About Kamp.la",
+			"paragraph1": "Kamp.la is a community-driven discovery app that lets you explore campsites, RV parks, and nature spots across Turkey on a map, mark the places you've visited, and share your experiences with the community.",
+			"paragraph2": "Our mission is to make it easy for nature lovers to find reliable, up-to-date location information, and to build a map that grows and is verified through every user's contribution. Adding a new location, sharing a photo, or rating a place all make this map more useful for everyone.",
+			"paragraph3": "Our vision is to make Kamp.la the most comprehensive and trusted camping/RV discovery platform in Turkey, connecting campers with each other and fostering a nature-respecting, sustainable discovery culture."
+		},
+		"login": {
+			"title": "Sign In",
+			"emailPlaceholder": "Email",
+			"passwordPlaceholder": "Password",
+			"forgotPassword": "Forgot password",
+			"submit": "Sign In",
+			"submitting": "Signing in...",
+			"googleSignIn": "Sign in with Google",
+			"googleComingSoon": "(coming soon)",
+			"noAccount": "Don't have an account?",
+			"registerLink": "Register",
+			"genericError": "Couldn't sign in. Please check your details and try again."
+		},
+		"register": {
+			"title": "Register",
+			"usernamePlaceholder": "Username",
+			"emailPlaceholder": "Email",
+			"passwordPlaceholder": "Password",
+			"agreementTerms": "Membership Agreement",
+			"agreementAnd": "and",
+			"agreementPrivacy": "Privacy Policy",
+			"agreementSuffix": ".",
+			"agreementRequired": "You must accept the agreement to continue.",
+			"submit": "Register",
+			"submitting": "Registering...",
+			"hasAccount": "Already have an account?",
+			"loginLink": "Sign in",
+			"checkEmailTitle": "Check your email",
+			"checkEmailBody": "We've sent you a confirmation email. Once confirmed, you can sign in.",
+			"genericError": "Couldn't create your account. Please check your details and try again."
+		},
+		"forgotPassword": {
+			"title": "Forgot Password",
+			"subtitle": "We'll send a password reset link to your email.",
+			"emailPlaceholder": "Email",
+			"emailInvalid": "Enter a valid email address.",
+			"submit": "Send Reset Link",
+			"submitting": "Sending...",
+			"checkEmailTitle": "Check your email",
+			"checkEmailBody": "We've sent a password reset link to your email. Click the link to set a new password, then sign in.",
+			"backToLogin": "Back to sign in"
+		},
+		"terms": {
+			"title": "Terms of Use",
+			"draftNotice": "⚠️ This text is a draft; legal review is required before publishing.",
+			"intro": "These Terms of Use govern your use of the Kamp.la mobile app and website ('the Service'). By accessing or using the Service, you agree to these terms.",
+			"section1Heading": "1. Creating an Account",
+			"section1Body": "You need an account to use some features of the Service (adding locations, writing reviews, creating lists, etc.). You are responsible for making sure the information you provide during registration is accurate and up to date, and for keeping your account and password secure.",
+			"section2Heading": "2. User Content",
+			"section2Body": "The location information, photos, reviews, and ratings you add to the app ('User Content') belong to you. By sharing this content on Kamp.la, however, you grant Kamp.la a non-exclusive, worldwide, royalty-free license to display, store, and distribute this content as part of the Service.",
+			"section3Heading": "3. Content Rules",
+			"section3Body": "You may not post content that is misleading, defamatory, infringes copyright, violates personal privacy, or could harm nature. Location-focused photos are expected instead of selfies or personal photos. Content that violates these rules may be reviewed and removed by administrators.",
+			"section4Heading": "4. Accuracy of Location Information",
+			"section4Body": "Kamp.la is a community-generated map. The accuracy of location details (coordinates, amenities, season, etc.) is not guaranteed. We recommend verifying up-to-date information before visiting a place. Kamp.la cannot be held liable for damages arising from inaccurate or outdated information.",
+			"section5Heading": "5. Premium Membership",
+			"section5Body": "Kamp.la Plus (premium) membership is a paid subscription offering additional features (unlimited lists, advanced filtering, etc.). Subscription fees, renewal terms, and cancellations are subject to the payment terms of the store you use (App Store/Google Play).",
+			"section6Heading": "6. Account Suspension and Termination",
+			"section6Body": "We reserve the right to warn, suspend, or permanently close accounts that violate these terms. You may also permanently delete your own account at any time from the 'My Account' page; this action cannot be undone.",
+			"section7Heading": "7. Limitation of Liability",
+			"section7Body": "Kamp.la does not guarantee that the Service will be uninterrupted or error-free. Camping/RV activities in nature involve inherent risks; Kamp.la cannot be held responsible for these risks or for incidents at third-party facilities.",
+			"section8Heading": "8. Changes and Contact",
+			"section8Body": "We may update these terms from time to time; we will notify you in-app of significant changes. For questions, contact us at support{'@'}kamp.la."
+		},
+		"privacy": {
+			"title": "Privacy Policy",
+			"draftNotice": "⚠️ This text is a draft; legal review is required before publishing.",
+			"intro": "This Privacy Policy explains what data we collect when you use Kamp.la, how we use it, and your rights.",
+			"section1Heading": "1. Data We Collect",
+			"section1Body": "When you create an account, we collect your username, email address, and password (stored encrypted). You may optionally add a profile photo and social media links. We also store the locations, photos, reviews, and lists you add while using the app.",
+			"section2Heading": "2. Location Data",
+			"section2Body": "If you use the automatic GPS positioning feature, we request access to your device's location; this permission is only used while adding a location/browsing the map, and there is no background tracking without your consent.",
+			"section3Heading": "3. Purposes of Use",
+			"section3Body": "Your data is used to manage your account, provide the core functions of the app (map, favorites, lists, notifications), improve service quality, and fulfill our legal obligations.",
+			"section4Heading": "4. Data Sharing",
+			"section4Body": "Your data may be shared to a limited extent with infrastructure providers that help us deliver the Service (e.g. hosting, database, payment infrastructure). Your data is not sold to third parties for advertising purposes.",
+			"section5Heading": "5. Data Retention",
+			"section5Body": "Your data is retained for as long as your account is active. When you permanently delete your account from the 'My Account' page, your associated personal data is deleted from our systems (except data we are legally required to retain).",
+			"section6Heading": "6. Your Rights",
+			"section6Body": "Under applicable law (e.g. GDPR), you have the right to access, correct, delete, and object to the processing of your data. You can contact us to exercise these rights.",
+			"section7Heading": "7. Cookies and Similar Technologies",
+			"section7Body": "Cookies/similar storage technologies are used for essential functions such as keeping you signed in and remembering your language preference.",
+			"section8Heading": "8. Data Security and Contact",
+			"section8Body": "We take reasonable technical and administrative measures to protect your data. For privacy-related questions, contact us at support{'@'}kamp.la."
+		},
+		"menu": { "title": "Menu" }
+	},
+	"menu": {
+		"addLocation": "Add Location",
+		"login": "Sign In",
+		"account": "My Account",
+		"settings": "App Settings",
+		"about": "About Kamp.la",
+		"logout": "Sign Out"
+	},
+	"wizard": {
+		"step1": "1. Pick Location",
+		"step2": "2. Location Type",
+		"step3": "3. Amenities",
+		"step4": "4. Details",
+		"step5": "5. Photos",
+		"step6": "6. Confirm",
+		"locationStep": {
+			"hint": "Drag the map so the pin in the center lands on the location you want to add.",
+			"gpsButton": "Auto-locate with GPS",
+			"locating": "Getting your location...",
+			"locationError": "Couldn't get your location. Please pan the map to pick it manually.",
+			"coordinatesLabel": "Selected location: {lat}, {lng}",
+			"coordinatesEmpty": "No location selected yet."
+		},
+		"typeStep": {
+			"hint": "If the spot works for both caravans and tents, pick caravan park here and mark tents too in the next step."
+		},
+		"amenitiesStep": {
+			"hint": "Select the amenities available here (this step is optional, you can leave it empty).",
+			"selectedCount": "{count} amenities selected"
+		},
+		"detailsStep": {
+			"nameLabel": "Location Name",
+			"namePlaceholder": "E.g. Alanya Camp Site",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "Write a short description of this location (optional).",
+			"phoneLabel": "Phone",
+			"phonePlaceholder": "+90 5xx xxx xx xx",
+			"websiteLabel": "Website",
+			"websitePlaceholder": "https://...",
+			"socialLabel": "Social Media (optional)",
+			"accommodationLabel": "Accommodation Options",
+			"seasonLabel": "Season",
+			"optionalHint": "Every field other than the location name is optional."
+		},
+		"photosStep": {
+			"hint": "Add photos of this location (optional — you can continue without adding any).",
+			"rulesTitle": "Photo rules",
+			"rulesNoSelfie": "Don't upload selfies or personal photos.",
+			"rulesLandscape": "Prefer landscape, location-focused shots when possible.",
+			"rulesRemoval": "Inappropriate or rule-breaking images will be removed by an admin.",
+			"addButton": "Add Photos",
+			"uploading": "Uploading...",
+			"removeAria": "Remove photo",
+			"emptyHint": "No photos added yet."
+		},
+		"confirmStep": {
+			"hint": "Confirm that the information you entered is accurate and submit it for review.",
+			"agreementLabel": "I confirm that the information I provided is accurate and complies with Kamp.la's Terms of Use.",
+			"back": "Back",
+			"submit": "Save",
+			"submitting": "Saving...",
+			"authRequired": "You need to be logged in to save.",
+			"genericError": "Something went wrong while saving the location. Please try again.",
+			"successTitle": "Thank you!",
+			"successBody": "Your location was received. It will be published after admin review.",
+			"goHome": "Go to Home"
+		}
+	},
+	"map": {
+		"layerModal": {
+			"title": "Choose Map Layer",
+			"classic": "Classic",
+			"topo": "Topographic",
+			"satellite": "Satellite"
+		},
+		"poiCard": {
+			"noRating": "No reviews yet",
+			"detailsCta": "Details",
+			"directionsCta": "Directions"
+		},
+		"filterModal": {
+			"title": "Filter by Category",
+			"clear": "Clear",
+			"freeLimitWarning": "Free accounts can filter up to 2 categories. Upgrade to Premium."
+		}
+	},
+	"emptyState": {
+		"favorites": {
+			"title": "You haven't added any favorites yet",
+			"description": "Add places you like to your favorites to see them here.",
+			"cta": "Back to Map"
+		},
+		"visited": {
+			"title": "You haven't marked any visits yet"
+		},
+		"reviews": {
+			"title": "You haven't written any reviews yet",
+			"cta": "Discover a location"
+		},
+		"search": {
+			"title": "No results found"
+		},
+		"notifications": {
+			"title": "No notifications yet"
+		},
+		"lists": {
+			"title": "Create your first list",
+			"cta": "New Map List"
+		}
+	}
 }

@@ -14,11 +14,9 @@ const emit = defineEmits<{ "update:modelValue": [boolean]; select: [MapLayerId] 
 const { currentLayer, setMapLayer } = useMap();
 const { t } = useI18n();
 
-const layerOptions: Array<{ id: MapLayerId; icon: string }> = [
-  { id: "classic", icon: "🗺️" },
-  { id: "topo", icon: "⛰️" },
-  { id: "satellite", icon: "🛰️" },
-];
+// TODO(figma-assets): `icon` alanı gerçek harita önizleme fotoğrafı export'u
+// gelince (node 160:1454/1455/1456) buraya eklenecek — bkz. template'teki not.
+const layerOptions: Array<{ id: MapLayerId }> = [{ id: "classic" }, { id: "topo" }, { id: "satellite" }];
 
 function close() {
   emit("update:modelValue", false);
@@ -34,19 +32,28 @@ function choose(id: MapLayerId) {
 <template>
   <Teleport to="body">
     <Transition name="kampla-fade">
-      <div v-if="modelValue" class="fixed inset-0 z-50 flex items-end justify-center">
-        <div class="absolute inset-0 bg-black/40" @click="close" />
+      <!--
+        Figma node 160:1313: bu, ekranın alt kenarına yapışık bir bottom-sheet
+        DEĞİL — harita üzerinde, alt navigasyonun ÜZERİNDE yüzen, dört köşesi
+        de yuvarlak (rounded-[10-20px]) bir kart (bkz. get_design_context
+        screenshot: kart altında hâlâ harita + alt nav görünüyor). Bu yüzden
+        `items-end` + `inset-0` yerine alt navigasyonu (bkz.
+        layouts/default.vue → LayoutBottomNav, ~6rem) temizleyecek bir
+        `bottom` boşluğu veriliyor; sürükleme tutamacı (grey handle-bar)
+        Figma'da yok, kaldırıldı.
+      -->
+      <div v-if="modelValue" class="fixed inset-0 z-50" @click="close">
+        <div class="absolute inset-0 bg-black/40" />
 
         <div
-          class="kl-card relative w-full max-w-md rounded-b-none p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]"
+          class="kl-card absolute inset-x-5 bottom-[calc(6rem+env(safe-area-inset-bottom))] p-5 shadow-[0_0_10px_rgba(0,0,0,0.15)]"
           role="dialog"
           aria-modal="true"
           :aria-label="t('map.layerModal.title')"
+          @click.stop
         >
-          <div class="mx-auto mb-4 h-1.5 w-10 rounded-full bg-neutral-200 dark:bg-neutral-700" />
-
           <div class="mb-4 flex items-center justify-between">
-            <h2 class="text-base font-bold text-brand-charcoal dark:text-neutral-100">
+            <h2 class="text-xl font-semibold text-brand-charcoal dark:text-neutral-100">
               {{ t("map.layerModal.title") }}
             </h2>
             <button
@@ -59,24 +66,32 @@ function choose(id: MapLayerId) {
             </button>
           </div>
 
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid grid-cols-3 gap-2.5">
             <button
               v-for="option in layerOptions"
               :key="option.id"
               type="button"
-              class="flex flex-col items-center gap-2 rounded-control border-2 p-3 transition-colors"
+              class="flex flex-col items-center gap-2 rounded-control border-2 p-1.5 transition-colors"
               :class="
                 currentLayer === option.id
                   ? 'border-brand-orange bg-brand-orange/10'
-                  : 'border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800'
+                  : 'border-neutral-100 bg-white dark:border-neutral-700 dark:bg-neutral-800'
               "
               @click="choose(option.id)"
             >
+              <!--
+                TODO(figma-assets, 2026-07-26): Figma'da bu alanlar gerçek
+                harita önizleme fotoğrafları (Klasik/Topografik/Uydu, node
+                160:1454/1455/1456, ~110x110px). Bu oturumda Figma MCP rate
+                limit'e takıldı VE bu sandbox'ın ağ proxy'si figma.com asset
+                CDN'ini engellediği için bayt indirilemedi — gerçek görseller
+                gelene kadar emoji/placeholder KULLANILMADI, nötr bir renk
+                bloğu bırakıldı (kafadan ikon uydurmamak için).
+              -->
               <span
-                class="flex h-14 w-14 items-center justify-center rounded-control bg-gradient-to-b from-[#dfe9d8] to-[#f1ede5] text-2xl dark:from-neutral-700 dark:to-neutral-800"
-              >
-                {{ option.icon }}
-              </span>
+                class="h-[90px] w-full rounded-control bg-gradient-to-b from-[#dfe9d8] to-[#f1ede5] dark:from-neutral-700 dark:to-neutral-800"
+                aria-hidden="true"
+              />
               <span
                 class="text-xs font-semibold"
                 :class="currentLayer === option.id ? 'text-brand-orange' : 'text-brand-charcoal dark:text-neutral-200'"
