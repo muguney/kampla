@@ -1,7 +1,7 @@
 # Durum — Kamp.la
 
-**Güncel Faz:** Faz 2 / 12 — kod tarafı tamamlandı, DoD onayı bekliyor
-**Genel Durum:** 🟡 Faz 2 (Harita & Keşif) 7 görevden 6'sı bitti, son DoD doğrulaması Mustafa'dan bekleniyor
+**Güncel Faz:** Faz 2 / 12 — kod tarafı tamamlandı, gerçek MapTiler key eklendi, DoD onayı bekliyor
+**Genel Durum:** 🟡 Faz 2 (Harita & Keşif) 7 görevden 6'sı bitti, MapTiler key artık gerçek (BLOCKERS #3 kapandı), son DoD doğrulaması Mustafa'dan bekleniyor
 
 ## Son Güncelleme: 2026-07-25
 Proje MobApps sistemine kaydedildi. Daha önce Mustafa'nın Figma'dan
@@ -310,6 +310,15 @@ iki ayrı general-purpose subagent'a delege edilip tamamlandı:
   maddesi).
 - Faz 3'e geçiş: POI Detay (PRD 5.F) — galeri, Detaylar/Yorumlar sekmeleri
   (şimdilik salt okuma, mock veriyle).
+
+### 2026-07-25 — Gerçek MapTiler key eklendi
+Mustafa MapTiler key'i ekledi. Aynı Faz 1'deki `.env` konumu hatası
+tekrarlandı: gerçek değer kök `app/.env`'e girilmişti, Nuxt paket bazında
+(`apps/mobile-web/.env`) okuduğu için oraya kopyalandı. `useMap.ts`
+içindeki `hasValidMaptilerKey()` placeholder string'i (`your-maptiler-
+api-key`) kontrol ediyor, artık gerçek key'i algılayıp otomatik gerçek
+MapTiler `streets-v2`/`topo-v2`/`satellite` stillerine geçecek — kod
+tarafında ek değişiklik gerekmedi. BLOCKERS #3 kapatıldı.
 
 ### 2026-07-25 — GitHub reposuna bağlandı
 Proje `https://github.com/muguney/kampla` (main branch) reposuna push

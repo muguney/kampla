@@ -7,7 +7,7 @@ Mustafa'dan aksiyon bekleyen maddeler. Kaynak: `Kurulum-Gereksinimleri.md`
 |---|---|---|---|---|
 | 1 | Supabase projesi (URL, anon key, service_role key, PostGIS enable) | Faz 0-1: veritabanı, auth | ✅ Tamamlandı | Anahtarları `.env`'e sen gireceksin (kod hard-code etmeyecek) |
 | 2 | Google Cloud OAuth client | Faz 1: Google ile giriş | Bekliyor | Ertelenebilir — e-posta/şifre girişi bağımsız çalışır |
-| 3 | MapTiler API key | Faz 2: harita tile (topografik/uydu katmanı) | Bekliyor | Faz 2 başlamadan gerekli değil |
+| 3 | MapTiler API key | Faz 2: harita tile (topografik/uydu katmanı) | ✅ Tamamlandı | Mustafa root `app/.env`'e ekledi; CEO ajanı Faz 1'deki aynı sorunu (Nuxt paket bazında `.env` okuyor, kökü okumuyor) fark edip `apps/mobile-web/.env`'e kopyaladı — `useMap.ts` gerçek key'i otomatik algılayıp MapTiler stillerine geçecek |
 | 4 | Cloudflare R2 bucket + API token | Faz 4: fotoğraf yükleme | Bekliyor | Geçici olarak Supabase Storage ile başlanabilir |
 | 5 | Apple Developer Program + Google Play Console | Faz 9-10: Premium/mağaza paketleme | Bekliyor | Şimdilik gerekmez |
 | 6 | RevenueCat hesabı | Faz 9: Premium ödeme altyapısı | Bekliyor | Şimdilik gerekmez |
