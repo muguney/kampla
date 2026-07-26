@@ -122,3 +122,26 @@ Durum kodları: `[ ]` bekliyor · `[~]` devam ediyor · `[x]` bitti · `[!]` blo
 - [x] Yorum Moderasyonu: uygunsuz yorumları listeleyip silme (`reviews` tablosu, admin DELETE RLS zaten `0006_reviews.sql`'de mevcuttu, yeni migration gerekmedi) — general-purpose (2026-07-26 otonom oturumda tamamlandı: yeni `pages/yorumlar.vue` — puan filtresi, konum/kullanıcı adı ayrı sorguyla çözümleniyor (raporlar.vue deseni), silme `confirm()` + local state; `layouts/default.vue`'a nav linki eklendi; `/tmp/kampla-verify-yorumlar` kopyada typecheck sıfır yeni hata + `nuxt build`/`nuxt dev` `/yorumlar` HTTP 200)
 - [x] İçerik Yönetimi: "Kamp.la Hakkında"/Kullanım Koşulları/Gizlilik metinlerini düzenleme — general-purpose (2026-07-26 otonom oturumda tamamlandı: `supabase/migrations/0013_site_content.sql` — `site_content` tablosu (key/lang/title/body) + RLS (herkes okur, admin yazar) + mobile-web i18n `tr.json`'daki gerçek metinlerle 3 satır seed (`hakkinda`/`kullanim-kosullari`/`gizlilik`); `packages/shared/src/types.ts`'e `SiteContent` tipi + `Database` tablo tanımı eklendi; `pages/icerik/index.vue` fonksiyonel form (başlık+textarea, dirty-state, kaydet); mobile-web'in bu tablodan OKUMASI kapsam dışı bırakıldı, statik sayfalar hâlâ i18n'den render ediyor — ayrı bir görev olarak not düşüldü; `/tmp/kampla-verify-icerik` kopyada admin+mobile-web ikisinde de typecheck sıfır yeni hata + `nuxt build`/`nuxt dev` `/icerik` HTTP 200)
 - [ ] Faz 8 DoD doğrulaması: admin girişi yapılabiliyor, en az bir konum admin panelinden onaylanıp mobile-web'de görünüyor (mock veri değil gerçek `locations`) — CEO/Mustafa (not: bu DoD'nin "mobile-web'de görünmesi" kısmı BLOCKERS #11'deki mimari karara bağlı olabilir, karar netleşmeden tam doğrulanamayabilir)
+
+## Faz 9 — Premium & Ödeme (PRD 7.3)
+> **Not (2026-07-26 otonom oturum):** Bu faz tamamen RevenueCat hesabı + Apple
+> Developer Program + Google Play Console'a bağlı (Kurulum-Gereksinimleri.md
+> madde 5, BLOCKERS #5/#6) — hesap açma/ödeme otonom sınırların dışında,
+> hiçbir alt görev şu an ilerletilemez. PHASES.md notuna göre Faz 8-12
+> ertelenebilir olduğundan, sıra bloklu olmayan Faz 10'a alındı.
+- [ ] `subscriptions` tablosu + RevenueCat entegrasyonu — **Mustafa'nın önce
+  RevenueCat/Apple/Google hesaplarını açması gerekiyor, bkz. BLOCKERS**
+
+## Faz 10 — Mobil Paketleme (PRD 7.1/7.2)
+> **Not (2026-07-26 otonom oturum):** Faz 0'da `capacitor.config.ts` yer
+> tutucu olarak bırakılmıştı ("`@capacitor/core`/`@capacitor/cli` ve gerçek
+> native proje (ios/, android/) Faz 10'da eklenecek" notu). Bu fazın ilk
+> adımları (paket kurulumu, config, native proje iskeleti, izin manifestleri)
+> hesap/ödeme gerektirmiyor — otonom ilerletilebilir. Gerçek cihazda
+> build/çalıştırma (DoD) Xcode/Android Studio gerektirir, bu sandbox'ta yok;
+> o kısım Mustafa'nın kendi Mac'inde yapılmalı.
+- [x] `@capacitor/core` + `@capacitor/cli` + `@capacitor/ios` + `@capacitor/android` bağımlılıklarını `apps/mobile-web`'e ekle, `capacitor.config.ts`'i gerçek `CapacitorConfig` tipine bağla (yorum satırındaki import'u aktif et) — general-purpose (2026-07-26 otonom oturumda tamamlandı: paketler 8.4.2, `capacitor.config.ts` artık gerçek `CapacitorConfig` tipini kullanıyor; ayrıca reponun daha önce hiç `typescript`/`vue-tsc` bağımlılığı yokmuş, `cap` CLI'ın config'i okuyup typecheck'in çalışabilmesi için `typescript@^5.6.3`+`vue-tsc@^2.1.10` devDependency + `typecheck` script'i eklendi)
+- [x] `npx cap add ios` + `npx cap add android` ile native proje iskeletlerini oluştur (bu sandbox'ta Xcode/Android SDK yok — sadece proje şablonu üretimi denendi, gerçek derleme denenmedi) — general-purpose (2026-07-26 otonom oturumda tamamlandı: `apps/mobile-web/ios/` (Xcode proje dosyaları, `App.xcodeproj`/`AppDelegate.swift`/`Info.plist`) + `apps/mobile-web/android/` (Gradle proje dosyaları) gerçekten mounted proje klasöründe oluşturuldu ve doğrulandı, build-artifact alt klasörleri `.gitignore`'a uygun olarak kopyalanmadı)
+- [x] Native izin manifestleri: iOS `Info.plist`'e konum izni açıklaması (`NSLocationWhenInUseUsageDescription`), Android `AndroidManifest.xml`'e `ACCESS_FINE_LOCATION`/`ACCESS_COARSE_LOCATION` — general-purpose (2026-07-26 otonom oturumda tamamlandı, ikisi de bizzat CEO ajanı tarafından dosya içeriğiyle doğrulandı)
+- [x] `@capacitor/geolocation` plugin kurulumu, `useMap.ts`'teki `requestUserLocation`'ı native ortamda çalışacak şekilde (web `navigator.geolocation` + Capacitor plugin fallback) güncelle — general-purpose (2026-07-26 otonom oturumda tamamlandı: `requestUserLocationNative()`/`requestUserLocationWeb()`'e bölündü, `Capacitor.isNativePlatform()` dispatcher'ı ile dallanıyor, web davranışı değişmedi, `npx cap sync` ile plugin'in iOS/Android'e doğru entegre olduğu doğrulandı)
+- [ ] Faz 10 DoD doğrulaması: iOS/Android cihazda (veya simülatörde) çalışan build var — **Mustafa (Xcode/Android Studio + muhtemelen `pod install` gerektirir, bu ortamda yapılamaz — BLOCKERS #17)**

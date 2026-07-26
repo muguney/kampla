@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Kamp.la</string>
+    <string name="title_activity_main">Kamp.la</string>
+    <string name="package_name">la.kamp.app</string>
+    <string name="custom_url_scheme">la.kamp.app</string>
+</resources>

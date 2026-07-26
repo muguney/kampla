@@ -12,6 +12,8 @@
  */
 import maplibregl from "maplibre-gl";
 import type { Map as MapLibreMap, Marker as MapLibreMarker, StyleSpecification } from "maplibre-gl";
+import { Capacitor } from "@capacitor/core";
+import { Geolocation } from "@capacitor/geolocation";
 
 /** 3 harita katmanı (PRD 5.B) — kimlikler sabit, gerçek stil URL'leri MapTiler key gelince değişir. */
 export const MAP_LAYERS = ["classic", "topo", "satellite"] as const;
@@ -140,12 +142,43 @@ export function useMap() {
   }
 
   /**
-   * Tarayıcıdan konum izni ister. İzin verilmezse veya hata olursa sessizce
-   * `null` döner (hata fırlatmaz) — mevcut varsayılan merkezde kalınır.
+   * Native (Capacitor iOS/Android) ortamda `@capacitor/geolocation` plugin'i
+   * üzerinden konum izni ister ve konum alır. Web'deki `navigator.geolocation`
+   * akışıyla aynı davranış: izin reddedilir veya hata olursa sessizce `null`
+   * döner (hata fırlatmaz).
    */
-  function requestUserLocation(): Promise<UserLocation | null> {
+  async function requestUserLocationNative(): Promise<UserLocation | null> {
+    try {
+      const permission = await Geolocation.requestPermissions({ permissions: ["location"] });
+      if (permission.location !== "granted" && permission.coarseLocation !== "granted") {
+        return null;
+      }
+      const position = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: false,
+        timeout: 8000,
+        maximumAge: 60_000,
+      });
+      const location: UserLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      userLocation.value = location;
+      showUserMarker(location);
+      return location;
+    } catch {
+      // İzin reddedildi veya konum alınamadı — sessizce yoksay.
+      return null;
+    }
+  }
+
+  /**
+   * Tarayıcıdan (web) `navigator.geolocation` ile konum izni ister. İzin
+   * verilmezse veya hata olursa sessizce `null` döner (hata fırlatmaz) —
+   * mevcut varsayılan merkezde kalınır.
+   */
+  function requestUserLocationWeb(): Promise<UserLocation | null> {
     return new Promise((resolve) => {
-      if (!import.meta.client || !navigator.geolocation) {
+      if (!navigator.geolocation) {
         resolve(null);
         return;
       }
@@ -166,6 +199,22 @@ export function useMap() {
         { enableHighAccuracy: false, timeout: 8000, maximumAge: 60_000 }
       );
     });
+  }
+
+  /**
+   * Konum izni ister ve kullanıcı konumunu döner. Native (Capacitor iOS/Android)
+   * ortamda `@capacitor/geolocation` plugin'ini, web'de mevcut
+   * `navigator.geolocation` API'sini kullanır — `Capacitor.isNativePlatform()`
+   * ile dallanır (PRD 7.1/7.2, Faz 10). Web davranışı değişmedi.
+   */
+  function requestUserLocation(): Promise<UserLocation | null> {
+    if (!import.meta.client) {
+      return Promise.resolve(null);
+    }
+    if (Capacitor.isNativePlatform()) {
+      return requestUserLocationNative();
+    }
+    return requestUserLocationWeb();
   }
 
   /** "Konumuma git" butonu — konum yoksa önce ister, sonra oraya uçar. */
