@@ -3,7 +3,348 @@
 **Güncel Faz:** Faz 12 — Rota Motoru: UI iskeletinin 3 görevi (servis araştırması, modal 3. seçenek, mock rota ekranı) TAMAM (kod önceki bir otonom oturumda yazılmış ama bookkeeping/TASKS.md güncellenmemiş kalmıştı, bu oturumda fark edilip doğrulandı ve işaretlendi); kalan tek görev Faz 12 DoD (gerçek routing servisi entegrasyonu, Mustafa'nın Valhalla/ORS/OSRM kararına bağlı, DECISIONS.md). Faz 11'in kalan 2 görevi de tamamen Mustafa'yı bekliyor.
 **Genel Durum:** 🟢 Faz 12'nin kod tarafı 3/4 (yalnızca DoD kaldı, servis seçimi kararına bağlı); Faz 11'de 4/6 görev bitti, kalan veri kaynağı kararı + DoD Mustafa'yı bekliyor; Faz 8 kod tarafı tamam (8/8) + Faz 10 kod tarafı tamam (4/5), ikisinin de DoD'u Mustafa'yı bekliyor; Faz 9 (Premium/RevenueCat) tamamen hesap/ödemeye bağlı, hiç başlanamadı (BLOCKERS #18); Faz 6 (7/8) + Faz 7 (4/5) kod tarafı tamam, DoD'ları bekliyor; Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); BLOCKERS #13 (ikon/logo gerçek Figma export'u) 2026-07-26 (interaktif) oturumunda tamamlandı — `design/icons-export/` klasöründeki gerçek export'lar `AppIcon.vue`/`Logo.vue`/vb.'ye entegre edildi, tek eksik `search` ikonu için Mustafa'nın ayrıca export vermesi; Faz 3 POI Detay layout/spacing karşılaştırması ise hâlâ Figma MCP erişimine bağlı, ayrı kaldı. **Şu an TASKS.md'de hiçbir fazda bloklu olmayan/bekleyen kod görevi kalmadı** — tüm açık maddeler ya Mustafa'nın manuel DoD testine, ya bir mimari/servis kararına, ya da hesap/ödemeye bağlı.
 
-## Son Güncelleme: 2026-07-26 (interaktif) — Gerçek Figma ikon/logo entegrasyonu
+## Son Güncelleme: 2026-07-27 00:33 — Otonom oturum: atlandı (görev yok, ~20.)
+00:02'deki taramadan beri hiçbir dosya değişmedi (`find -newermt`), tek
+istisna STATUS.md'nin kendisi. Durum birebir aynı — bloklu olmayan kod
+görevi yok, dosya değişikliği/git push yok, yeni blocker yok. Bu ~20.
+ardışık "görev yok" oturumu; tekrar bilgi üretmemek için ayrıntı bir
+önceki kayıtla aynı, bkz. aşağı. Öneri (DAILY_LOG'a da düşüldü): Mustafa
+bir sonraki interaktif oturumda en az bir DoD/karar netleştirene kadar
+30 dk'lık tetiklemenin bilgi üretmediği not edilmeli.
+
+## Son Güncelleme (önceki): 2026-07-27 00:02 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md/DECISIONS.md yeniden tarandı (`find -newermt "2026-07-26 23:33"`):
+  23:32'deki oturumdan beri hiçbir dosyada değişiklik yok — hâlâ bloklu
+  olmayan bir kod görevi yok. Açık maddeler aynı: Faz 2/3/4/6/7/8/10 DoD'ları
+  (#8/9/10/12/14/16/17), Faz 5 mock-vs-real mimari kararı (#11), Faz 11
+  PMTiles veri kaynağı kararı (#19), Faz 12 routing servis seçimi kararı,
+  Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası (#13 — yalnızca `search`
+  ikonu kaldı). DECISIONS.md'deki 3 bekleyen karar (#12-Rota Motoru servis
+  seçimi dahil) hâlâ "Bekliyor" — Mustafa'dan yeni bir onay girilmemiş.
+- BLOCKERS.md'de yeni madde eklenmedi. Yeni blocker yok, Gmail taslağı
+  gerekmedi (durum değişmedi, önceki oturumlarda zaten bildirilmişti).
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- **Not:** Bu, arka arkaya ~19. "görev yok, atlandı" otonom oturumu (ilk
+  benzer kayıt 2026-07-26 ~15:33'ten beri, 30 dk aralıklarla) — proje
+  gerçekten tüm kod tarafında tıkandı, kalan her şey Mustafa'nın DoD
+  testine veya bir karara bağlı. STATUS.md bu tekrarlar yüzünden 1100+
+  satıra ulaştı; bir sonraki interaktif daily'de eski tekrarlı "atlandı"
+  kayıtlarının tek bir özet paragrafta toplanması önerilir (içerik
+  kaybı olmadan, salt okunabilirlik için).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri
+#8/9/10/12/14/16/17, Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 23:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md/DECISIONS.md yeniden tarandı (`find -newermt "2026-07-26 23:03"`):
+  23:03'teki oturumdan beri değişiklik yok (yalnızca STATUS.md'nin kendisi) —
+  hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler aynı: Faz 2/3/4/6/7/8/10
+  DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real mimari kararı (#11), Faz 11
+  PMTiles veri kaynağı kararı (#19), Faz 12 routing servis seçimi kararı,
+  Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası (#13 — yalnızca `search` ikonu
+  kaldı).
+- Figma MCP kotası tekrar denendi (`get_metadata`, dosya kökü) — yine
+  "Starter plan tool call limit" hatası, kota hâlâ dolu.
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi. Gmail taslağı gerekmedi (durum
+  değişmedi, önceki oturumlarda zaten bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri
+#8/9/10/12/14/16/17, Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 23:03 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md yeniden tarandı (`find -newermt "2026-07-26 22:32"`):
+  22:32'deki oturumdan beri değişiklik yok — hâlâ bloklu olmayan bir kod
+  görevi yok. Açık maddeler aynı: Faz 2/3/4/6/7/8/10 DoD'ları
+  (#8/9/10/12/14/16/17), Faz 5 mock-vs-real mimari kararı (#11), Faz 11
+  PMTiles veri kaynağı kararı (#19), Faz 12 routing servis seçimi kararı,
+  Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası (#13 — yalnızca `search`
+  ikonu kaldı).
+- Figma MCP kotası tekrar denendi (`get_metadata`, dosya kökü) — yine
+  "Starter plan tool call limit" hatası, kota hâlâ dolu.
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi. Gmail taslağı gerekmedi (durum
+  değişmedi, önceki oturumlarda zaten bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri
+#8/9/10/12/14/16/17, Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 22:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md/DECISIONS.md yeniden tarandı (`find -newermt "2026-07-26 22:00"`):
+  22:02'deki oturumdan beri değişiklik yok (yalnızca STATUS.md'nin kendisi
+  değişmiş) — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler aynı:
+  Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 22:02 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md yeniden tarandı (`find -newermt "2026-07-26 21:32"`):
+  21:32'deki oturumdan beri değişiklik yok (yalnızca STATUS.md/_index.md'nin
+  kendisi değişmiş) — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler
+  aynı: Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- Figma MCP kotası tekrar denendi (`get_metadata`, dosya kökü) — yine
+  "Starter plan tool call limit" hatası, kota hâlâ dolu.
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 21:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md/DECISIONS.md yeniden tarandı (`find -newermt "2026-07-26 21:02"`):
+  21:02'deki oturumdan beri değişiklik yok, yalnızca STATUS.md'nin kendisi
+  değişmiş — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler aynı:
+  Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 21:02 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md/DECISIONS.md/design/icons-export yeniden tarandı
+  (`find -newermt "2026-07-26 20:32"`): 20:32'deki oturumdan beri değişiklik
+  yok, yalnızca STATUS.md'nin kendisi değişmiş — hâlâ bloklu olmayan bir kod
+  görevi yok. Açık maddeler aynı: Faz 2/3/4/6/7/8/10 DoD'ları
+  (#8/9/10/12/14/16/17), Faz 5 mock-vs-real mimari kararı (#11), Faz 11
+  PMTiles veri kaynağı kararı (#19), Faz 12 routing servis seçimi kararı,
+  Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası (#13 — yalnızca `search`
+  ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 20:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md yeniden tarandı: 20:02'deki oturumdan beri değişiklik
+  yok (`find -newermt` ile doğrulandı, yalnızca STATUS.md'nin kendisi
+  değişmiş) — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler aynı:
+  Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 20:02 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md (Faz 0-12) + BLOCKERS.md yeniden tarandı: 19:32'deki oturumdan
+  beri değişiklik yok (`find -newermt` ile doğrulandı, yalnızca STATUS.md'nin
+  kendisi değişmiş) — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler
+  aynı: Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 19:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md/BLOCKERS.md/DECISIONS.md/design/icons-export yeniden tarandı:
+  19:02'deki oturumdan beri değişiklik yok (`find -newermt` ile
+  doğrulandı, `search` ikonu hâlâ export edilmemiş). Hâlâ bloklu olmayan
+  bir kod görevi yok. Dosya/kod değişikliği yok, git push gerekmedi, yeni
+  blocker yok, Gmail taslağı gerekmedi.
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 19:02 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md (Faz 0-12) + BLOCKERS.md yeniden tarandı: 18:32'deki oturumdan
+  beri değişiklik yok (`find -newermt` ile doğrulandı, yalnızca STATUS.md'nin
+  kendisi değişmiş) — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler
+  aynı: Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi.
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 18:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md (Faz 0-12) + BLOCKERS.md yeniden tarandı: 18:03'teki oturumdan
+  beri değişiklik yok — hâlâ bloklu olmayan bir kod görevi yok. Açık
+  maddeler aynı: Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5
+  mock-vs-real mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı
+  (#19), Faz 12 routing servis seçimi kararı, Faz 9 hesap/ödeme
+  (#5/#6/#18), Figma kotası (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS #13 (Figma "Starter plan" kotası) tekrar denendi (`get_metadata`,
+  node 190:1288 — Poi Detay, Faz 3 layout/spacing karşılaştırması için),
+  yine "Starter plan tool call limit" hatası — kota hâlâ dolu.
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi (bir önceki oturumda zaten
+  GitHub ile senkron olduğu doğrulanmıştı).
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 18:03 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md (Faz 0-12) yeniden tarandı: 17:32'deki oturumdan beri hiçbir
+  dosyada değişiklik yok (`find -newermt` ile doğrulandı, yalnızca STATUS.md
+  kendisi değişmiş) — hâlâ bloklu olmayan bir kod görevi yok. Açık maddeler
+  aynı: Faz 2/3/4/6/7/8/10 DoD'ları (#8/9/10/12/14/16/17), Faz 5 mock-vs-real
+  mimari kararı (#11), Faz 11 PMTiles veri kaynağı kararı (#19), Faz 12
+  routing servis seçimi kararı, Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası
+  (#13 — yalnızca `search` ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi (bir önceki oturumda zaten
+  GitHub ile senkron olduğu doğrulanmıştı).
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 17:32 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md (Faz 0-12) yeniden tarandı: 17:04'teki oturumdan beri hiçbir
+  dosyada değişiklik yok (mounted proje klasöründe `find -newermt` ile
+  doğrulandı, STATUS.md dışında hiçbir dosya değişmemiş) — hâlâ bloklu
+  olmayan bir kod görevi yok. Açık maddeler aynı: Faz 2/3/4/6/7/8/10 DoD'ları
+  (#8/9/10/12/14/16/17), Faz 5 mock-vs-real mimari kararı (#11), Faz 11
+  PMTiles veri kaynağı kararı (#19), Faz 12 routing servis seçimi kararı,
+  Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası (#13 — yalnızca `search`
+  ikonu kaldı).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi (bir önceki oturumda zaten
+  GitHub ile senkron olduğu doğrulanmıştı).
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 17:04 — Otonom oturum: atlandı (görev yok)
+**Yapılanlar:**
+- TASKS.md (Faz 0-12) yeniden tarandı: 16:55'teki oturumdan beri değişiklik
+  yok — hâlâ hiçbir fazda `[ ]` bekliyor + bağımlılığı tamamlanmış, bloklu
+  olmayan bir kod görevi yok. Açık maddeler aynı: Faz 2/3/4/6/7/8/10 DoD'ları
+  (#8/9/10/12/14/16/17), Faz 5 mock-vs-real mimari kararı (#11), Faz 11
+  PMTiles veri kaynağı kararı (#19), Faz 12 routing servis seçimi kararı,
+  Faz 9 hesap/ödeme (#5/#6/#18), Figma kotası (#13).
+- Ek doğrulama: GitHub reposu (`muguney/kampla`) sandbox'a clone edilip
+  mounted proje klasörüyle karşılaştırıldı — 16:52'de push edilen "Gerçek
+  Figma ikon/logo export entegrasyonu" (commit `14eeb51`) dahil her şey
+  senkron; tek fark bilinen çöp/geçici klasörler (`node_modules_broken_*`,
+  `.nuxt_broken*`, boş `pages/liste/` dizini) ve hafifçe eski
+  `package-lock.json` (Capacitor/maplibre/pmtiles bağımlılıkları lock
+  dosyasında eksik — işlevi etkilemiyor, ayrı bir küçük bookkeeping notu
+  olarak düşüldü, bir sonraki kod değişikliği oturumunda `npm install` ile
+  otomatik güncellenecek).
+- BLOCKERS.md/DECISIONS.md'de Mustafa tarafından yeni bir onay/karar
+  girilmemiş. Yeni blocker eklenmedi.
+- Dosya/kod değişikliği yapılmadı, subagent delegasyonu yapılmadı, bu
+  yüzden git commit/push adımı gerekmedi (zaten senkron).
+- Gmail taslağı gerekmedi (durum değişmedi, önceki oturumlarda zaten
+  bildirilmişti).
+
+**Sırada:** Değişmedi — Mustafa'nın en az bir kararı/DoD'u netleştirmesi
+gerekiyor (öncelik: #11 mock-vs-real mimari karar, Faz 11 PMTiles kaynağı
+#19, Faz 12 routing servis seçimi, çeşitli DoD testleri #8/9/10/12/14/16/17,
+Figma kotası #13 — yalnızca `search` ikonu kaldı).
+
+## Son Güncelleme (önceki): 2026-07-26 (interaktif) — Gerçek Figma ikon/logo entegrasyonu
 
 **Bağlam:** Mustafa önceki oturumların Ana Ekran/Liste/Filtre/Arama
 ekranlarındaki ikonları ve marka logosunu "screenshot'a bakarak elle çizilmiş
