@@ -1,0 +1,495 @@
+{
+  "brand": {
+    "name": "Kamp.la"
+  },
+  "common": {
+    "back": "Geri",
+    "comingSoon": "Bu ekran ilerleyen fazlarda geliştirilecek.",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "close": "Kapat",
+    "loading": "Yükleniyor..."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "search": "Ara",
+    "add": "Konum Ekle",
+    "lists": "Listelerim",
+    "menu": "Menü"
+  },
+  "pages": {
+    "home": { "title": "Kamp.la" },
+    "listView": {
+      "title": "Liste Görünümü",
+      "resultCount": "{count} sonuç",
+      "mapToggle": "Harita",
+      "favoriteToggle": "Favorilere ekle/çıkar"
+    },
+    "search": {
+      "title": "Ara",
+      "headerTitle": "Konum ara",
+      "placeholder": "Konum ara",
+      "recentTitle": "Son Aramalar",
+      "suggestionsTitle": "Öneriler"
+    },
+    "poiDetail": {
+      "title": "Konum Detayı",
+      "teamName": "Kamp.la ekibi",
+      "addedBySuffix": " tarafından {date} tarihinde eklendi",
+      "tabs": {
+        "details": "Detaylar",
+        "reviews": "Yorumlar ({count})"
+      },
+      "amenitiesTitle": "İmkanlar",
+      "description": "Açıklama",
+      "contact": "İletişim",
+      "contactIcons": {
+        "phone": "Telefon",
+        "website": "Web sitesi",
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "youtube": "YouTube",
+        "x": "X"
+      },
+      "accommodations": "Kamp İmkanları",
+      "seasonLabels": {
+        "summer": "Yaz sezonunda açık",
+        "winter": "Kış sezonunda açık",
+        "all": "Tüm sezonlarda açık"
+      },
+      "coordinatesLabel": "{lat}, {lng} (lat, lng)",
+      "copyCoordinates": "Koordinatı kopyala",
+      "coordinatesCopied": "Koordinat panoya kopyalandı!",
+      "mapSectionTitle": "Haritadaki Konum",
+      "reportIssue": "Hata Bildir",
+      "edit": "Düzenle",
+      "reportModal": {
+        "title": "Hata Bildir",
+        "placeholder": "Ne tür bir hata bildirmek istersin?",
+        "submit": "Gönder",
+        "submitted": "Bildirimin alındı, teşekkürler!"
+      },
+      "reviewsTab": {
+        "ratingTitle": "Değerlendirme",
+        "totalReviews": "{count} yorum",
+        "writeReview": "Yorum yazın",
+        "emptyTitle": "Henüz yorum yapılmamış",
+        "emptyDescription": "Bu konumu ziyaret ettiysen ilk yorumu sen yaz.",
+        "emptyCta": "Yorum Yaz"
+      },
+      "reviewModal": {
+        "title": "Değerlendirme",
+        "placeholder": "Yorumunuzu yazınız",
+        "submit": "Yorumu yayınla",
+        "ratingRequired": "Lütfen bir yıldız puanı seç."
+      },
+      "actions": {
+        "addPhoto": "Fotoğraf ekle",
+        "addPhotoToast": "Fotoğraf ekleme Faz 5'te aktif olacak.",
+        "markVisited": "Ziyaret et",
+        "markVisitedOnToast": "Ziyaret edildi olarak işaretlendi.",
+        "markVisitedOffToast": "Ziyaret işareti kaldırıldı.",
+        "directions": "Yol Tarifi",
+        "saveToList": "Listeye kaydet",
+        "saveOnToast": "Listene eklendi.",
+        "saveOffToast": "Listenden çıkarıldı.",
+        "share": "Paylaş",
+        "shareToast": "Bağlantı panoya kopyalandı."
+      },
+      "directionsModal": {
+        "title": "Yol Tarifi",
+        "inApp": "Google Maps (uygulama içi)",
+        "external": "Google Maps (harici)"
+      },
+      "notFound": {
+        "title": "Konum bulunamadı",
+        "cta": "Haritaya Dön"
+      }
+    },
+    "poiEdit": { "title": "Konumu Düzenle" },
+    "addLocation": { "title": "Konum Ekle" },
+    "myLists": {
+      "title": "Harita Listelerim",
+      "systemListNames": {
+        "favorites": "Favorilerim",
+        "visited": "Ziyaret Edilen Yerler"
+      },
+      "customSectionTitle": "Özel Listelerim",
+      "createButton": "+ Yeni Harita Listesi Oluştur",
+      "createModal": {
+        "title": "Yeni Liste Oluştur",
+        "placeholder": "Liste adı (ör. 2023 Akdeniz Turu)",
+        "submit": "Oluştur",
+        "creating": "Oluşturuluyor...",
+        "nameRequired": "Lütfen bir liste adı gir."
+      },
+      "limitReached": "Ücretsiz hesapta en fazla {max} özel liste oluşturabilirsin.",
+      "upgradeCta": "Premium'a geç",
+      "genericError": "Bir sorun oluştu, lütfen tekrar dene."
+    },
+    "listDetail": {
+      "title": "Liste",
+      "notFound": {
+        "title": "Liste bulunamadı",
+        "cta": "Listelerime Dön"
+      },
+      "typeBadge": {
+        "system": "Sistem Listesi",
+        "custom": "Özel Liste"
+      },
+      "createdAtLabel": "Oluşturulma: {date}",
+      "genericError": "Bir sorun oluştu, lütfen tekrar dene.",
+      "itemsPlaceholder": {
+        "title": "Bu listedeki konumlar yakında burada görünecek",
+        "description": "Listeye konum ekleme/çıkarma özelliği ayrı bir aşamada eklenecek."
+      },
+      "rename": {
+        "button": "Adını Değiştir",
+        "save": "Kaydet",
+        "cancel": "Vazgeç",
+        "nameRequired": "Lütfen bir liste adı gir."
+      },
+      "visibility": {
+        "public": "Herkese Açık",
+        "private": "Gizli",
+        "makePublicButton": "Profilde Görünür Yap",
+        "makePrivateButton": "Gizle",
+        "confirmPublic": "Bu listeyi herkese açık yapmak istediğine emin misin? Profilinde görünür olacak.",
+        "confirmPrivate": "Bu listeyi gizlemek istediğine emin misin?",
+        "confirm": "Evet, Onayla",
+        "cancel": "Vazgeç"
+      },
+      "delete": {
+        "button": "Sil",
+        "confirmBody": "Bu listeyi silmek istediğine emin misin? Bu işlem geri alınamaz.",
+        "confirm": "Evet, Sil",
+        "cancel": "Vazgeç"
+      }
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "markAllAsRead": "Tümünü okundu işaretle",
+      "relativeTime": {
+        "justNow": "Az önce",
+        "minutesAgo": "{count} dakika önce",
+        "hoursAgo": "{count} saat önce",
+        "daysAgo": "{count} gün önce"
+      }
+    },
+    "premium": { "title": "Kamp.la Plus" },
+    "account": {
+      "title": "Hesabım",
+      "guestName": "Misafir",
+      "shareProfile": "Profili Paylaş",
+      "shareToast": "Bağlantı panoya kopyalandı.",
+      "myListsLink": "Favorilerim / Konum Listelerim",
+      "visitedToggleLabel": "Ziyaret ettiğim yerleri göster",
+      "visitedToggleError": "Ayar güncellenemedi, lütfen tekrar dene.",
+      "deleteAccount": {
+        "button": "Hesabımı kalıcı olarak sil",
+        "warning": "Bu işlem geri alınamaz. Hesabın ve tüm verilerin (yorumların, listelerin, eklediğin konumlar hariç) kalıcı olarak silinecek.",
+        "confirm": "Evet, hesabımı sil",
+        "cancel": "Vazgeç",
+        "deleting": "Siliniyor...",
+        "genericError": "Hesap silinirken bir sorun oluştu, lütfen tekrar dene."
+      }
+    },
+    "accountUsername": {
+      "title": "Kullanıcı Adı Değiştir",
+      "label": "Yeni kullanıcı adı",
+      "placeholder": "kullanici_adi",
+      "submit": "Kaydet",
+      "submitting": "Kaydediliyor...",
+      "successToast": "Kullanıcı adın güncellendi.",
+      "usernameTaken": "Bu kullanıcı adı zaten alınmış, başka bir tane dene.",
+      "genericError": "Kullanıcı adı güncellenirken bir sorun oluştu, lütfen tekrar dene."
+    },
+    "accountEmail": {
+      "title": "E-Posta Değiştir",
+      "label": "Yeni e-posta adresi",
+      "currentLabel": "Mevcut e-posta",
+      "placeholder": "ornek{'@'}eposta.com",
+      "submit": "Kaydet",
+      "submitting": "Kaydediliyor...",
+      "checkEmailTitle": "E-postanı kontrol et",
+      "checkEmailBody": "Hem eski hem yeni e-posta adresine bir onay bağlantısı gönderdik. Değişikliğin tamamlanması için onay linkine tıklaman gerekiyor.",
+      "genericError": "E-posta güncellenirken bir sorun oluştu, lütfen tekrar dene."
+    },
+    "accountPassword": {
+      "title": "Şifre Değiştir",
+      "currentPlaceholder": "Mevcut şifre",
+      "newPlaceholder": "Yeni şifre",
+      "confirmPlaceholder": "Yeni şifre (tekrar)",
+      "submit": "Şifreyi Güncelle",
+      "submitting": "Güncelleniyor...",
+      "mismatchError": "Yeni şifreler eşleşmiyor.",
+      "tooShortError": "Yeni şifre en az 6 karakter olmalı.",
+      "currentWrongError": "Mevcut şifre yanlış.",
+      "successToast": "Şifren güncellendi.",
+      "genericError": "Şifre güncellenirken bir sorun oluştu, lütfen tekrar dene."
+    },
+    "accountSocial": {
+      "title": "Sosyal Medya Hesapları",
+      "websitePlaceholder": "Web sitesi (https://...)",
+      "facebookPlaceholder": "Facebook (https://facebook.com/...)",
+      "instagramPlaceholder": "Instagram (https://instagram.com/...)",
+      "xPlaceholder": "X / Twitter (https://x.com/...)",
+      "youtubePlaceholder": "YouTube (https://youtube.com/...)",
+      "submit": "Kaydet",
+      "submitting": "Kaydediliyor...",
+      "successToast": "Sosyal medya hesapların güncellendi.",
+      "genericError": "Güncellenirken bir sorun oluştu, lütfen tekrar dene."
+    },
+    "accountReviews": { "title": "Tüm Yorumlarım" },
+    "profile": {
+      "title": "Profil",
+      "notFound": {
+        "title": "Kullanıcı bulunamadı",
+        "cta": "Ana Ekrana Dön"
+      },
+      "publicListsTitle": "Paylaşılan Listeler",
+      "noPublicLists": "Bu kullanıcının paylaşıma açık listesi yok"
+    },
+    "publicList": {
+      "title": "Liste",
+      "notFound": {
+        "title": "Liste bulunamadı veya herkese açık değil",
+        "cta": "Ana Ekrana Dön"
+      },
+      "createdAtLabel": "Oluşturulma: {date}",
+      "actions": {
+        "share": "Paylaş",
+        "shareToast": "Bağlantı panoya kopyalandı.",
+        "save": "Listeyi Kaydet",
+        "saved": "Kaydedildi",
+        "saveCopySuffix": "(Kopya)",
+        "saveToast": "Liste hesabına kaydedildi.",
+        "saveError": "Liste kaydedilirken bir sorun oluştu, lütfen tekrar dene."
+      }
+    },
+    "settings": { "title": "Uygulama Ayarları" },
+    "settingsLanguage": { "title": "Dil Seçimi" },
+    "settingsTheme": { "title": "Tema Ayarları" },
+    "settingsAbout": {
+      "title": "Kamp.la Hakkında",
+      "paragraph1": "Kamp.la, Türkiye'deki kamp alanlarını, karavan parklarını ve doğa alanlarını harita üzerinde keşfetmeni, ziyaret ettiğin yerleri işaretlemeni ve deneyimlerini toplulukla paylaşmanı sağlayan bir topluluk kaynaklı keşif uygulamasıdır.",
+      "paragraph2": "Misyonumuz, doğa severlerin güvenilir ve güncel konum bilgisine kolayca ulaşmasını sağlamak; her kullanıcının katkısıyla büyüyen, doğruluğu topluluk tarafından denetlenen bir harita oluşturmaktır. Yeni bir konum eklemek, fotoğraf paylaşmak veya bir yeri değerlendirmek — hepsi bu haritayı herkes için daha faydalı hale getirir.",
+      "paragraph3": "Vizyonumuz, Kamp.la'yı Türkiye'nin en kapsamlı ve en güvenilir kamp/karavan keşif platformu haline getirmek; kampçıları birbirine bağlayan, doğaya saygılı ve sürdürülebilir bir keşif kültürünü desteklemektir."
+    },
+    "login": {
+      "title": "Üye Girişi",
+      "emailPlaceholder": "E-posta",
+      "passwordPlaceholder": "Şifre",
+      "forgotPassword": "Şifremi unuttum",
+      "submit": "Giriş Yap",
+      "submitting": "Giriş yapılıyor...",
+      "googleSignIn": "Google ile giriş yap",
+      "googleComingSoon": "(yakında)",
+      "noAccount": "Hesabın yok mu?",
+      "registerLink": "Kayıt ol",
+      "genericError": "Giriş yapılamadı. Lütfen bilgilerini kontrol edip tekrar dene."
+    },
+    "register": {
+      "title": "Kayıt Ol",
+      "usernamePlaceholder": "Kullanıcı adı",
+      "emailPlaceholder": "E-posta",
+      "passwordPlaceholder": "Şifre",
+      "agreementTerms": "Üyelik Sözleşmesi",
+      "agreementAnd": "ve",
+      "agreementPrivacy": "Gizlilik Politikası",
+      "agreementSuffix": "'nı kabul ediyorum.",
+      "agreementRequired": "Devam etmek için sözleşmeyi kabul etmelisin.",
+      "submit": "Kayıt Ol",
+      "submitting": "Kayıt olunuyor...",
+      "hasAccount": "Zaten hesabın var mı?",
+      "loginLink": "Giriş yap",
+      "checkEmailTitle": "E-postanı kontrol et",
+      "checkEmailBody": "Hesabını onaylamak için sana bir e-posta gönderdik. Onayladıktan sonra giriş yapabilirsin.",
+      "genericError": "Kayıt oluşturulamadı. Lütfen bilgilerini kontrol edip tekrar dene."
+    },
+    "forgotPassword": {
+      "title": "Şifremi Unuttum",
+      "subtitle": "E-posta adresine şifre sıfırlama linki gönderelim.",
+      "emailPlaceholder": "E-posta",
+      "emailInvalid": "Geçerli bir e-posta adresi gir.",
+      "submit": "Sıfırlama Linki Gönder",
+      "submitting": "Gönderiliyor...",
+      "checkEmailTitle": "E-postanı kontrol et",
+      "checkEmailBody": "E-posta adresine bir şifre sıfırlama linki gönderdik. Linke tıklayıp yeni şifreni belirledikten sonra giriş yapabilirsin.",
+      "backToLogin": "Girişe dön"
+    },
+    "terms": {
+      "title": "Kullanım Koşulları",
+      "draftNotice": "⚠️ Bu metin taslaktır, yayına almadan önce hukuki inceleme gerekir.",
+      "intro": "Bu Kullanım Koşulları, Kamp.la mobil uygulamasını ve web sitesini ('Hizmet') kullanımınızı düzenler. Hizmete erişerek veya kullanarak bu koşulları kabul etmiş sayılırsınız.",
+      "section1Heading": "1. Hesap Oluşturma",
+      "section1Body": "Hizmetin bazı özelliklerini kullanmak (konum ekleme, yorum yazma, liste oluşturma vb.) için bir hesap oluşturmanız gerekir. Kayıt sırasında verdiğiniz bilgilerin doğru ve güncel olmasından siz sorumlusunuz. Hesabınızın güvenliğinden ve şifrenizin gizliliğinden siz sorumlusunuz.",
+      "section2Heading": "2. Kullanıcı İçerikleri",
+      "section2Body": "Uygulamaya eklediğiniz konum bilgileri, fotoğraflar, yorumlar ve değerlendirmeler ('Kullanıcı İçeriği') size aittir. Ancak bu içerikleri Kamp.la üzerinde paylaşarak, Kamp.la'ya bu içerikleri Hizmet kapsamında görüntüleme, saklama ve dağıtma konusunda münhasır olmayan, dünya çapında, telifsiz bir lisans vermiş olursunuz.",
+      "section3Heading": "3. İçerik Kuralları",
+      "section3Body": "Yanıltıcı, hakaret içeren, telif hakkı ihlali yapan, kişisel gizliliği ihlal eden veya doğaya zarar verecek bilgiler içeren içerik paylaşamazsınız. Selfie veya kişisel fotoğraflar yerine mekân odaklı fotoğraflar paylaşmanız beklenir. Kural dışı içerikler yöneticiler tarafından incelenip kaldırılabilir.",
+      "section4Heading": "4. Konum Bilgilerinin Doğruluğu",
+      "section4Body": "Kamp.la, topluluk tarafından oluşturulan bir haritadır. Konum bilgilerinin (koordinat, imkanlar, sezon vb.) doğruluğu garanti edilmez. Bir yere gitmeden önce güncel bilgiyi teyit etmeniz önerilir. Kamp.la, hatalı/güncel olmayan bilgilerden doğabilecek zararlardan sorumlu tutulamaz.",
+      "section5Heading": "5. Premium Üyelik",
+      "section5Body": "Kamp.la Plus (premium) üyelik, ek özellikler (sınırsız liste, gelişmiş filtreleme vb.) sunan ücretli bir abonelik hizmetidir. Abonelik ücretleri, yenileme koşulları ve iptal işlemleri, kullandığınız mağazanın (App Store/Google Play) ödeme koşullarına tabidir.",
+      "section6Heading": "6. Hesap Askıya Alma ve Sonlandırma",
+      "section6Body": "Bu koşulları ihlal eden hesapları uyarma, askıya alma veya kalıcı olarak kapatma hakkını saklı tutarız. Kendi hesabınızı da 'Hesabım' sayfasından dilediğiniz zaman kalıcı olarak silebilirsiniz; bu işlem geri alınamaz.",
+      "section7Heading": "7. Sorumluluğun Sınırlandırılması",
+      "section7Body": "Kamp.la, Hizmetin kesintisiz veya hatasız çalışacağını garanti etmez. Doğa koşullarında kamp/karavan faaliyetleri risk içerir; bu risklerden ve üçüncü taraf tesislerde yaşanabilecek olaylardan Kamp.la sorumlu tutulamaz.",
+      "section8Heading": "8. Değişiklikler ve İletişim",
+      "section8Body": "Bu koşulları zaman zaman güncelleyebiliriz; önemli değişikliklerde sizi uygulama içinden bilgilendiririz. Sorularınız için destek{'@'}kamp.la adresinden bize ulaşabilirsiniz."
+    },
+    "privacy": {
+      "title": "Gizlilik Sözleşmesi",
+      "draftNotice": "⚠️ Bu metin taslaktır, yayına almadan önce hukuki inceleme gerekir.",
+      "intro": "Bu Gizlilik Politikası, Kamp.la'yı kullanırken hangi verilerinizi topladığımızı, bu verileri nasıl kullandığımızı ve haklarınızı açıklar.",
+      "section1Heading": "1. Topladığımız Veriler",
+      "section1Body": "Hesap oluştururken kullanıcı adı, e-posta adresi ve şifre (şifrelenmiş olarak) topluyoruz. İsteğe bağlı olarak profil fotoğrafı ve sosyal medya bağlantıları ekleyebilirsiniz. Uygulama kullanımınız sırasında eklediğiniz konumlar, fotoğraflar, yorumlar ve listeler de tarafımızca saklanır.",
+      "section2Heading": "2. Konum Verileri",
+      "section2Body": "GPS ile otomatik konumlandırma özelliğini kullanırsanız cihazınızın konum bilgisine erişim izni isteriz; bu izin yalnızca konum eklerken/haritada gezinirken kullanılır ve izniniz olmadan arka planda takip yapılmaz.",
+      "section3Heading": "3. Verilerin Kullanım Amaçları",
+      "section3Body": "Verileriniz; hesabınızı yönetmek, uygulamanın temel işlevlerini (harita, favoriler, listeler, bildirimler) sağlamak, hizmet kalitesini iyileştirmek ve yasal yükümlülüklerimizi yerine getirmek amacıyla kullanılır.",
+      "section4Heading": "4. Veri Paylaşımı",
+      "section4Body": "Verileriniz, Hizmeti sağlamamıza yardımcı olan altyapı sağlayıcılarıyla (ör. barındırma, veritabanı, ödeme altyapısı) sınırlı ölçüde paylaşılabilir. Verileriniz reklam amacıyla üçüncü taraflara satılmaz.",
+      "section5Heading": "5. Veri Saklama Süresi",
+      "section5Body": "Verileriniz, hesabınız aktif olduğu sürece saklanır. Hesabınızı 'Hesabım' sayfasından kalıcı olarak sildiğinizde, ilişkili kişisel verileriniz sistemlerimizden silinir (yasal saklama yükümlülüğü olan veriler hariç).",
+      "section6Heading": "6. Haklarınız",
+      "section6Body": "Yürürlükteki mevzuat (ör. KVKK, GDPR) kapsamında verilerinize erişme, düzeltme, silme ve işlemeye itiraz etme hakkına sahipsiniz. Bu haklarınızı kullanmak için bizimle iletişime geçebilirsiniz.",
+      "section7Heading": "7. Çerezler ve Benzer Teknolojiler",
+      "section7Body": "Oturumunuzu açık tutmak ve dil tercihinizi hatırlamak gibi temel işlevler için çerezler/benzer depolama teknolojileri kullanılır.",
+      "section8Heading": "8. Veri Güvenliği ve İletişim",
+      "section8Body": "Verilerinizi korumak için makul teknik ve idari önlemler alıyoruz. Gizlilikle ilgili sorularınız için destek{'@'}kamp.la adresinden bize ulaşabilirsiniz."
+    },
+    "menu": { "title": "Menü" }
+  },
+  "menu": {
+    "addLocation": "Konum Ekle",
+    "notifications": "Bildirimler",
+    "login": "Giriş Yap",
+    "account": "Hesabım",
+    "settings": "Uygulama Ayarları",
+    "about": "Kamp.la Hakkında",
+    "logout": "Çıkış Yap"
+  },
+  "wizard": {
+    "step1": "1. Konum Seç",
+    "step2": "2. Konum Türü",
+    "step3": "3. Hizmetler",
+    "step4": "4. Detaylar",
+    "step5": "5. Fotoğraflar",
+    "step6": "6. Onay",
+    "locationStep": {
+      "hint": "Haritayı kaydırarak ortadaki pimi eklemek istediğiniz konuma getirin.",
+      "gpsButton": "GPS ile otomatik konumlandır",
+      "locating": "Konum alınıyor...",
+      "locationError": "Konum alınamadı. Lütfen haritayı elle kaydırarak konumu seçin.",
+      "coordinatesLabel": "Seçili konum: {lat}, {lng}",
+      "coordinatesEmpty": "Henüz bir konum seçilmedi."
+    },
+    "typeStep": {
+      "hint": "Hem karavan hem kamp alanıysa karavan parkı seçip sonraki adımda çadırı da işaretleyebilirsiniz."
+    },
+    "amenitiesStep": {
+      "hint": "Bu alanda bulunan hizmetleri seçin (bu adım opsiyoneldir, boş bırakabilirsiniz).",
+      "selectedCount": "{count} hizmet seçildi"
+    },
+    "detailsStep": {
+      "nameLabel": "Konum Adı",
+      "namePlaceholder": "Örn. Alanya Kamp Alanı",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Bu konum hakkında kısa bir açıklama yazın (opsiyonel).",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "05xx xxx xx xx",
+      "websiteLabel": "Web Sitesi",
+      "websitePlaceholder": "https://...",
+      "socialLabel": "Sosyal Medya (opsiyonel)",
+      "accommodationLabel": "Konaklama İmkanları",
+      "seasonLabel": "Sezon",
+      "optionalHint": "Konum adı dışındaki tüm alanlar opsiyoneldir."
+    },
+    "photosStep": {
+      "hint": "Bu konuma ait fotoğraflar ekleyin (opsiyonel — fotoğraf eklemeden de devam edebilirsiniz).",
+      "rulesTitle": "Fotoğraf kuralları",
+      "rulesNoSelfie": "Selfie veya kişisel fotoğraf yüklemeyin.",
+      "rulesLandscape": "Mümkünse yatay ve mekân odaklı çekimler tercih edin.",
+      "rulesRemoval": "Uygunsuz veya kural dışı görseller yönetici tarafından silinir.",
+      "addButton": "Fotoğraf Ekle",
+      "uploading": "Yükleniyor...",
+      "removeAria": "Fotoğrafı kaldır",
+      "emptyHint": "Henüz fotoğraf eklenmedi."
+    },
+    "confirmStep": {
+      "hint": "Girdiğiniz bilgilerin doğru olduğunu onaylayarak konumu inceleme için gönderin.",
+      "agreementLabel": "Girdiğim bilgilerin doğru olduğunu ve Kamp.la Kullanım Koşulları'na uygun olduğunu beyan ederim.",
+      "back": "Geri",
+      "submit": "Kaydet",
+      "submitting": "Kaydediliyor...",
+      "authRequired": "Kaydetmek için giriş yapmış olmanız gerekiyor.",
+      "genericError": "Konum kaydedilirken bir sorun oluştu. Lütfen tekrar deneyin.",
+      "successTitle": "Teşekkürler!",
+      "successBody": "Konumunuz alındı. Yönetici incelemesinden sonra yayınlanır.",
+      "goHome": "Ana Ekrana Dön"
+    }
+  },
+  "map": {
+    "layerModal": {
+      "title": "Harita Katmanı Seç",
+      "classic": "Klasik",
+      "topo": "Topografik",
+      "satellite": "Uydu"
+    },
+    "poiCard": {
+      "noRating": "Henüz değerlendirme yok",
+      "detailsCta": "Detaylar",
+      "directionsCta": "Yol Tarifi"
+    },
+    "filterModal": {
+      "title": "Kategori Filtrele",
+      "clear": "Temizle",
+      "freeLimitWarning": "Ücretsiz hesapta en fazla 2 kategori filtrelenebilir. Premium'a geç."
+    },
+    "offlineModal": {
+      "title": "Bölgeyi Çevrimdışı İndir",
+      "premiumLockTitle": "Bu özellik Premium'a özel",
+      "premiumLockBody": "Haritanın bir bölgesini internetsiz kullanmak için Kamp.la Plus'a geçmen gerekiyor.",
+      "premiumCta": "Premium'a geç",
+      "currentViewLabel": "Görünen bölge",
+      "bboxLabel": "{west}, {south} — {east}, {north}",
+      "nameLabel": "Bölge adı",
+      "namePlaceholder": "Örn. Alanya çevresi",
+      "downloadButton": "İndir",
+      "downloading": "İndiriliyor... {progress}%",
+      "mapNotReady": "Harita henüz hazır değil, lütfen bekleyin.",
+      "downloadSuccessToast": "Bölge cihazına indirildi.",
+      "downloadErrorToast": "Bölge indirilemedi, lütfen tekrar dene.",
+      "savedRegionsTitle": "İndirilen Bölgeler",
+      "emptyRegions": "Henüz indirilmiş bir bölge yok.",
+      "deleteAria": "Bölgeyi sil",
+      "deleteToast": "Bölge silindi."
+    }
+  },
+  "emptyState": {
+    "favorites": {
+      "title": "Henüz favori eklemediniz",
+      "description": "Beğendiğin konumları favorilerine ekleyerek burada listeleyebilirsin.",
+      "cta": "Haritaya Dön"
+    },
+    "visited": {
+      "title": "Henüz ziyaret işaretlemediniz"
+    },
+    "reviews": {
+      "title": "Henüz yorum yapmadınız",
+      "cta": "Bir konum keşfet"
+    },
+    "search": {
+      "title": "Sonuç bulunamadı"
+    },
+    "notifications": {
+      "title": "Henüz bildiriminiz yok"
+    },
+    "lists": {
+      "title": "İlk listeni oluştur",
+      "cta": "Yeni Harita Listesi Oluştur"
+    }
+  }
+}

@@ -1,6 +1,19 @@
-.DS_Store
+node_modules/
+.nuxt/
+.output/
+.data/
+dist/
+.env
+.env.local
+.env.bak
 *.log
-.git-remote-credentials
+.DS_Store
+.vscode/
+.idea/
 
-# app/ altında kendi .gitignore'u var (node_modules, .nuxt, .env, vb.)
-# burada sadece proje kökü için genel kurallar
+# Faz 0 kurulum doğrulaması sırasında sandbox dosya sistemi kısıtı nedeniyle
+# silinemeyip yeniden adlandırılan artık klasörler — Mac'te Finder'dan elle
+# silinebilir, projeye dahil değildir (bkz. STATUS.md).
+*_broken*/
+*_unused*/
+*-cleared-*/
