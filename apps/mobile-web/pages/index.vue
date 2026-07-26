@@ -22,6 +22,8 @@ const poiLegend = LOCATION_TYPES.map((type) => ({
   label: LOCATION_TYPE_LABELS_TR[type],
 }));
 
+const { t } = useI18n();
+
 const {
   initMap,
   destroyMap,
@@ -29,6 +31,7 @@ const {
   flyToCoordinates,
   requestUserLocation,
   userLocation,
+  isOfflineFallbackActive,
   map: mapState,
 } = useMap();
 
@@ -111,6 +114,16 @@ function closeSummaryCard() {
          Figma'da (node 52:218) harita tam ekran kenarına kadar gidiyor, üst
          bar yok — bkz. components/layout/TopBar.vue (showWordmark dalı). -->
     <div id="map" ref="mapContainer" class="kampla-map-container" />
+
+    <!-- Bağlantı kesilip indirilmiş bir bölgenin pmtiles kaynağına geçildiğinde
+         gösterilen basit rozet (bkz. composables/useMap.ts → isOfflineFallbackActive,
+         Faz 11 offline fallback). -->
+    <div
+      v-if="isOfflineFallbackActive"
+      class="absolute left-1/2 top-3 z-20 -translate-x-1/2 rounded-full bg-brand-charcoal/90 px-3 py-1.5 text-xs font-semibold text-white shadow-md dark:bg-neutral-800"
+    >
+      {{ t("map.offlineModal.offlineActiveBadge") }}
+    </div>
 
     <!-- Liste görünümüne geçiş (Figma node 52:218: buttonWithIcon, #fe8542,
          rounded-[20px], shadow 0 4px 3px rgba(0,0,0,.09)) -->

@@ -9,11 +9,27 @@
  * `hasValidMaptilerKey()` placeholder değeri ("your-maptiler-api-key" veya
  * boş) otomatik tespit eder ve gerçek anahtar geldiğinde otomatik olarak
  * MapTiler style URL'lerine geçer — kod değişikliği gerekmez.
+ *
+ * Faz 11 "Offline Harita" (PRD 7.1, 5.B, 5.P) — offline fallback:
+ * `useOfflineMap().getRegionSourceUrl()` indirilmiş bir bölge için çalışan bir
+ * `pmtiles://` kaynak URL'i üretiyordu ama hiçbir yerde haritaya BAĞLANMIYORDU.
+ * Bu dosyada eklenen mekanizma: bağlantı kesildiğinde (`navigator.onLine` +
+ * harita `error` event'i — bkz. `tryActivateOfflineFallback`) mevcut harita
+ * merkezini kapsayan (yoksa en son indirilen) bölgenin pmtiles kaynağı, online
+ * stilin YERİNE `map.setStyle()` ile geçici olarak bağlanır; bağlantı geri
+ * gelince (`online` event) `restoreOnlineStyle()` normal online stile döner.
+ * Basit/geri dönüşü kolay bir karar — karmaşık network-state yönetimi veya
+ * `@capacitor/network` plugin'i kasıtlı olarak eklenmedi (kapsam dışı, bkz.
+ * görev talimatı). Gerçek üretim PMTiles kaynağı/şeması netleşene kadar
+ * `buildOfflinePmtilesStyle()`'daki katmanlar Protomaps'in herkese açık demo
+ * dosyasının (`v4.pmtiles`) bilinen şemasına (earth/water/roads/buildings)
+ * göre yazıldı — DECISIONS.md'deki karar netleşince gözden geçirilecek.
  */
 import maplibregl from "maplibre-gl";
 import type { Map as MapLibreMap, Marker as MapLibreMarker, StyleSpecification } from "maplibre-gl";
 import { Capacitor } from "@capacitor/core";
 import { Geolocation } from "@capacitor/geolocation";
+import type { OfflineRegionBBox } from "@kampla/shared";
 
 /** 3 harita katmanı (PRD 5.B) — kimlikler sabit, gerçek stil URL'leri MapTiler key gelince değişir. */
 export const MAP_LAYERS = ["classic", "topo", "satellite"] as const;
@@ -82,6 +98,64 @@ export function getMapStyle(layer: MapLayerId, maptilerKey?: string | null): str
   return osmRasterStyle();
 }
 
+/** Bir noktanın (`lng`/`lat`) bir bbox `[west, south, east, north]` içinde olup olmadığı. */
+function regionContainsPoint(bbox: OfflineRegionBBox, lng: number, lat: number): boolean {
+  const [west, south, east, north] = bbox;
+  return lng >= west && lng <= east && lat >= south && lat <= north;
+}
+
+/**
+ * İndirilmiş bir bölgenin `pmtiles://` kaynağını (bkz. `useOfflineMap().getRegionSourceUrl`)
+ * kullanan, tamamen çevrimdışı çalışabilen minimal bir MapLibre stili üretir. Bilerek
+ * `glyphs`/sembol-etiket katmanı YOK — uzak font glyph fetch'i gerektirir ve bu offline
+ * fallback'in tüm amacını (bağlantısız çalışma) bozardı. Katman/`source-layer` adları
+ * (`earth`/`water`/`roads`/`buildings`) Protomaps'in herkese açık demo şemasına göre —
+ * placeholder kaynak değişirse (bkz. dosya başı not) bu liste de güncellenmeli; eksik bir
+ * `source-layer` MapLibre'de hata FIRLATMAZ, o katman sadece boş çizilir.
+ */
+function buildOfflinePmtilesStyle(sourceUrl: string): StyleSpecification {
+  return {
+    version: 8,
+    sources: {
+      "offline-pmtiles": {
+        type: "vector",
+        url: sourceUrl,
+      },
+    },
+    layers: [
+      { id: "offline-bg", type: "background", paint: { "background-color": "#f2ede4" } },
+      {
+        id: "offline-earth",
+        type: "fill",
+        source: "offline-pmtiles",
+        "source-layer": "earth",
+        paint: { "fill-color": "#f2ede4" },
+      },
+      {
+        id: "offline-water",
+        type: "fill",
+        source: "offline-pmtiles",
+        "source-layer": "water",
+        paint: { "fill-color": "#a8d4e6" },
+      },
+      {
+        id: "offline-buildings",
+        type: "fill",
+        source: "offline-pmtiles",
+        "source-layer": "buildings",
+        paint: { "fill-color": "#d9d2c5" },
+      },
+      {
+        id: "offline-roads",
+        type: "line",
+        source: "offline-pmtiles",
+        "source-layer": "roads",
+        paint: { "line-color": "#ffffff", "line-width": 1 },
+      },
+    ],
+  };
+}
+
 export interface UserLocation {
   lat: number;
   lng: number;
@@ -95,8 +169,47 @@ export function useMap() {
   const isReady = useState("kampla-map-ready", () => false);
   const currentLayer = useState<MapLayerId>("kampla-map-layer", () => "classic");
   const userLocation = useState<UserLocation | null>("kampla-map-user-location", () => null);
+  /** Harita şu an online tile yerine indirilmiş bir offline pmtiles bölgesi mi gösteriyor
+   * (bkz. dosya başı not — Faz 11 offline fallback). */
+  const isOfflineFallbackActive = useState("kampla-map-offline-fallback", () => false);
 
   let userMarker: MapLibreMarker | null = null;
+  let handleBrowserOffline: (() => void) | null = null;
+  let handleBrowserOnline: (() => void) | null = null;
+
+  /**
+   * Bağlantı kesildiğinde (`offline` event veya online tile fetch hatası) mevcut harita
+   * merkezini kapsayan indirilmiş bir bölge varsa onun `pmtiles://` kaynağını devreye
+   * sokar (bkz. dosya başı not). Kapsayan bölge yoksa en son indirilen bölgeye düşülür —
+   * basit/geri dönüşü kolay bir sezgisel; indirilmiş hiçbir bölge yoksa `false` döner ve
+   * mevcut (başarısız da olsa) online stil yerinde kalır.
+   */
+  async function tryActivateOfflineFallback(): Promise<boolean> {
+    if (!map.value || isOfflineFallbackActive.value) return isOfflineFallbackActive.value;
+
+    const offlineMap = useOfflineMap();
+    await offlineMap.hydrate();
+    const available = offlineMap.regions.value;
+    if (available.length === 0) return false;
+
+    const center = map.value.getCenter();
+    const containing = available.find((region) => regionContainsPoint(region.bbox, center.lng, center.lat));
+    const target = containing ?? available[available.length - 1];
+
+    const sourceUrl = await offlineMap.getRegionSourceUrl(target.id);
+    if (!sourceUrl || !map.value) return false;
+
+    map.value.setStyle(buildOfflinePmtilesStyle(sourceUrl));
+    isOfflineFallbackActive.value = true;
+    return true;
+  }
+
+  /** Bağlantı geri geldiğinde (`online` event) normal online stile döner. */
+  function restoreOnlineStyle() {
+    if (!isOfflineFallbackActive.value) return;
+    isOfflineFallbackActive.value = false;
+    map.value?.setStyle(getMapStyle(currentLayer.value, maptilerKey));
+  }
 
   /** Verilen DOM container'ında MapLibre map instance'ı kurar. */
   function initMap(container: string | HTMLElement): MapLibreMap {
@@ -117,15 +230,42 @@ export function useMap() {
       if (userLocation.value) {
         showUserMarker(userLocation.value, instance);
       }
+      // İlk yüklemede zaten bağlantı yoksa (ör. uçak modunda uygulama açıldıysa)
+      // doğrudan offline fallback'i dener.
+      if (import.meta.client && !navigator.onLine) {
+        void tryActivateOfflineFallback();
+      }
     });
+
+    // Online tile/stil fetch'i başarısız olursa (ör. bağlantı koptu ama henüz `offline`
+    // event'i gelmediyse) offline fallback'i dener — mevcut hata yakalama deseniyle
+    // tutarlı (bkz. dosyadaki diğer sessiz `catch` blokları).
+    instance.on("error", () => {
+      if (import.meta.client && !navigator.onLine) {
+        void tryActivateOfflineFallback();
+      }
+    });
+
+    if (import.meta.client) {
+      handleBrowserOffline = () => {
+        void tryActivateOfflineFallback();
+      };
+      handleBrowserOnline = () => {
+        restoreOnlineStyle();
+      };
+      window.addEventListener("offline", handleBrowserOffline);
+      window.addEventListener("online", handleBrowserOnline);
+    }
 
     map.value = instance;
     return instance;
   }
 
-  /** 3 katmandan birine geçer (Klasik/Topografik/Uydu) — PRD 5.B. */
+  /** 3 katmandan birine geçer (Klasik/Topografik/Uydu) — PRD 5.B. Kullanıcı elle katman
+   * değiştirirse offline fallback'ten çıkılır (online stile geçilir). */
   function setMapLayer(layer: MapLayerId) {
     currentLayer.value = layer;
+    isOfflineFallbackActive.value = false;
     if (!map.value) return;
     map.value.setStyle(getMapStyle(layer, maptilerKey));
   }
@@ -235,12 +375,19 @@ export function useMap() {
     map.value.flyTo({ center: [lng, lat], zoom, essential: true });
   }
 
-  /** Sayfa/bileşen unmount olurken map instance'ını temizler. */
+  /** Sayfa/bileşen unmount olurken map instance'ını ve `online`/`offline` listener'larını temizler. */
   function destroyMap() {
+    if (import.meta.client) {
+      if (handleBrowserOffline) window.removeEventListener("offline", handleBrowserOffline);
+      if (handleBrowserOnline) window.removeEventListener("online", handleBrowserOnline);
+    }
+    handleBrowserOffline = null;
+    handleBrowserOnline = null;
     userMarker = null;
     map.value?.remove();
     map.value = null;
     isReady.value = false;
+    isOfflineFallbackActive.value = false;
   }
 
   return {
@@ -248,11 +395,14 @@ export function useMap() {
     isReady,
     currentLayer,
     userLocation,
+    isOfflineFallbackActive,
     initMap,
     setMapLayer,
     requestUserLocation,
     flyToUserLocation,
     flyToCoordinates,
+    tryActivateOfflineFallback,
+    restoreOnlineStyle,
     destroyMap,
   };
 }

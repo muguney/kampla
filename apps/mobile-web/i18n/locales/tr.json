@@ -465,7 +465,8 @@
       "savedRegionsTitle": "İndirilen Bölgeler",
       "emptyRegions": "Henüz indirilmiş bir bölge yok.",
       "deleteAria": "Bölgeyi sil",
-      "deleteToast": "Bölge silindi."
+      "deleteToast": "Bölge silindi.",
+      "offlineActiveBadge": "Çevrimdışı harita kullanılıyor"
     }
   },
   "emptyState": {

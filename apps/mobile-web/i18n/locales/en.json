@@ -465,7 +465,8 @@
 			"savedRegionsTitle": "Downloaded Regions",
 			"emptyRegions": "No regions downloaded yet.",
 			"deleteAria": "Delete region",
-			"deleteToast": "Region deleted."
+			"deleteToast": "Region deleted.",
+			"offlineActiveBadge": "Using offline map"
 		}
 	},
 	"emptyState": {
