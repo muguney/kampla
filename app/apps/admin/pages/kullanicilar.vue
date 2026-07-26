@@ -1,3 +1,7 @@
+<script setup lang="ts">
+definePageMeta({ middleware: "admin" });
+</script>
+
 <template>
   <div>
     <h1 class="mb-4 text-xl font-bold">Kullanıcı Yönetimi</h1>

@@ -8,32 +8,11 @@
  */
 import { AMENITIES, AMENITY_LABELS_EN, AMENITY_LABELS_TR, type Amenity } from "@kampla/shared";
 import { useLocationWizardStore } from "~/stores/locationWizard";
+import { useAmenityIcon } from "~/composables/useAmenityIcon";
 
 const { t, locale } = useI18n();
 const wizard = useLocationWizardStore();
-
-/** Sunum amaçlı emoji ikon eşlemesi — şema/i18n'e bağlı değildir (bkz. PoiDetailsTab.vue). */
-const AMENITY_ICONS: Record<Amenity, string> = {
-  shower: "🚿",
-  electricity: "⚡",
-  fridge: "🧊",
-  "vehicle-entry": "🚐",
-  "hot-shower": "♨️",
-  "near-sea": "🌊",
-  "campfire-grill": "🔥",
-  "pet-friendly": "🐾",
-  "washing-machine": "🧺",
-  "paid-general": "💰",
-  "gsm-signal": "📶",
-  "toilet-drain": "🚽",
-  "water-fill": "🚰",
-  "caravan-waste-drain": "♻️",
-  "free-wifi": "📡",
-  toilet: "🚻",
-  "market-nearby": "🛒",
-  playground: "🧸",
-  dryer: "🌀",
-};
+const { amenityIconSrc } = useAmenityIcon();
 
 function amenityLabel(amenity: Amenity): string {
   return locale.value === "en" ? AMENITY_LABELS_EN[amenity] : AMENITY_LABELS_TR[amenity];
@@ -73,7 +52,7 @@ function toggleAmenity(amenity: Amenity) {
         :aria-pressed="isSelected(amenity)"
         @click="toggleAmenity(amenity)"
       >
-        <span class="text-xl">{{ AMENITY_ICONS[amenity] }}</span>
+        <img :src="amenityIconSrc(amenity)" :alt="amenityLabel(amenity)" class="h-9 w-9" width="36" height="36" />
         <span class="text-[11px] font-semibold leading-tight text-brand-charcoal dark:text-neutral-100">
           {{ amenityLabel(amenity) }}
         </span>

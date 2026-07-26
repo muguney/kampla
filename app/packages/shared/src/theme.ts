@@ -61,6 +61,18 @@ export const referenceColors = {
 /** Puanlama yıldızı rengi — Figma node 64:4384 ("Warning: #FFCA41") */
 export const ratingColor = "#FFCA41";
 
+/**
+ * Amenity (hizmet/imkan) ikon rozetlerinin ortak arkaplan rengi — 19 ikonun
+ * TAMAMINDA (design/icons-export/Group 171-189.svg + Frame.svg) sabit
+ * `fill="#69C053"` olarak bulundu (design/20-Konum Ekle - Hizmetler.png ile
+ * görsel doğrulandı). Önceden bu amaçla kullanılan `bg-emerald-500/90`
+ * marka paletinde olmayan bir yeşildi (bkz. STATUS.md 2026-07-26 notu) —
+ * gerçek SVG'ler artık kendi arkaplanını taşıdığı için bu token çoğunlukla
+ * referans/dokümantasyon amaçlıdır, ama aynı yeşile ihtiyaç duyan başka bir
+ * yerde (ör. seçili durum vurgusu) kullanılabilir.
+ */
+export const amenityIconBg = "#69C053";
+
 export const fontFamily = {
   sans: [
     "Saira",

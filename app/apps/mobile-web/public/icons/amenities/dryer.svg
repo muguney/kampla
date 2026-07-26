@@ -1,0 +1,23 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!--
+  Kaynak: design/icons-export/Frame.svg (Mustafa'nın Figma export'u, "Kurutma
+  makinesi var" satırı — design/20-Konum Ekle - Hizmetler.png son satır ile
+  görsel olarak doğrulandı). Orijinal dosyada diğer Group 17x/18x.svg
+  dosyalarındaki yeşil (#69C053) rounded-square arkaplan yoktu (yalnızca
+  23x23 glif) — burada diğer 18 amenity ikonuyla görsel tutarlılık için aynı
+  arkaplan elle eklendi, glif verisi değiştirilmedi.
+-->
+<rect width="36" height="36" rx="10" fill="#69C053"/>
+<g transform="translate(6.5 6.5)">
+<g clip-path="url(#clip0_dryer)">
+<path d="M20.5358 0.821533H2.46439C1.55707 0.821533 0.821533 1.55707 0.821533 2.46439V20.5358C0.821533 21.4431 1.55707 22.1787 2.46439 22.1787H20.5358C21.4431 22.1787 22.1787 21.4431 22.1787 20.5358V2.46439C22.1787 1.55707 21.4431 0.821533 20.5358 0.821533Z" stroke="white" stroke-width="2.28571" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.5 18.8931C14.6756 18.8931 17.25 16.3187 17.25 13.1431C17.25 9.96743 14.6756 7.39307 11.5 7.39307C8.32436 7.39307 5.75 9.96743 5.75 13.1431C5.75 16.3187 8.32436 18.8931 11.5 18.8931Z" stroke="white" stroke-width="2.28571" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M0.821533 5.75H5.7501M17.2501 5.75H22.1787M11.5001 13.0936V18.8436M11.5001 13.0936L6.57153 10.1857M11.5001 13.0936L16.4287 10.1857" stroke="white" stroke-width="2.28571" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_dryer">
+<rect width="23" height="23" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -24,34 +24,13 @@ import {
   type MockLocationCard,
 } from "@kampla/shared";
 import { getMapStyle } from "~/composables/useMap";
+import { useAmenityIcon } from "~/composables/useAmenityIcon";
 
 const props = defineProps<{ location: MockLocationCard }>();
 
 const { t, locale } = useI18n();
 const authStore = useAuthStore();
-
-/** Sunum amaçlı emoji ikon eşlemesi — şema/i18n'e bağlı değildir, yalnızca bu bileşende yaşar. */
-const AMENITY_ICONS: Record<Amenity, string> = {
-  shower: "🚿",
-  electricity: "⚡",
-  fridge: "🧊",
-  "vehicle-entry": "🚐",
-  "hot-shower": "♨️",
-  "near-sea": "🌊",
-  "campfire-grill": "🔥",
-  "pet-friendly": "🐾",
-  "washing-machine": "🧺",
-  "paid-general": "💰",
-  "gsm-signal": "📶",
-  "toilet-drain": "🚽",
-  "water-fill": "🚰",
-  "caravan-waste-drain": "♻️",
-  "free-wifi": "📡",
-  toilet: "🚻",
-  "market-nearby": "🛒",
-  playground: "🧸",
-  dryer: "🌀",
-};
+const { amenityIconSrc } = useAmenityIcon();
 
 const ACCOMMODATION_ICONS: Record<AccommodationType, string> = {
   caravan: "🚐",
@@ -178,11 +157,11 @@ onBeforeUnmount(() => {
         <div v-for="amenity in location.amenities" :key="amenity" class="relative flex justify-center">
           <button
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-control bg-emerald-500/90 text-xl text-white shadow-sm transition-transform hover:scale-105"
+            class="flex h-12 w-12 items-center justify-center rounded-control shadow-sm transition-transform hover:scale-105"
             :aria-label="amenityLabel(amenity)"
             @click="toggleTooltip(amenity)"
           >
-            {{ AMENITY_ICONS[amenity] }}
+            <img :src="amenityIconSrc(amenity)" :alt="amenityLabel(amenity)" class="h-12 w-12" width="48" height="48" />
           </button>
           <Transition name="kampla-fade">
             <span
