@@ -26,6 +26,8 @@ Mustafa'dan aksiyon bekleyen maddeler. Kaynak: `Kurulum-Gereksinimleri.md`
 
 | 15 | Faz 8 admin girişi test edebilmek için: Supabase dashboard'dan (Table Editor → `profiles`) kendi hesabının (veya test amaçlı bir hesabın) `role` kolonunu `'admin'` yap, sonra `apps/admin`'de `pnpm dev`/`npm run dev` ile `/giris`'ten giriş yapıp Konum Moderasyon Kuyruğu'nu (`/`) dene: en az bir `pending` konum varsa (Faz 4 sihirbazından kendi eklediğin bir test konumu kullanabilirsin) "İncele" → Onayla/Reddet akışını uçtan uca test et | Admin panelinin gerçek Supabase runtime testi (giriş, RLS, moderasyon update'i, tetiklenen bildirim) bu ortamda `.env` gerçek key olsa da CEO ajanının kendi admin rolüne sahip bir hesabı olmadığından yapılamadı | Bekliyor | Varsayılan `profiles.role` `'user'`, hiçbir kullanıcı otomatik admin olmuyor (bilinçli güvenlik kararı) — en az bir admin hesabı elle atanmalı, bu adım her yeni ortamda bir kereliğine gerekli |
 
+| 16 | Faz 8 (kalan) DoD manuel testi: yeni migration'ları (`0012_profiles_suspended.sql`, `0013_site_content.sql`) kendi Supabase projene uygula, admin panelde `/kullanicilar` (arama, tier değiştirme, askıya alma), `/yorumlar` (puan filtresi, silme), `/icerik` (3 statik metni düzenleyip kaydetme) sayfalarını dene | Sandbox'ta typecheck + `nuxt dev`/`nuxt build` doğrulandı ama gerçek Supabase bağlantısıyla hiç runtime test edilmedi | Bekliyor | Aynı admin hesabı BLOCKERS #15'teki gibi `profiles.role='admin'` olmalı; `0013_site_content.sql` migration'ı uygulanmadan `/icerik` boş/hata verir |
+
 **Not:** Faz 0'da hesap eksikliği kodu bloklamıyor — Supabase zaten hazır
 olduğu için gerçek migration'lar uygulanabilir; MapTiler/R2/OAuth
 gerektiren kısımlar placeholder/mock ile ilerler, gerçek anahtar

@@ -55,6 +55,13 @@ async function handleSignOut() {
           Raporlar
         </NuxtLink>
         <NuxtLink
+          to="/yorumlar"
+          class="rounded-control px-3 py-2 hover:bg-neutral-100"
+          active-class="bg-neutral-100 font-semibold text-brand-orange"
+        >
+          Yorumlar
+        </NuxtLink>
+        <NuxtLink
           to="/icerik"
           class="rounded-control px-3 py-2 hover:bg-neutral-100"
           active-class="bg-neutral-100 font-semibold text-brand-orange"

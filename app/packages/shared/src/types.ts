@@ -43,6 +43,10 @@ export type Profile = {
   show_visited_places: boolean;
   tier: UserTier;
   role: "user" | "admin";
+  /** PRD 5.R "Kullanıcı Yönetimi" — admin panelinden askıya alma (0012_profiles_suspended.sql).
+   * Optional tutuldu: bu tip `supabase gen types` ile senkronize edilene kadar,
+   * kolonu henüz seçmeyen eski `select("id, username")` gibi kısmi sorgular bozulmasın diye. */
+  suspended?: boolean;
   created_at: string;
   updated_at: string;
 };
@@ -113,6 +117,17 @@ export type Review = {
   rating: number; // 1-5
   comment: string | null;
   created_at: string;
+  updated_at: string;
+};
+
+/** PRD 5.R "İçerik Yönetimi" — admin panelden düzenlenebilir statik sayfa içerikleri
+ * (Kamp.la Hakkında, Kullanım Koşulları, Gizlilik Sözleşmesi). `key` sabit slug'lardan
+ * biridir (`hakkinda`, `kullanim-kosullari`, `gizlilik`). */
+export type SiteContent = {
+  key: string;
+  lang: string;
+  title: string | null;
+  body: string;
   updated_at: string;
 };
 
@@ -192,6 +207,12 @@ export interface Database {
         Row: Subscription;
         Insert: Partial<Subscription>;
         Update: Partial<Subscription>;
+        Relationships: [];
+      };
+      site_content: {
+        Row: SiteContent;
+        Insert: Partial<SiteContent>;
+        Update: Partial<SiteContent>;
         Relationships: [];
       };
     };
