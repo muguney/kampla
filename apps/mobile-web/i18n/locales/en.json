@@ -99,8 +99,23 @@
 			"directionsModal": {
 				"title": "Directions",
 				"inApp": "Google Maps (in-app)",
-				"external": "Google Maps (external)"
+				"external": "Google Maps (external)",
+				"inAppRoute": "In-app route",
+				"betaBadge": "BETA"
 			},
+			"notFound": {
+				"title": "Location not found",
+				"cta": "Back to Map"
+			}
+		},
+		"route": {
+			"title": "Route",
+			"mockNotice": "This is a sample route preview. Real caravan-safe routing engine integration is not finished yet.",
+			"distanceLabel": "Estimated Distance",
+			"durationLabel": "Estimated Duration",
+			"startLabel": "Start",
+			"endLabel": "Destination",
+			"back": "Back",
 			"notFound": {
 				"title": "Location not found",
 				"cta": "Back to Map"

@@ -99,8 +99,23 @@
       "directionsModal": {
         "title": "Yol Tarifi",
         "inApp": "Google Maps (uygulama içi)",
-        "external": "Google Maps (harici)"
+        "external": "Google Maps (harici)",
+        "inAppRoute": "Uygulama içi rota",
+        "betaBadge": "BETA"
       },
+      "notFound": {
+        "title": "Konum bulunamadı",
+        "cta": "Haritaya Dön"
+      }
+    },
+    "route": {
+      "title": "Rota",
+      "mockNotice": "Bu örnek bir rota gösterimidir. Gerçek karavan-güvenli rota motoru entegrasyonu henüz tamamlanmadı.",
+      "distanceLabel": "Tahmini Mesafe",
+      "durationLabel": "Tahmini Süre",
+      "startLabel": "Başlangıç",
+      "endLabel": "Varış",
+      "back": "Geri",
       "notFound": {
         "title": "Konum bulunamadı",
         "cta": "Haritaya Dön"

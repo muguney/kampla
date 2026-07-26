@@ -340,6 +340,7 @@ async function handleShare() {
       :lat="location.lat"
       :lng="location.lng"
       :name="location.name"
+      :poi-id="location.id"
     />
   </div>
 
