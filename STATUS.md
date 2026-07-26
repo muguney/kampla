@@ -3,14 +3,41 @@
 **Güncel Faz:** Faz 12 — Rota Motoru: UI iskeletinin 3 görevi (servis araştırması, modal 3. seçenek, mock rota ekranı) TAMAM (kod önceki bir otonom oturumda yazılmış ama bookkeeping/TASKS.md güncellenmemiş kalmıştı, bu oturumda fark edilip doğrulandı ve işaretlendi); kalan tek görev Faz 12 DoD (gerçek routing servisi entegrasyonu, Mustafa'nın Valhalla/ORS/OSRM kararına bağlı, DECISIONS.md). Faz 11'in kalan 2 görevi de tamamen Mustafa'yı bekliyor.
 **Genel Durum:** 🟢 Faz 12'nin kod tarafı 3/4 (yalnızca DoD kaldı, servis seçimi kararına bağlı); Faz 11'de 4/6 görev bitti, kalan veri kaynağı kararı + DoD Mustafa'yı bekliyor; Faz 8 kod tarafı tamam (8/8) + Faz 10 kod tarafı tamam (4/5), ikisinin de DoD'u Mustafa'yı bekliyor; Faz 9 (Premium/RevenueCat) tamamen hesap/ödemeye bağlı, hiç başlanamadı (BLOCKERS #18); Faz 6 (7/8) + Faz 7 (4/5) kod tarafı tamam, DoD'ları bekliyor; Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); BLOCKERS #13 (ikon/logo gerçek Figma export'u) 2026-07-26 (interaktif) oturumunda tamamlandı — `design/icons-export/` klasöründeki gerçek export'lar `AppIcon.vue`/`Logo.vue`/vb.'ye entegre edildi, tek eksik `search` ikonu için Mustafa'nın ayrıca export vermesi; Faz 3 POI Detay layout/spacing karşılaştırması ise hâlâ Figma MCP erişimine bağlı, ayrı kaldı. **Şu an TASKS.md'de hiçbir fazda bloklu olmayan/bekleyen kod görevi kalmadı** — tüm açık maddeler ya Mustafa'nın manuel DoD testine, ya bir mimari/servis kararına, ya da hesap/ödemeye bağlı.
 
-## Son Güncelleme: 2026-07-27 00:33 — Otonom oturum: atlandı (görev yok, ~20.)
+## Son Güncelleme: 2026-07-27 01:03 — Otonom oturum: atlandı (görev yok, ~21.)
+00:33'teki taramadan beri hiçbir kod/görev dosyası değişmedi (`find
+-newermt` — yalnızca bir önceki oturumun kendi STATUS.md/_index.md
+bookkeeping yazısı fark ediliyor). TASKS.md/BLOCKERS.md/DECISIONS.md
+birebir aynı: bloklu olmayan kod görevi yok, 3 karar hâlâ Mustafa'yı
+bekliyor, Figma kotası (#13) bu oturumda tekrar denenmedi (art arda ~10+
+oturumdur "Starter plan" limitine takılıyordu, sinyal/gürültü oranı
+düşük). Dosya değişikliği yalnızca bu STATUS.md/_index.md notu, git
+push yapıldı (yalnız bu iki dosya). Yeni blocker yok, yeni Gmail taslağı
+gerekmedi.
+
+## Son Güncelleme (önceki): 2026-07-27 00:33 — Otonom oturum: atlandı (görev yok, ~20.) + geciken git push
 00:02'deki taramadan beri hiçbir dosya değişmedi (`find -newermt`), tek
 istisna STATUS.md'nin kendisi. Durum birebir aynı — bloklu olmayan kod
-görevi yok, dosya değişikliği/git push yok, yeni blocker yok. Bu ~20.
-ardışık "görev yok" oturumu; tekrar bilgi üretmemek için ayrıntı bir
-önceki kayıtla aynı, bkz. aşağı. Öneri (DAILY_LOG'a da düşüldü): Mustafa
-bir sonraki interaktif oturumda en az bir DoD/karar netleştirene kadar
-30 dk'lık tetiklemenin bilgi üretmediği not edilmeli.
+görevi yok, yeni blocker yok. Bu ~20. ardışık "görev yok" oturumu; tekrar
+bilgi üretmemek için ayrıntı bir önceki kayıtla aynı, bkz. aşağı. Öneri
+(DAILY_LOG'a da düşüldü): Mustafa bir sonraki interaktif oturumda en az
+bir DoD/karar netleştirene kadar 30 dk'lık tetiklemenin bilgi üretmediği
+not edilmeli.
+
+**Ek bulgu — geciken git push:** Bu oturumda `git-remote-credentials`
+talimatına göre commit/push adımı çalıştırılırken, GitHub'daki son commit'in
+(`14eeb51`, 2026-07-26 16:52 — Figma ikon export) o tarihten beri hiç
+güncellenmediği görüldü. `app/` altında Faz 8-12 kod değişikliği yoktu
+(hepsi zaten `14eeb51`'e kadar pushlanmış), ama `package-lock.json`
+(Capacitor/pmtiles bağımlılıkları — Faz 10/11'den kalma) ve STATUS.md'nin
+~343 satırlık birikmiş güncellemesi hiç pushlanmamıştı — önceki "görev yok,
+dosya değişikliği yok, push gerekmedi" tespitleri STATUS.md'nin kendi
+değişikliğini ve zaten lokalde duran package-lock.json farkını atlamıştı.
+Bu oturumda `604f482` commit'iyle (`main` branch, `muguney/kampla`) düzeltilip
+pushlandı. **Not:** Bundan sonraki "görev yok" oturumlarında da STATUS.md'nin
+kendisi değiştiği için teknik olarak her seferinde küçük bir commit/push
+gerekecek — bu normal ve sorun değil, ama gereksiz commit gürültüsünü
+azaltmak için ileride STATUS.md'nin "görev yok" kayıtlarının push'a değer
+olup olmadığı (ör. yalnızca N oturumda bir push) Mustafa'ya sorulabilir.
 
 ## Son Güncelleme (önceki): 2026-07-27 00:02 — Otonom oturum: atlandı (görev yok)
 **Yapılanlar:**
