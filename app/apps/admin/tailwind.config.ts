@@ -12,5 +12,12 @@ export default <Partial<Config>>{
   theme: {
     extend: tailwindThemeExtend,
   },
+  safelist: [
+    // `pages/konumlar/index.vue` konum türü seçici, POI kategori rengini
+    // dinamik olarak (`bg-poi-${type}`) oluşturuyor — JIT tarayıcısı bunu
+    // statik metinde bulamadığı için safelist gerekiyor (bkz. aynı desen
+    // `apps/mobile-web/tailwind.config.ts`).
+    ...Object.keys(tailwindThemeExtend.colors.poi).flatMap((key) => [`bg-poi-${key}`]),
+  ],
   plugins: [],
 };

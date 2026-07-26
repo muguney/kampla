@@ -173,6 +173,12 @@ export type LocationStatus = (typeof LOCATION_STATUSES)[number];
 export const REPORT_STATUSES = ["open", "reviewing", "resolved"] as const;
 export type ReportStatus = (typeof REPORT_STATUSES)[number];
 
+export const REPORT_STATUS_LABELS_TR: Record<ReportStatus, string> = {
+  open: "Açık",
+  reviewing: "İnceleniyor",
+  resolved: "Çözüldü",
+};
+
 /** PRD 5.P / 6.6 — kullanıcı tipi */
 export const USER_TIERS = ["free", "premium"] as const;
 export type UserTier = (typeof USER_TIERS)[number];
