@@ -10,8 +10,13 @@ bookkeeping yazısı fark ediliyor). TASKS.md/BLOCKERS.md/DECISIONS.md
 birebir aynı: bloklu olmayan kod görevi yok, 3 karar hâlâ Mustafa'yı
 bekliyor, Figma kotası (#13) bu oturumda tekrar denenmedi (art arda ~10+
 oturumdur "Starter plan" limitine takılıyordu, sinyal/gürültü oranı
-düşük). Dosya değişikliği yalnızca bu STATUS.md/_index.md notu, git
-push yapıldı (yalnız bu iki dosya). Yeni blocker yok, yeni Gmail taslağı
+düşük). Dosya değişikliği yalnızca bu STATUS.md notu (+ üst seviye
+_index.md, repo dışı) — STATUS.md commit+push edildi (`771e3a2`, `main`).
+**Yan not:** push adımında yerel `git init`'in branch adını `master`
+yaptığı fark edildi, `git push origin main` bu yüzden sessizce
+başarısız oluyordu ("src refspec main does not match any") — bu oturumda
+`git push origin master:main` ile düzeltildi, CEO_AGENT.md'ye not
+düşüldü (gelecek oturumlar için). Yeni blocker yok, yeni Gmail taslağı
 gerekmedi.
 
 ## Son Güncelleme (önceki): 2026-07-27 00:33 — Otonom oturum: atlandı (görev yok, ~20.) + geciken git push
