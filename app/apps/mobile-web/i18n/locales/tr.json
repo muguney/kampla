@@ -166,7 +166,16 @@
         "cancel": "Vazgeç"
       }
     },
-    "notifications": { "title": "Bildirimler" },
+    "notifications": {
+      "title": "Bildirimler",
+      "markAllAsRead": "Tümünü okundu işaretle",
+      "relativeTime": {
+        "justNow": "Az önce",
+        "minutesAgo": "{count} dakika önce",
+        "hoursAgo": "{count} saat önce",
+        "daysAgo": "{count} gün önce"
+      }
+    },
     "premium": { "title": "Kamp.la Plus" },
     "account": {
       "title": "Hesabım",
@@ -355,6 +364,7 @@
   },
   "menu": {
     "addLocation": "Konum Ekle",
+    "notifications": "Bildirimler",
     "login": "Giriş Yap",
     "account": "Hesabım",
     "settings": "Uygulama Ayarları",

@@ -166,7 +166,16 @@
 				"cancel": "Cancel"
 			}
 		},
-		"notifications": { "title": "Notifications" },
+		"notifications": {
+			"title": "Notifications",
+			"markAllAsRead": "Mark all as read",
+			"relativeTime": {
+				"justNow": "Just now",
+				"minutesAgo": "{count} minutes ago",
+				"hoursAgo": "{count} hours ago",
+				"daysAgo": "{count} days ago"
+			}
+		},
 		"premium": { "title": "Kamp.la Plus" },
 		"account": {
 			"title": "My Account",
@@ -355,6 +364,7 @@
 	},
 	"menu": {
 		"addLocation": "Add Location",
+		"notifications": "Notifications",
 		"login": "Sign In",
 		"account": "My Account",
 		"settings": "App Settings",

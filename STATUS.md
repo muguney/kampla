@@ -1,9 +1,26 @@
 # Durum — Kamp.la
 
-**Güncel Faz:** Faz 6 / 12 — Hesap & Ayarlar (PRD 5.A/5.J/5.L) kod tarafı tamamen bitti; Faz 5'in kalan görevleri hâlâ mimari karara bağlı (BLOCKERS #11), Faz 2/3/4/6 DoD'ları Mustafa'dan bekleniyor
-**Genel Durum:** 🟡 Faz 6'nın 7/8 görevi tamamlandı (yalnızca DoD kaldı); Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); Faz 0-6 kod tabanı GitHub'da; Figma kotası tükendiği için (BLOCKERS #13) tasarım uyum çalışması şimdilik duraklatıldı
+**Güncel Faz:** Faz 7 / 12 — Bildirimler (PRD 5.Q/5.M) kod tarafı tamamen bitti, sadece DoD kaldı; Faz 5'in kalan görevleri hâlâ mimari karara bağlı (BLOCKERS #11), Faz 2/3/4/6 DoD'ları Mustafa'dan bekleniyor
+**Genel Durum:** 🟡 Faz 6 (7/8 görev, DoD kaldı) + Faz 7 (4/5 görev, DoD kaldı) kod tarafı tamam; Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); Figma kotası tükendiği için (BLOCKERS #13) tasarım uyum çalışması duraklıyor — Faz 7'de Figma node'u olmadığından bu faz Figma kısıtından etkilenmedi
 
-## Son Güncelleme: 2026-07-26 — Otonom oturum: Faz 3 Figma uyum denemesi (kota tükendi) + POI puan/yıldız tutarlılığı düzeltmesi
+## Son Güncelleme: 2026-07-26 — Otonom oturum: Faz 7 (Bildirimler) kod tarafı tamamlandı
+**Yapılanlar:**
+- Faz 5 (mimari karar bekliyor), Faz 2/3/4/6 (Mustafa'nın manuel testini bekliyor) ve Figma uyumu (kota tükendi) hepsi bloklu olduğundan, PHASES.md'deki bir sonraki bağımsız faz olan Faz 7 (Bildirimler) TASKS.md'ye kırılıp general-purpose subagent'a delege edildi.
+- `supabase/migrations/0011_notification_triggers.sql` (yeni): `notify_on_location_status_change()` (locations.status pending→published/rejected'da created_by'a bildirim, rejection_reason varsa içeriğe eklenir) ve `notify_on_report_status_change()` (reports.status değişince reporter_id'ye bildirim, konum adı ayrıca sorgulanıyor çünkü reports'ta tutulmuyor) — ikisi de security definer + set search_path=public, mevcut `is_admin()`/`set_updated_at()` deseniyle tutarlı. Admin paneli (Faz 8) henüz yok, bu yüzden bildirim oluşturma admin aksiyonu yerine DB trigger ile otomatik yapılıyor.
+- `apps/mobile-web/stores/notifications.ts` (yeni): `fetchNotifications`/`markAsRead`/`markAllAsRead`, `stores/lists.ts` deseniyle.
+- `pages/bildirimler.vue`: EmptyState placeholder'dan gerçek listeye geçti — `middleware:['auth']`, göreli zaman formatlama, okunmamışlarda turuncu şerit, tıklayınca `/konum/{id}`'ye yönlendirme + okundu işaretleme, "Tümünü okundu işaretle".
+- `pages/menu.vue`: BottomNav'da bildirim ikonu için yer olmadığından (5 sabit sekme) menüye "Bildirimler" satırı + turuncu rozet (9+ sınırlı) eklendi.
+- i18n (`tr.json`/`en.json`) `pages.notifications.*` + `menu.notifications` genişletildi.
+- Doğrulama (`~/kampla-verify`, sandbox-local): `npm install --legacy-peer-deps`; `vue-tsc --noEmit` 6 hata, hepsi baseline (nuxt.config/tailwind.config, ilgisiz) — yeni dosyalardan sıfır hata; `nuxt dev` ile `/`, `/bildirimler`, `/menu` HTTP 200; `nuxt build` (production) hatasız.
+- CEO ajanı yeni dosyaların (`0011_notification_triggers.sql`, `stores/notifications.ts`) gerçekten proje klasöründe var olduğunu bizzat doğruladı.
+- Gerçek Supabase runtime testi (trigger'ların canlı çalışması, RLS) bu ortamda yapılamadı (`.env` gerçek key yok) — BLOCKERS #14'e eklendi.
+
+**Sırada:**
+- Mustafa'nın Faz 7 DoD'unu (BLOCKERS #14) doğrulaması: migration'ı Supabase'e push et, bir konumun `status`'unu `pending`→`published`/`rejected` yapıp bildirim düştüğünü, `/bildirimler`'de göründüğünü ve rozetin güncellendiğini kontrol et.
+- Hâlâ açık: Faz 2 DoD (#8), Faz 3 DoD (#9), Faz 4 DoD (#10), Faz 5 mimari karar (#11), Faz 6 DoD (#12), Figma export/kota (#13), Faz 7 DoD (#14).
+- Bunların hepsi Mustafa'dan aksiyon beklediğinden, bir sonraki otonom oturumda (bloklu olmayan bir görev bulunursa) Faz 8 (Admin Paneli) planlamasına bakılabilir — ama Faz 8 kapsamlı olduğundan önce Mustafa ile kısa bir yön onayı faydalı olur.
+
+## Son Güncelleme (önceki): 2026-07-26 — Otonom oturum: Faz 3 Figma uyum denemesi (kota tükendi) + POI puan/yıldız tutarlılığı düzeltmesi
 **Yapılanlar:**
 - Faz 2'de yapılan Figma uyum çalışmasının devamı olarak Faz 3 (POI Detay) ekranlarını gerçek Figma node'larıyla (190:1288, 237:1279, 237:1870, 237:2069, 237:2292) karşılaştırmak üzere general-purpose subagent'a delege edildi.
 - **Sonuç — Figma kotası tamamen tükenmiş:** Sadece `download_assets` değil, `get_design_context`/`get_metadata`/`get_screenshot` (okuma amaçlı araçlar) da 3 farklı denemede "Starter plan tool call limit" hatası verdi. Subagent, Mustafa'nın "Figma'daki gibi olacak, kafana göre değişiklik yapma" kuralına uyarak Figma doğrulaması olmadan spekülatif layout/spacing değişikliği YAPMADI — bu doğru bir karardı. BLOCKERS #13'e bu genişletilmiş kota bilgisi eklendi.

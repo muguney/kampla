@@ -83,3 +83,21 @@ Durum kodları: `[ ]` bekliyor · `[~]` devam ediyor · `[x]` bitti · `[!]` blo
 - [x] Hesabı kalıcı olarak sil: onay modalı + Nuxt server route (`server/api/hesap-sil.post.ts`, `SUPABASE_SERVICE_ROLE_KEY` ile server-side `auth.admin.deleteUser()`), client JWT doğrulaması, başarıda signOut + `/`'a yönlendirme — general-purpose (service_role key sandbox'ta yok, kod typecheck ile doğrulandı, gerçek silme testi Mustafa'nın kendi ortamında — BLOCKERS #12)
 - [x] Ayarlar statik sayfalar: `ayarlar/hakkinda.vue` (Kamp.la Hakkında marka metni), `kullanim-kosullari.vue`, `gizlilik.vue` — düz metin taslak içerik (PRD 5.L deseniyle), açıkça "taslak, hukuki inceleme bekliyor" notu ile — general-purpose (2026-07-26 otonom oturumda doğrulandı, üçü de mevcut ve dolu; kullanim-kosullari/gizlilik'te taslak uyarı kutusu var)
 - [ ] Faz 6 DoD doğrulaması: Hesabım'daki tüm alt sayfalar gerçek veriyle çalışıyor, statik sayfalar görüntüleniyor — CEO/Mustafa (kod tarafı + typecheck/`nuxt build` sandbox'ta doğrulandı; gerçek Supabase runtime testi Mustafa'dan bekleniyor — BLOCKERS #12)
+
+## Faz 7 — Bildirimler (PRD 5.Q, 5.M)
+> **Not (2026-07-26 otonom oturum):** Faz 5'in kalan görevleri BLOCKERS #11'deki
+> mimari karara bağlı, Faz 2/3/4/6 DoD'ları Mustafa'nın manuel testine bağlı,
+> Figma kotası hâlâ tükenmiş (BLOCKERS #13) — bu yüzden sıra, hiçbirine bağlı
+> olmayan Faz 7'ye alındı. `notifications` tablosu zaten Faz 0'da migration
+> olarak var (`0008_notifications.sql`), `pages/bildirimler.vue` şu an
+> EmptyState placeholder. Admin paneli (Faz 8) henüz yok, bu yüzden "konum
+> onay/red" ve "hata bildirimi durum değişikliği" bildirimleri normal admin
+> panel aksiyonu yerine DB trigger ile (locations.status / reports.status
+> UPDATE'inde) otomatik oluşturulacak — bu, `notifications_insert_admin` RLS
+> politikasını bypass eder çünkü trigger fonksiyonu `security definer` ile
+> çalışır, kullanıcı adına insert yapmaz.
+- [x] DB trigger'lar: `locations.status` `pending`→`published`/`rejected` olduğunda `created_by`'a bildirim; `reports.status` değiştiğinde raporu açan kullanıcıya bildirim (yeni migration, `security definer` fonksiyon + trigger, mevcut `is_admin()`/`set_updated_at()` desenleriyle tutarlı) — general-purpose (2026-07-26 otonom oturumda tamamlandı: `supabase/migrations/0011_notification_triggers.sql`, `notify_on_location_status_change()` + `notify_on_report_status_change()`, `reports` için konum adı ayrıca sorgulanıyor çünkü `reports` tablosunda tutulmuyor; henüz gerçek Supabase'e push edilip canlı test edilmedi)
+- [x] `useNotificationsStore` (veya composable): `notifications` tablosundan `recipient_id = auth.uid()` filtresiyle gerçek veri çekme, `is_read` update (tek/hepsini okundu işaretle), `related_location_id` varsa ilgili POI'ye yönlendirme — general-purpose (2026-07-26: `stores/notifications.ts`, `fetchNotifications`/`markAsRead`/`markAllAsRead`, `Notification` tipi zaten `packages/shared/src/types.ts`'te mevcuttu)
+- [x] `pages/bildirimler.vue`: EmptyState yerine gerçek liste (tarih + içerik + okunmamış vurgusu + tıklayınca ilgili sayfaya git + okundu işaretle), boşsa mevcut EmptyState korunur — general-purpose (2026-07-26: `middleware:['auth']` eklendi, göreli zaman formatlama, sol turuncu şerit vurgusu, `/konum/{id}` yönlendirmesi, "Tümünü okundu işaretle")
+- [x] Okunmamış sayısı rozeti: menü/nav'daki "Bildirimler" simgesine (PRD: çan ikonu) `unreadCount` rozeti — general-purpose (2026-07-26: BottomNav'da yer olmadığından `pages/menu.vue`'ya "Bildirimler" satırı + turuncu rozet (9+ sınırlı) eklendi, mount'ta bir kez `fetchNotifications()`, polling/Realtime yok — kapsam dışı bırakıldı)
+- [ ] Faz 7 DoD doğrulaması: konum onaylanınca/reddedilince ilgili kullanıcıya bildirim düşüyor, rozet güncelleniyor, listeye tıklayınca ilgili ekrana gidiliyor — CEO/Mustafa (kod tarafı + typecheck/`nuxt dev`/`nuxt build` sandbox'ta doğrulandı — 6 baseline hata dışında yeni hata yok, `/bildirimler`+`/menu` HTTP 200; gerçek Supabase runtime testi — migration push + trigger'ın canlı çalışması — Mustafa'dan bekleniyor, BLOCKERS #14)

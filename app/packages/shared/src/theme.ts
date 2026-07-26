@@ -9,9 +9,12 @@
  * tonları Figma'da ayrı token olarak yok — eski oran korunarak yeniden
  * hesaplandı (hover/active state'leri için).
  *
- * NOT: `poiColors`/`referenceColors` HÂLÂ görsel tahmindir (bu 3 ekranın
- * Figma verisinde 9 kategori rengi teyit edilmedi) — Liste/Filtre/POI Detay
- * ekranları Figma ile karşılaştırılırken ayrıca doğrulanmalı.
+ * GÜNCELLEME (2026-07-26, ikinci tur): Mustafa Figma'dan TÜM ikonları
+ * (design/icons-export/*.svg) gerçek export olarak indirdi. `poiColors`
+ * artık bu SVG'lerin `fill` değerlerinden birebir okunan gerçek hex
+ * kodları (paid-parking hariç — bkz. aşağıdaki not, görsel doğrulama
+ * bekliyor). `referenceColors` hâlâ görsel tahmin (ilgili ikon export
+ * edilmedi).
  *
  * Bu dosya hem `apps/mobile-web/tailwind.config.ts` hem de
  * `apps/admin/tailwind.config.ts` tarafından import edilir — tek kaynak.
@@ -37,15 +40,15 @@ export const brandColors = {
  * Anahtarlar `location_type` enum değerleriyle birebir eşleşir (bkz. supabase/migrations).
  */
 export const poiColors = {
-  "paid-caravan": "#E8604C", // Ücretli Karavan Parkı
-  "free-caravan": "#F2884B", // Ücretsiz Karavan Parkı
-  "paid-parking": "#C2622E", // Ücretli Park Alanı
-  "free-parking": "#8A6D3B", // Ücretsiz Park Alanı
-  "paid-tent": "#8B5CF6", // Ücretli Çadır Alanı
-  "free-tent": "#4CAF6D", // Ücretsiz Çadır Alanı
-  water: "#3B9FD6", // Su Doldurma Yeri
-  laundry: "#06B6D4", // Çamaşır Yıkama Yeri
-  shower: "#F4C430", // Duş Alanı
+  "paid-caravan": "#FF6868", // Ücretli Karavan Parkı — design/icons-export/van-1.svg + van-2.svg (pin) fill
+  "free-caravan": "#FE8542", // Ücretsiz Karavan Parkı — van-free-1.svg + van-free-2.svg fill (marka turuncusuyla aynı)
+  "paid-parking": "#70C8EE", // Ücretli Park Alanı — park-3.svg fill (TAHMİNİ eşleşme: bu kategorinin pin/40x49 varyantı export'ta yok, park-2/park-4 yeşil çiftiyle karşılaştırınca "kalan" renk budur — bir sonraki Figma incelemesinde Chrome ile görsel doğrulanmalı)
+  "free-parking": "#93DC5A", // Ücretsiz Park Alanı — park-2.svg + park-4.svg (pin) fill
+  "paid-tent": "#C26BEB", // Ücretli Çadır Alanı — tent-1.svg + tent-2.svg (pin) fill
+  "free-tent": "#4AB937", // Ücretsiz Çadır Alanı — tent-free-1.svg + tent-free-2.svg (pin) fill
+  water: "#38B3E8", // Su Doldurma Yeri — water-1.svg + water-2.svg (pin) fill
+  laundry: "#2A6CB9", // Çamaşır Yıkama Yeri — laundry-1.svg + laundry-2.svg (pin) fill
+  shower: "#2AB9B9", // Duş Alanı — shower-1.svg + shower-2.svg (pin) fill (shower-3.svg #FF0000 kategoriyle alakasız görünüyor, kullanılmadı)
 } as const;
 
 /** Referans/bilgi katmanı (PRD 6.5) — kullanıcı POI kategorilerinden ayrı renkler */
