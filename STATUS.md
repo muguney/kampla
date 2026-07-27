@@ -3,7 +3,31 @@
 **Güncel Faz:** Faz 12 — Rota Motoru: UI iskeletinin 3 görevi (servis araştırması, modal 3. seçenek, mock rota ekranı) TAMAM (kod önceki bir otonom oturumda yazılmış ama bookkeeping/TASKS.md güncellenmemiş kalmıştı, bu oturumda fark edilip doğrulandı ve işaretlendi); kalan tek görev Faz 12 DoD (gerçek routing servisi entegrasyonu, Mustafa'nın Valhalla/ORS/OSRM kararına bağlı, DECISIONS.md). Faz 11'in kalan 2 görevi de tamamen Mustafa'yı bekliyor.
 **Genel Durum:** 🟢 Faz 12'nin kod tarafı 3/4 (yalnızca DoD kaldı, servis seçimi kararına bağlı); Faz 11'de 4/6 görev bitti, kalan veri kaynağı kararı + DoD Mustafa'yı bekliyor; Faz 8 kod tarafı tamam (8/8) + Faz 10 kod tarafı tamam (4/5), ikisinin de DoD'u Mustafa'yı bekliyor; Faz 9 (Premium/RevenueCat) tamamen hesap/ödemeye bağlı, hiç başlanamadı (BLOCKERS #18); Faz 6 (7/8) + Faz 7 (4/5) kod tarafı tamam, DoD'ları bekliyor; Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); BLOCKERS #13 (ikon/logo gerçek Figma export'u) 2026-07-26 (interaktif) oturumunda tamamlandı — `design/icons-export/` klasöründeki gerçek export'lar `AppIcon.vue`/`Logo.vue`/vb.'ye entegre edildi, tek eksik `search` ikonu için Mustafa'nın ayrıca export vermesi; Faz 3 POI Detay layout/spacing karşılaştırması ise hâlâ Figma MCP erişimine bağlı, ayrı kaldı. **Şu an TASKS.md'de hiçbir fazda bloklu olmayan/bekleyen kod görevi kalmadı** — tüm açık maddeler ya Mustafa'nın manuel DoD testine, ya bir mimari/servis kararına, ya da hesap/ödemeye bağlı.
 
-## Son Güncelleme: 2026-07-27 09:02 — Otonom oturum: atlandı (görev yok, ~35.)
+## Son Güncelleme: 2026-07-27 — Otonom oturum: 2 bağımsız bakım görevi tamamlandı
+~35 ardışık "görev yok" oturumundan sonra TASKS.md yeniden tarandı ve
+hesap/ödeme/mimari karara bağlı OLMAYAN iki küçük ama gerçek kod görevi
+bulundu (ikisi de daha önce TASKS.md'de ayrı madde olarak yoktu, yalnızca
+kod içi TODO/not olarak duruyordu — bu oturumda backlog'a eklenip
+tamamlandı):
+1. **Orphan foto temizliği** (Faz 4): `WizardStep5Photos.vue`'daki
+   `removePhoto()` artık `supabase.storage.from('location-photos').remove()`
+   ile gerçek dosyayı da siliyor (public URL'den path çözümlenerek), hata
+   olursa yalnızca `console.warn` — UI bloklanmıyor.
+2. **mobile-web → `site_content` entegrasyonu** (Faz 8): `hakkinda`/
+   `kullanim-kosullari`/`gizlilik` sayfaları artık admin panelin
+   düzenlediği `site_content` tablosunu okuyor (yeni `useSiteContent.ts`
+   composable), tabloda satır yoksa/hata olursa mevcut statik i18n metnine
+   fallback (asla boş render olmuyor).
+İkisi de general-purpose subagent'a delege edildi, `~/kampla-verify`
+sandbox kopyasında typecheck (yalnızca bilinen `tailwind.config.ts`
+baseline hatası dışında temiz) + `nuxt build` + ilgili route'ların HTTP 200
+doğrulamasıyla teslim alındı. Gerçek Supabase runtime'ında (canlı storage
+silme + DB-hit render) test edilmedi — sandbox'ta gerçek anahtar yok, bu
+beklenen bir kısıt. Git commit+push bu oturumda yapıldı (bkz. commit
+mesajı). Kalan tüm diğer TASKS.md maddeleri hâlâ Mustafa'nın DoD testine,
+mimari/servis kararına veya hesap/ödemeye bağlı — değişmedi.
+
+## Son Güncelleme (önceki): 2026-07-27 09:02 — Otonom oturum: atlandı (görev yok, ~35.)
 08:33'teki taramadan beri (`ls --time-style=full-iso`) TASKS.md (2026-07-26
 12:11), BLOCKERS.md (16:45), DECISIONS.md (16:46) değişmemiş — hâlâ bloklu
 olmayan tek bir kod görevi yok. Açık maddeler aynı: DoD testleri

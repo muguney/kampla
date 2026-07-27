@@ -3,10 +3,10 @@
  * İçerik Yönetimi — PRD 5.R "İçerik Yönetimi", Faz 8.
  * `public.site_content` tablosundaki sabit key'li (hakkinda,
  * kullanim-kosullari, gizlilik) kayıtları listeler ve düzenlemeye izin verir.
- * mobile-web tarafındaki statik sayfaların (`pages/ayarlar/hakkinda.vue`,
- * `pages/kullanim-kosullari.vue`, `pages/gizlilik.vue`) bu tablodan okuması
- * KAPSAM DIŞI — ayrı bir görev (şu an hâlâ i18n içine gömülü metinleri
- * render ediyorlar).
+ * mobile-web tarafındaki statik sayfalar (`pages/ayarlar/hakkinda.vue`,
+ * `pages/kullanim-kosullari.vue`, `pages/gizlilik.vue`) artık bu tablodan
+ * okuyor (bkz. `apps/mobile-web/composables/useSiteContent.ts`) — tablo
+ * boşsa/erişilemezse i18n'deki statik metne güvenli şekilde düşüyorlar.
  */
 import type { Database, SiteContent } from "@kampla/shared";
 

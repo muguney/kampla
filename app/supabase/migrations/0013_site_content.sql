@@ -2,8 +2,10 @@
 -- Admin panelden düzenlenebilir statik sayfa içerikleri: "Kamp.la Hakkında",
 -- "Kullanım Koşulları", "Gizlilik Sözleşmesi". mobile-web tarafındaki ilgili
 -- sayfalar (`pages/ayarlar/hakkinda.vue`, `pages/kullanim-kosullari.vue`,
--- `pages/gizlilik.vue`) şu an bu metinleri kod içine gömülü (i18n `tr.json`)
--- render ediyor; bu tabloyu okuyup göstermeleri KAPSAM DIŞI — ayrı bir görev.
+-- `pages/gizlilik.vue`) bu tabloyu okuyup gösteriyor (bkz.
+-- `apps/mobile-web/composables/useSiteContent.ts`); bu migration henüz
+-- uygulanmamış/tablo boş ortamlarda o sayfalar i18n `tr.json`/`en.json`
+-- içindeki statik metne güvenli şekilde düşer.
 
 create table if not exists public.site_content (
   key text primary key,

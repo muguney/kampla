@@ -8,7 +8,9 @@
  * aktif kalır, [step].vue içindeki `isStepValid` case 5 için `true` döner.
  *
  * Dosyalar `${auth.uid()}/${uuid}.${ext}` yoluna yüklenir (bkz. migration'daki
- * update/delete "own folder" policy'leri ile tutarlı).
+ * update/delete "own folder" policy'leri ile tutarlı). Bir fotoğraf formdan
+ * kaldırıldığında (`removePhoto`), storage'daki karşılık gelen dosya da
+ * public URL'den path çıkarılarak silinir — orphan dosya bırakılmaz.
  */
 import type { Database } from "@kampla/shared";
 import { useLocationWizardStore } from "~/stores/locationWizard";
@@ -60,10 +62,38 @@ async function onFilesSelected(event: Event) {
   input.value = "";
 }
 
-function removePhoto(index: number) {
-  // Not: storage'daki dosya silinmiyor (MVP kapsamı dışında — orphan temizliği
-  // ileride bir cron/admin aksiyonu ile yapılabilir), yalnızca formdan kaldırılır.
-  wizard.photos.splice(index, 1);
+/**
+ * Public URL'den storage bucket path'ini çıkarır.
+ * Beklenen format: `.../storage/v1/object/public/location-photos/<path>`.
+ * Eşleşmezse (ör. beklenmedik bir URL şekli) `null` döner.
+ */
+function storagePathFromPublicUrl(url: string): string | null {
+  const marker = "/object/public/location-photos/";
+  const idx = url.indexOf(marker);
+  if (idx === -1) return null;
+  const path = url.slice(idx + marker.length);
+  return path ? decodeURIComponent(path) : null;
+}
+
+async function removePhoto(index: number) {
+  // Fotoğrafı önce formdan kaldır (kullanıcı deneyimi storage silme işleminin
+  // sonucuna bağımlı olmasın), ardından storage'daki dosyayı silmeyi dene.
+  const [url] = wizard.photos.splice(index, 1);
+  if (!url) return;
+
+  const path = storagePathFromPublicUrl(url);
+  if (!path) return;
+
+  try {
+    const { error } = await supabase.storage.from("location-photos").remove([path]);
+    if (error) {
+      // Silme başarısız olsa bile kullanıcı akışını bloklamıyoruz; dosya
+      // orphan kalabilir (ör. ağ hatası) ama form davranışı etkilenmez.
+      console.warn("[WizardStep5Photos] storage.remove failed:", error.message);
+    }
+  } catch (err) {
+    console.warn("[WizardStep5Photos] storage.remove threw:", err);
+  }
 }
 </script>
 

@@ -6,12 +6,36 @@
  * ayrı bir `ayarlar/kullanim-kosullari.vue` route'u YOK, mevcut tek route
  * dolduruldu.
  *
- * ÖNEMLİ: Bu içerik genel geçer bir mobil uygulama şablonundan türetilmiş bir
- * TASLAKTIR — yayına almadan önce hukuki inceleme gerekir (bkz. sayfa üstündeki
- * uyarı kutusu, `pages.terms.draftNotice`).
+ * PRD 5.R "İçerik Yönetimi" (Faz 8): gövde metni artık admin panelden
+ * düzenlenebilen `public.site_content` tablosundan (`key = 'kullanim-kosullari'`)
+ * okunuyor — bkz. `composables/useSiteContent.ts`. Tablo boşsa/erişilemezse
+ * `dbParagraphs` `null` kalır ve sayfa GÜVENLİ ŞEKİLDE mevcut statik i18n
+ * bölüm yapısına (intro + 8 numaralı bölüm) düşer — sayfa asla boş render
+ * edilmez.
+ *
+ * ÖNEMLİ: İçerik kaynağı ne olursa olsun (DB veya i18n), bu metin hâlâ genel
+ * geçer bir şablondan türetilmiş bir TASLAKTIR — hukuki inceleme durumu
+ * içeriğin DB'ye taşınmasıyla değişmediği için uyarı kutusu (`pages.terms.draftNotice`)
+ * her koşulda gösterilmeye devam eder.
  */
 const { t } = useI18n();
 usePageTitle("pages.terms.title");
+
+const { content } = useSiteContent("kullanim-kosullari");
+
+const displayTitle = computed(() => content.value?.title || t("pages.terms.title"));
+
+/** DB'deki `body` tek bir metin bloğu (admin editörü serbest metin textarea'sı) —
+ * i18n'deki gibi başlık/gövde ayrımı yok; boş satırla ayrılmış paragraflar
+ * olarak düz gösterilir. */
+const dbParagraphs = computed<string[] | null>(() => {
+  if (!content.value?.body) return null;
+  const paragraphs = content.value.body
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  return paragraphs.length > 0 ? paragraphs : null;
+});
 
 const sections = computed(() =>
   [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({
@@ -33,12 +57,19 @@ const sections = computed(() =>
     <div
       class="kl-card flex flex-col gap-4 px-4 py-5 text-sm leading-relaxed text-brand-charcoal/80 dark:text-neutral-300"
     >
-      <p>{{ t("pages.terms.intro") }}</p>
+      <h1 class="text-base font-bold text-brand-charcoal dark:text-neutral-100">{{ displayTitle }}</h1>
 
-      <div v-for="section in sections" :key="section.heading" class="flex flex-col gap-1">
-        <h2 class="font-semibold text-brand-charcoal dark:text-neutral-100">{{ section.heading }}</h2>
-        <p>{{ section.body }}</p>
-      </div>
+      <template v-if="dbParagraphs">
+        <p v-for="(paragraph, i) in dbParagraphs" :key="i">{{ paragraph }}</p>
+      </template>
+      <template v-else>
+        <p>{{ t("pages.terms.intro") }}</p>
+
+        <div v-for="section in sections" :key="section.heading" class="flex flex-col gap-1">
+          <h2 class="font-semibold text-brand-charcoal dark:text-neutral-100">{{ section.heading }}</h2>
+          <p>{{ section.body }}</p>
+        </div>
+      </template>
     </div>
   </div>
 </template>
