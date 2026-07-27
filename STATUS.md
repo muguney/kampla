@@ -3,7 +3,143 @@
 **Güncel Faz:** Faz 12 — Rota Motoru: UI iskeletinin 3 görevi (servis araştırması, modal 3. seçenek, mock rota ekranı) TAMAM (kod önceki bir otonom oturumda yazılmış ama bookkeeping/TASKS.md güncellenmemiş kalmıştı, bu oturumda fark edilip doğrulandı ve işaretlendi); kalan tek görev Faz 12 DoD (gerçek routing servisi entegrasyonu, Mustafa'nın Valhalla/ORS/OSRM kararına bağlı, DECISIONS.md). Faz 11'in kalan 2 görevi de tamamen Mustafa'yı bekliyor.
 **Genel Durum:** 🟢 Faz 12'nin kod tarafı 3/4 (yalnızca DoD kaldı, servis seçimi kararına bağlı); Faz 11'de 4/6 görev bitti, kalan veri kaynağı kararı + DoD Mustafa'yı bekliyor; Faz 8 kod tarafı tamam (8/8) + Faz 10 kod tarafı tamam (4/5), ikisinin de DoD'u Mustafa'yı bekliyor; Faz 9 (Premium/RevenueCat) tamamen hesap/ödemeye bağlı, hiç başlanamadı (BLOCKERS #18); Faz 6 (7/8) + Faz 7 (4/5) kod tarafı tamam, DoD'ları bekliyor; Faz 5'te POI'ye bağımlı olmayan işler bitti, kalanı mock POI vs. gerçek `locations` mimari kararına bağlı (DECISIONS.md 2026-07-26, BLOCKERS #11); BLOCKERS #13 (ikon/logo gerçek Figma export'u) 2026-07-26 (interaktif) oturumunda tamamlandı — `design/icons-export/` klasöründeki gerçek export'lar `AppIcon.vue`/`Logo.vue`/vb.'ye entegre edildi, tek eksik `search` ikonu için Mustafa'nın ayrıca export vermesi; Faz 3 POI Detay layout/spacing karşılaştırması ise hâlâ Figma MCP erişimine bağlı, ayrı kaldı. **Şu an TASKS.md'de hiçbir fazda bloklu olmayan/bekleyen kod görevi kalmadı** — tüm açık maddeler ya Mustafa'nın manuel DoD testine, ya bir mimari/servis kararına, ya da hesap/ödemeye bağlı.
 
-## Son Güncelleme: 2026-07-27 03:03 — Otonom oturum: atlandı (görev yok, ~25.)
+## Son Güncelleme: 2026-07-27 09:02 — Otonom oturum: atlandı (görev yok, ~35.)
+08:33'teki taramadan beri (`ls --time-style=full-iso`) TASKS.md (2026-07-26
+12:11), BLOCKERS.md (16:45), DECISIONS.md (16:46) değişmemiş — hâlâ bloklu
+olmayan tek bir kod görevi yok. Açık maddeler aynı: DoD testleri
+(#8/9/10/12/14/16/17), mimari/servis kararları (#11 mock-vs-real, Faz 11
+PMTiles #19, Faz 12 routing servisi), hesap/ödeme (#5/#6/#18), Figma kotası
+(#13, yalnızca `search` ikonu). Dosya değişikliği yok, subagent yok, git
+push gerekmedi, yeni blocker/Gmail taslağı yok. **~35. ardışık "görev yok"
+oturumu** (~17.5 saattir). **Yeni not:** bu dosya artık 1350+ satır ve
+büyük kısmı (yaklaşık satır 6-667) tekrarlayan "görev yok" kayıtları —
+bir sonraki interaktif oturumda Mustafa'nın onayıyla bu blok tek bir özet
+paragrafta konsolide edilmesi önerilir (otonom oturumda riskli/büyük dosya
+düzenlemesi bilinçli olarak yapılmadı). Öneri değişmedi: tetikleme sıklığı
+azaltılsın ya da BLOCKERS/DECISIONS'daki kararlardan biri çözülsün.
+
+## Son Güncelleme (önceki): 2026-07-27 08:33 — Otonom oturum: atlandı (görev yok, ~34.)
+Tam tarandı (`stat` ile mtime kontrolü): TASKS.md (2026-07-26 12:11),
+BLOCKERS.md (16:45), DECISIONS.md (16:46) 08:04'teki son bookkeeping
+notundan bu yana değişmemiş — hâlâ bloklu olmayan tek bir kod görevi yok.
+Tüm açık maddeler Mustafa'nın manuel DoD testine (#8/9/10/12/14/16/17),
+mimari/servis kararına (#11 mock-vs-real, Faz 11 PMTiles #19, Faz 12
+routing servisi) ya da hesap/ödemeye (#5/#6/#18) bağlı. Dosya değişikliği
+yalnızca bu STATUS.md/DAILY_LOG.md bookkeeping notu, subagent delegasyonu
+yok, git push gerekmedi (değişiklik yok). Yeni blocker yok, yeni Gmail
+taslağı gerekmedi. **~34. ardışık "görev yok" oturumu** (2026-07-26
+~15:33'ten beri, ~17 saattir kesintisiz) — öneri değişmedi: bir sonraki
+interaktif oturumda tetikleme sıklığının azaltılması ya da BLOCKERS/
+DECISIONS'daki maddelerden en az birinin çözülmesi.
+
+## Son Güncelleme (önceki): 2026-07-27 08:04 — Otonom oturum: atlandı (görev yok, ~33.)
+Tam tarandı (`find -newermt "2026-07-27 07:04"`): TASKS.md/BLOCKERS.md/
+DECISIONS.md/`app/` altında hiçbir dosya değişmemiş, yalnızca STATUS.md'nin
+kendi zaman damgası farklı. Hâlâ bloklu olmayan tek bir kod görevi yok: tüm
+açık maddeler Mustafa'nın manuel DoD testine (#8/9/10/12/14/16/17), mimari/
+servis kararına (#11 mock-vs-real, Faz 11 PMTiles #19, Faz 12 routing
+servisi) ya da hesap/ödemeye (#5/#6/#18) bağlı. Dosya değişikliği yalnızca
+bu STATUS.md/DAILY_LOG.md bookkeeping notu, subagent delegasyonu yok, git
+push gerekmedi (değişiklik yok). Yeni blocker yok, yeni Gmail taslağı
+gerekmedi. **~33. ardışık "görev yok" oturumu** (2026-07-26 ~15:33'ten beri,
+~16.5 saattir kesintisiz) — öneri değişmedi: bir sonraki interaktif
+oturumda tetikleme sıklığının azaltılması ya da BLOCKERS/DECISIONS'daki
+maddelerden en az birinin çözülmesi.
+
+## Son Güncelleme (önceki): 2026-07-27 07:04 — Otonom oturum: atlandı (görev yok, ~32.)
+Tam tarandı (`ls --time-style=full-iso`): TASKS.md 2026-07-26 12:11'den,
+BLOCKERS.md 16:45'ten, DECISIONS.md 16:46'dan beri değişmemiş — 06:03'teki
+son bookkeeping notundan bu yana hiçbir kod/görev dosyası değişmedi. Hâlâ
+bloklu olmayan tek bir kod görevi yok: tüm açık maddeler Mustafa'nın manuel
+DoD testine (#8/9/10/12/14/16/17), mimari/servis kararına (#11 mock-vs-real,
+Faz 11 PMTiles #19, Faz 12 routing servisi) ya da hesap/ödemeye (#5/#6/#18)
+bağlı. Dosya değişikliği yalnızca bu STATUS.md/DAILY_LOG.md bookkeeping notu,
+subagent delegasyonu yok, git push gerekmedi (değişiklik yok). Yeni blocker
+yok, yeni Gmail taslağı gerekmedi. **~32. ardışık "görev yok" oturumu**
+(2026-07-26 ~15:33'ten beri, ~15.5 saattir kesintisiz) — öneri değişmedi:
+bir sonraki interaktif oturumda tetikleme sıklığının azaltılması ya da
+BLOCKERS/DECISIONS'daki maddelerden en az birinin çözülmesi.
+
+## Son Güncelleme (önceki): 2026-07-27 06:03 — Otonom oturum: atlandı (görev yok, ~31.)
+Tam tarandı (`ls --time-style=full-iso`): TASKS.md 2026-07-26 12:11'den,
+BLOCKERS.md ve DECISIONS.md 2026-07-26 16:4x'ten beri değişmemiş — 05:34'teki
+son bookkeeping notundan bu yana hiçbir kod/görev dosyası değişmedi. Hâlâ
+bloklu olmayan tek bir kod görevi yok: tüm açık maddeler Mustafa'nın manuel
+DoD testine (#8/9/10/12/14/16/17), mimari/servis kararına (#11 mock-vs-real,
+Faz 11 PMTiles #19, Faz 12 routing servisi) ya da hesap/ödemeye (#5/#6/#18)
+bağlı. Dosya değişikliği yalnızca bu STATUS.md/DAILY_LOG.md bookkeeping notu,
+subagent delegasyonu yok, git push gerekmedi. Yeni blocker yok, yeni Gmail
+taslağı gerekmedi. **~31. ardışık "görev yok" oturumu** (2026-07-26 ~15:33'ten
+beri, ~14.5 saattir kesintisiz) — öneri değişmedi: bir sonraki interaktif
+oturumda tetikleme sıklığının azaltılması ya da BLOCKERS/DECISIONS'daki
+maddelerden en az birinin çözülmesi.
+
+## Son Güncelleme (önceki): 2026-07-27 (öğleden sonra) — Otonom oturum: atlandı (görev yok, ~30.)
+05:02'deki taramadan beri TASKS.md/BLOCKERS.md/DECISIONS.md/_index.md aynı:
+bloklu olmayan kod görevi yok, tüm açık maddeler Mustafa'nın manuel DoD
+testine (#8/9/10/12/14/16/17), mimari/servis kararına (#11 mock-vs-real,
+Faz 11 PMTiles #19, Faz 12 routing servisi) ya da hesap/ödemeye (#5/#6/#18)
+bağlı. **Yeni teknik bulgu (bu oturumda doğrulandı):** BLOCKERS #10/#14/#16'daki
+"migration'ı kendi Supabase projene uygula" adımı CEO ajanı tarafından
+otonom denenebilir mi diye kontrol edildi — `app/.env`'de gerçek Supabase
+URL/anon/service_role key mevcut, ancak bu sandbox'ın ağ erişimi
+`https://tomyjuuetxuojkhqpvwf.supabase.co`'ya kapalı (`curl` bağlantısı
+kuramadı, "000"). Yani bu adımın Mustafa'yı beklemesinin sebebi yalnızca
+"gerçek key yok" değil, sandbox'ın Supabase'e ağ erişiminin de olmaması —
+migration uygulama + trigger doğrulama SQL'le bile olsa yalnızca
+Mustafa'nın kendi makinesinde yapılabilir. Dosya değişikliği yalnızca bu
+STATUS.md/DAILY_LOG.md bookkeeping notu, subagent delegasyonu yok, git push
+gerekmedi. Yeni blocker yok, yeni Gmail taslağı gerekmedi.
+**~30. ardışık "görev yok" oturumu** (2026-07-26 ~15:33'ten beri, ~14+
+saattir kesintisiz) — durum ancak Mustafa'nın bir daily'de BLOCKERS.md/
+DECISIONS.md maddelerinden birine karar vermesiyle değişecek; 30 dakikalık
+tetikleme sıklığının azaltılması ya da bir sonraki karar/DoD'a kadar
+duraklatılması hâlâ önerilir.
+
+## Son Güncelleme (önceki): 2026-07-27 05:02 — Otonom oturum: atlandı (görev yok, ~29.)
+04:32'deki taramadan beri hiçbir kod/görev dosyası değişmedi (`find
+-newermt "2026-07-27 04:32"` — proje klasöründe `app/` altında hiçbir
+dosya farkı yok, yalnızca önceki oturumun kendi STATUS.md yazısı).
+TASKS.md/BLOCKERS.md/DECISIONS.md/_index.md aynı: bloklu olmayan kod
+görevi yok, tüm açık maddeler Mustafa'nın manuel DoD testine
+(#8/9/10/12/14/16/17), mimari/servis kararına (#11 mock-vs-real, Faz 11
+PMTiles #19, Faz 12 routing servisi) ya da hesap/ödemeye (#5/#6/#18)
+bağlı. Dosya değişikliği yalnızca bu STATUS.md/DAILY_LOG.md bookkeeping
+notu, subagent delegasyonu yok, git push gerekmedi (kod tarafı zaten
+senkron). Yeni blocker yok, yeni Gmail taslağı gerekmedi.
+**~29. ardışık "görev yok" oturumu** (2026-07-26 ~15:33'ten beri, ~13.5
+saattir kesintisiz) — durum ancak Mustafa'nın bir daily'de
+BLOCKERS.md/DECISIONS.md maddelerinden birine karar vermesiyle değişecek;
+30 dakikalık tetikleme sıklığının azaltılması ya da bir sonraki
+karar/DoD'a kadar duraklatılması hâlâ önerilir.
+
+## Son Güncelleme (önceki): 2026-07-27 04:32 — Otonom oturum: atlandı (görev yok, ~28.)
+04:03'teki taramadan beri hiçbir kod/görev dosyası değişmedi. TASKS.md/
+BLOCKERS.md/DECISIONS.md/_index.md aynı: bloklu olmayan kod görevi yok,
+tüm açık maddeler Mustafa'nın manuel DoD testine (#8/9/10/12/14/16/17),
+mimari/servis kararına (#11 mock-vs-real, Faz 11 PMTiles #19, Faz 12
+routing servisi) ya da hesap/ödemeye (#5/#6/#18) bağlı. Dosya değişikliği
+yalnızca bu STATUS.md/DAILY_LOG.md bookkeeping notu, subagent delegasyonu
+yok, git push gerekmedi. Yeni blocker yok, yeni Gmail taslağı gerekmedi.
+**~28. ardışık "görev yok" oturumu** — durum ancak Mustafa'nın bir
+daily'de BLOCKERS.md/DECISIONS.md maddelerinden birine karar vermesiyle
+değişecek; 30 dakikalık tetikleme sıklığının azaltılması hâlâ önerilir.
+
+## Son Güncelleme (önceki): 2026-07-27 04:03 — Otonom oturum: atlandı (görev yok, ~27.)
+03:32'deki taramadan beri hiçbir kod/görev dosyası değişmedi (`find
+-newermt "2026-07-27 03:30"` — proje klasöründe hiçbir dosya farkı yok).
+TASKS.md/BLOCKERS.md/DECISIONS.md/_index.md aynı: bloklu olmayan kod
+görevi yok, tüm açık maddeler Mustafa'nın manuel DoD testine
+(#8/9/10/12/14/16/17), mimari/servis kararına (#11 mock-vs-real, Faz 11
+PMTiles #19, Faz 12 routing servisi) ya da hesap/ödemeye (#5/#6/#18)
+bağlı. Dosya değişikliği yalnızca bu STATUS.md/_index.md/DAILY_LOG.md
+bookkeeping notu, subagent delegasyonu yok, git push gerekmedi (kod
+tarafı önceki oturumda zaten senkron). Yeni blocker yok, yeni Gmail
+taslağı gerekmedi. **~27. ardışık "görev yok" oturumu** — durum ancak
+Mustafa'nın bir daily'de BLOCKERS.md/DECISIONS.md maddelerinden birine
+karar vermesiyle değişecek.
+
+## Son Güncelleme (önceki): 2026-07-27 03:03 — Otonom oturum: atlandı (görev yok, ~25.)
 02:32'deki taramadan beri hiçbir kod/görev dosyası değişmedi (yalnızca
 önceki oturumun kendi STATUS.md/DAILY_LOG.md bookkeeping yazısı). TASKS.md/
 BLOCKERS.md/DECISIONS.md/_index.md aynı: bloklu olmayan kod görevi yok.
